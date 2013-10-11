@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SnooZy Charger
+    Power Connection manager. Turn the screen off on power connection
+    or disconnection, to save battery consumption by the phone's display.
+
+    Copyright (C) 2013 Mudar Noufal <mn@mudar.ca>
+
+    This file is part of SnooZy Charger.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <string name="app_name">SnooZy le chargeur</string>
+    <string name="app_version">0.9 bêta</string>
+    <string name="activity_settings">Paramètres</string>
+    <string name="activity_about">À propos</string>
+    <string name="activity_eula">Licence</string>
+
+    <!--Menu-->
+    <string name="action_settings">Paramètres</string>
+    <string name="action_about">À propos</string>
+    <string name="action_eula">Licence d’utilisation</string>
+    <string name="action_share">Partager</string>
+    <string name="action_rate">Évaluer</string>
+
+    <!--System-->
+    <string name="admin_device_extra_desc_text">Cette application a besoin d’être activée comme administrateur afin de pouvoir verrouiller l’écran…</string>
+    <string name="admin_device_app_desc">Autoriser SnooZy le chargeur à verrouiller l’écran. Zzz…</string>
+    <string name="share_intent_title">Découvrez SnooZy Charger sur Googleplay</string>
+
+    <!--Settings/Preferences-->
+    <string name="prefs_breadcrumb">Paramètres</string>
+    <string name="prefs_category_advanced">Verrouillage de l’écran</string>
+    <string name="prefs_category_device_admin">Gestion de l’appareil</string>
+
+    <string name="prefs_is_enabled">Activer l’application</string>
+    <string name="prefs_has_notifications_title">Notifications</string>
+    <string name="prefs_has_sound_title">Sonnerie</string>
+    <string name="prefs_has_vibration_title">Vibreur</string>
+    <string name="prefs_on_screen_lock_title">Écran de veille uniquement</string>
+    <string name="prefs_on_power_loss_title">Déconnexion uniquement</string>
+    <string name="prefs_device_admin_title">Administrateurs de l’appareil</string>
+    <string name="prefs_device_admin_summary_enabled">Afficher ou désactiver les administrateurs de l’appareil. Utile si vous souhaitez désinstaller SnooZy</string>
+    <string name="prefs_device_admin_summary_disabled">SnooZy n’est pas un administrateur de l’appareil actuellement : impossible de verrouiller l’écran</string>
+
+    <!--Notifications-->
+    <string name="notify_content_title">Connexion chargeur</string>
+    <string name="notify_content_text_single_on">Connecté à une source d’alimentation.</string>
+    <string name="notify_content_text_single_off">Déconnecté de la source d’alimentation.</string>
+    <string name="notify_content_text_multi">Alimentation connectée et déconnectée.</string>
+
+    <!-- Toast Notifications -->
+    <string name="toast_service_disabled">SnooZy est désactivé actuellement</string>
+    <string name="toast_running_no_admin">Afin de verrouiller l’écran, activer en tant que administrateur de l’appareil</string>
+
+    <!--History ListFragment-->
+    <string name="history_empty_list_title">Veuillez %s votre source d’alimentation pour commencer à utiliser l’application !</string>
+    <string name="history_empty_list_settings">Vérifier les paramètres pour adapter l’application à vos besoins…</string>
+    <string name="history_empty_list_title_connect">connecter</string>
+    <string name="history_empty_list_title_disconnect">déconnecter</string>
+
+
+    <!--History Header -->
+    <string name="history_header">Historique des charges</string>
+    <string name="history_header_timestamp">Heure</string>
+    <string name="history_header_power_connection">Connecté</string>
+    <string name="history_header_battery_level">Batterie</string>
+
+    <!--History Footer -->
+    <string name="history_footer_about">SnooZy s’exécute en arrière-plan. Au moment de la connexion ou de la déconnexion du chargeur, l’application verrouille l’appareil afin de réduire la consommation d’énergie de l’écran.</string>
+
+    <!--History ListFragmentItem -->
+    <string name="history_item_power_connected">Oui</string>
+    <string name="history_item_power_disconnected">Non</string>
+    <string name="history_item_day_today">Aujourd’hui</string>
+    <string name="history_item_battery_level">%s %%</string>
+
+    <!--About -->
+    <string name="about_title">SnooZy le chargeur Zzz…</string>
+    <string name="about_project_version">Version %s</string>
+    <string name="about_footer_website"><a href="http://mudar.github.io/SnooZy">mudar.github.io/SnooZy</a></string>
+    <string name="about_text_credits">Application Android réalisée par <a href="http://www.mudar.ca/">Mudar Noufal</a>. Le code source est publié sous la licence GPLv3 de la Free Software Foundation. Un grand merci à G&amp;A.</string>
+    <string name="about_text_usage">Cette application réduit la consommation d’énergie de l’écran de l’appareil. Elle peut également être utilisée pour l’auto-verrouillage au moment de la déconnexion, ou simplement pour obtenir l’historique des charges.</string>
+    <string name="about_text_usage_extra">SnooZy est très utile avec les <i>chargeurs solaires</i> et d’une façon plus spécifique avec les téléphones <strong>Galaxy Nexus</strong> qui rencontrent des problèmes de batterie liés à la détection du chargement.</string>
+
+</resources>

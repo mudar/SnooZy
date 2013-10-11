@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SnooZy Charger
+    Power Connection manager. Turn the screen off on power connection
+    or disconnection, to save battery consumption by the phone's display.
+
+    Copyright (C) 2013 Mudar Noufal <mn@mudar.ca>
+
+    This file is part of SnooZy Charger.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowBackground">@color/app_bg_color</item>
+        <item name="android:logo">@drawable/ic_logo</item>
+        <!--<item name="android:actionBarStyle">@style/LogoActionBar</item>-->
+    </style>
+
+    <style name="LogoActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:displayOptions">useLogo</item>
+    </style>
+
+    <style name="HistoryList">
+        <item name="android:paddingLeft">@dimen/root_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/root_horizontal_margin</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:divider">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:dividerHeight">0dp</item>
+    </style>
+
+    <style name="HistoryListEmpty" parent="@android:style/TextAppearance.Medium">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/empty_list_color</item>
+        <item name="android:paddingBottom">@dimen/listview_empty_bottom_padding</item>
+    </style>
+
+    <style name="HistoryListEmptyTitle" parent="@style/HistoryListEmpty">
+        <item name="android:textColor">@color/card_title_color</item>
+    </style>
+
+    <style name="HistoryListItem">
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="HistoryHeader">
+        <item name="android:paddingLeft">@dimen/card_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/card_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/card_vertical_margin</item>
+        <item name="android:textColor">@color/card_header_color</item>
+    </style>
+
+    <style name="HistoryHeaderTitle" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/card_header_color</item>
+        <item name="android:paddingLeft">@dimen/card_header_inner_padding</item>
+        <item name="android:paddingBottom">@dimen/card_title_bottom_padding</item>
+    </style>
+
+    <style name="CardHeaderLegend" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/card_header_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">1</item>
+        <item name="android:padding">@dimen/card_header_inner_padding</item>
+    </style>
+
+    <style name="CardHeaderTimestamp" parent="@style/CardHeaderLegend">
+        <item name="android:gravity">left|bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="CardHeaderPowerStatus" parent="@style/CardHeaderLegend">
+        <item name="android:gravity">center_horizontal|bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="CardHeaderBatteryLevel" parent="@style/CardHeaderLegend">
+        <item name="android:gravity">right|bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="HistoryFooter" parent="@android:style/TextAppearance.Medium">
+        <item name="android:paddingLeft">@dimen/card_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/card_horizontal_padding</item>
+        <item name="android:paddingBottom">@dimen/card_vertical_margin</item>
+        <item name="android:textColor">@color/card_header_color</item>
+    </style>
+
+    <style name="CardTitleText" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/card_title_color</item>
+        <item name="android:paddingBottom">@dimen/card_title_bottom_padding</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="CardTitleTotal" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/card_title_color</item>
+        <item name="android:gravity">right|center_vertical</item>
+    </style>
+
+    <style name="CardRowText">
+        <item name="android:textColor">@color/card_row_color</item>
+    </style>
+
+    <style name="CardRowTimestamp" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/card_row_color</item>
+    </style>
+
+    <style name="CardRowPowerStatus" parent="@style/CardRowText">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="CardRowBatteryLevel" parent="@style/CardRowText">
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="AboutView">
+        <item name="android:paddingLeft">@dimen/root_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/root_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/root_vertical_margin</item>
+    </style>
+
+    <style name="AboutHeaderTitle" parent="@android:style/TextAppearance.Large">
+        <item name="android:paddingTop">@dimen/card_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/card_vertical_margin</item>
+        <item name="android:paddingLeft">@dimen/card_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/card_horizontal_padding</item>
+        <item name="android:textColor">@color/card_title_color</item>
+    </style>
+
+    <style name="AboutFooterText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/about_footer_color</item>
+        <!--<item name="android:gravity">center_horizontal</item>-->
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="AboutCard">
+        <item name="android:background">@drawable/bg_cards_top_bottom</item>
+    </style>
+
+    <style name="AboutCardText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/about_card_color</item>
+        <item name="android:paddingBottom">@dimen/card_text_bottom_padding</item>
+    </style>
+
+</resources>

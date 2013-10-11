@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SnooZy Charger
+    Power Connection manager. Turn the screen off on power connection
+    or disconnection, to save battery consumption by the phone's display.
+
+    Copyright (C) 2013 Mudar Noufal <mn@mudar.ca>
+
+    This file is part of SnooZy Charger.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <color name="temp_first">#ffffffff</color>
+    <color name="temp_last">#30ff0000</color>
+    <color name="temp_single">#ffffffff</color>
+    <color name="temp_middle">#ffffffff</color>
+
+    <color name="app_bg_color">#e3e3e3</color>
+    <color name="bg_eula">#e3e3e3</color>
+    <color name="bg_webview">#00000000</color>
+
+    <color name="card_background">#ffffff</color>
+    <color name="card_header_color">#80323232</color>
+    <color name="card_title_color">#ff0099cc</color>
+    <color name="card_row_color">#80323232</color>
+    <color name="empty_list_color">#80323232</color>
+
+    <color name="card_row_highlight_color">#ff0099cc</color>
+
+    <color name="about_footer_color">#80323232</color>
+    <color name="about_card_color">#80323232</color>
+</resources>

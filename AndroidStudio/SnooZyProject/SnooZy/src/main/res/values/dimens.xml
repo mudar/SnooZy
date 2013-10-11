@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SnooZy Charger
+    Power Connection manager. Turn the screen off on power connection
+    or disconnection, to save battery consumption by the phone's display.
+
+    Copyright (C) 2013 Mudar Noufal <mn@mudar.ca>
+
+    This file is part of SnooZy Charger.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <dimen name="listview_empty_width">300dp</dimen>
+
+    <dimen name="card_shadow_bottom_margin">13dp</dimen>
+    <dimen name="card_horizontal_margin">16dp</dimen>
+    <dimen name="card_vertical_margin">16dp</dimen>
+    <dimen name="card_horizontal_padding">24dp</dimen>
+    <dimen name="card_top_padding">16dp</dimen>
+    <dimen name="card_bottom_padding">24dp</dimen>
+    <dimen name="card_header_inner_padding">6dp</dimen>
+    <dimen name="card_title_bottom_padding">8dp</dimen>
+    <dimen name="listview_empty_bottom_padding">8dp</dimen>
+    <dimen name="root_horizontal_margin">0dp</dimen>
+    <dimen name="root_vertical_margin">16dp</dimen>
+    <dimen name="card_text_bottom_padding">8dp</dimen>
+
+</resources>
