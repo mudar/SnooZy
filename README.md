@@ -38,7 +38,7 @@ The Android app includes (thanks!) libraries and derivative work of the followin
 
 * [AOSP][link_lib_aosp] &copy; The Android Open Source Project.
 * [Android Support Library v4][link_lib_supportv4] &copy; The Android Open Source Project.
-* [Android Asset Studio][link_lib_ui_utils] &copy; The Android Open Source Project.
+* [Android Asset Studio][link_lib_ui_utils] &copy; Google Inc, used to create icons assets.
 
 These three projects are all released under the [Apache License v2.0][link_apache].
 
@@ -65,7 +65,6 @@ These three projects are all released under the [Apache License v2.0][link_apach
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 [![Android app on Google Play][img_devices]][link_snoozy_playstore]
 
 [link_snoozy_playstore]: http://play.google.com/store/apps/details?id=ca.mudar.snoozy
@@ -74,11 +73,9 @@ These three projects are all released under the [Apache License v2.0][link_apach
 [link_snoozy_privacy]: http://snoozy.mudar.ca/privacy.html
 [link_mudar_ca]: http://www.mudar.ca/
 [link_gpl]: http://www.gnu.org/licenses/gpl.html
-[link_portal_license]: http://donnees.ville.montreal.qc.ca/licence-texte-complet
 [img_devices]: http://snoozy.mudar.ca/images/snoozy-devices.png
 [img_playstore_badge]: http://snoozy.mudar.ca/images/en_app_rgb_wo_60.png
 [link_lib_aosp]: http://source.android.com/
 [link_lib_supportv4]: http://developer.android.com/tools/support-library/
 [link_lib_ui_utils]: http://code.google.com/p/android-ui-utils/
 [link_apache]: http://www.apache.org/licenses/LICENSE-2.0
-
