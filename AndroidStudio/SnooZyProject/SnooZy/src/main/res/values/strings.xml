@@ -96,7 +96,7 @@
     <!--About -->
     <string name="about_title">SnooZy Charger Zzz…</string>
     <string name="about_project_version">Version %s</string>
-    <string name="about_footer_website"><a href="http://mudar.github.io/SnooZy">mudar.github.io/SnooZy</a></string>
+    <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
     <string name="about_text_credits">Android app developed by <a href="http://www.mudar.ca/">Mudar Noufal</a>. Source code is released under the GPLv3 license from the Free Software Foundation. Many thanks to G&amp;A.</string>
     <string name="about_text_usage">This app aims to save power consumption by the device’s display. It can also be used as an auto-lock on unplug or as a simple power connection history app.</string>
     <string name="about_text_usage_extra">SnooZy can be very useful with <i>solar chargers</i> or more specifically for <strong>Galaxy Nexus</strong> phones with power connection and battery drain issues.</string>
