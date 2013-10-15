@@ -8,10 +8,7 @@ SnooZy Charger is a Power Connection manager. The app turns off the screen on po
 
 SnooZy can also be used as an auto-lock on unplug or simply as for power connection history. 
 
-This app can be useful to save battery when using a **solar charger**, where power connectivity relies on weather conditions!
-
-It was initially developed as a fix for battery drain issues on **Samsung Galaxy Nexus**: some devices randomly detect a power connection without any charger being actually connected to the phone. 
-This would drain the battery because of the screen turning on to display the "Charging" message, multiple times per hour till screen timeout.
+This app can be useful to save battery when using a **solar charger**, where power connectivity relies on weather conditions! It was initially developed as a fix for battery drain issues on **Samsung Galaxy Nexus**.
 
 ##Features
 * Lightweight background service detecting power connection/disconnection.
@@ -20,6 +17,20 @@ This would drain the battery because of the screen turning on to display the "Ch
 * Supports phones and tablets running Android 4.0 or later (API 14).
 
 This app does NOT manage any other phone functionalities, such as WiFi, Bluetooth, GPS, etc. There are other apps for that…
+
+##Galaxy Nexus Ghost Charging
+Some devices Samsung Galaxy Nexus randomly detect a power connection without any charger being actually connected to the phone. This would drain the battery because of the screen turning on to display the "Charging" message, multiple times per hour till screen timeout. 
+
+Forums reporting this bug:
+
+* [Galaxy Nexus battery/charging problem?][link_forum_6]
+* [My Galaxy Nexus goes crazy (battery/charging issue)][link_forum_1]
+* [VBUS TUNA OTG wakelock due to usb port problem and battery drain][link_forum_4]
+* [Help! Screen keeps turning back on after turning it off. ][link_forum_5]
+* [Galaxy Nexus Charging Issues][link_forum_2]
+* [Galaxy Nexus - Screen keeps turning on when it's locked][link_forum_3]
+
+SnooZy Charger was developed as a (partial) software solution for this issue: it saves battery consumption by turning off the display on these phantom connections, if the user is not currently using the phone. However, it does not fix the random detections. Some hardware solutions are suggested by users reporting this issue.
 
 ##Links
 
@@ -79,3 +90,10 @@ These three projects are all released under the [Apache License v2.0][link_apach
 [link_lib_supportv4]: http://developer.android.com/tools/support-library/
 [link_lib_ui_utils]: http://code.google.com/p/android-ui-utils/
 [link_apache]: http://www.apache.org/licenses/LICENSE-2.0
+
+[link_forum_1]: http://forum.xda-developers.com/showthread.php?t=1427539
+[link_forum_2]: http://code.google.com/p/android/issues/detail?id=23789
+[link_forum_3]: http://productforums.google.com/d/topic/mobile/PA5JZH-Oj4o/discussion
+[link_forum_4]: http://forum.xda-developers.com/showthread.php?t=2157431
+[link_forum_5]: http://forum.xda-developers.com/showthread.php?t=2328444
+[link_forum_6]: http://forum.xda-developers.com/showthread.php?t=1757178
