@@ -19,7 +19,7 @@ This app can be useful to save battery when using a **solar charger**, where pow
 This app does NOT manage any other phone functionalities, such as WiFi, Bluetooth, GPS, etc. There are other apps for that…
 
 ##Galaxy Nexus Ghost Charging
-Some devices Samsung Galaxy Nexus randomly detect a power connection without any charger being actually connected to the phone. This would drain the battery because of the screen turning on to display the "Charging" message, multiple times per hour till screen timeout. 
+Some Samsung Galaxy Nexus devices randomly detect a power connection without any charger being actually connected to the phone. This would drain the battery because of the screen turning on to display the "Charging" message, multiple times per hour till screen timeout. 
 
 Forums reporting this bug:
 
