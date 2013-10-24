@@ -24,7 +24,7 @@
 <resources>
 
     <string name="app_name">SnooZy le chargeur</string>
-    <string name="app_version">0.9 bêta</string>
+    <string name="app_version">1.0</string>
     <string name="activity_settings">Paramètres</string>
     <string name="activity_about">À propos</string>
     <string name="activity_eula">Licence</string>
@@ -94,6 +94,6 @@
     <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
     <string name="about_text_credits">Application Android réalisée par <a href="http://www.mudar.ca/">Mudar Noufal</a>. Le code source est publié sous la licence GPLv3 de la Free Software Foundation. Un grand merci à G&amp;A.</string>
     <string name="about_text_usage">Cette application réduit la consommation d’énergie de l’écran de l’appareil. Elle peut également être utilisée pour l’auto-verrouillage au moment de la déconnexion, ou simplement pour obtenir l’historique des charges.</string>
-    <string name="about_text_usage_extra">SnooZy est très utile avec les <i>chargeurs solaires</i> et d’une façon plus spécifique avec les téléphones <strong>Galaxy Nexus</strong> qui rencontrent des problèmes de batterie liés à la détection du chargement.</string>
+    <string name="about_text_usage_extra"><![CDATA[SnooZy est très utile avec les <b>chargeurs solaires</b> et d’une façon plus spécifique avec les téléphones <b>Galaxy Nexus</b> qui rencontrent des problèmes de batterie liés aux connexions fantômes du chargeur.]]></string>
 
 </resources>
