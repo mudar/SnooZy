@@ -42,7 +42,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
-import android.text.format.Time;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
@@ -57,6 +59,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         implements AudioManager.OnAudioFocusChangeListener {
     private static final String TAG = makeLogTag(PowerConnectionReceiver.class);
     private static final int AUDIO_FOCUS_DURATION = 1000;
+    private static final String FORMAT_ORDINAL_DAY = "yyyyDDDD"; // Ensure that ordinalDate is greater than previous julianDay values
     private Ringtone mRingtone;
 
     @Override
@@ -231,14 +234,14 @@ public class PowerConnectionReceiver extends BroadcastReceiver
 
         final float batteryLevel = BatteryHelper.getBatteryLevel(context);
         final long millis = System.currentTimeMillis();
+        final int ordinalDay = Integer.valueOf(new SimpleDateFormat(FORMAT_ORDINAL_DAY).format(new Date(millis)));
 
         ContentValues newItem = new ContentValues();
         newItem.put(History.IS_POWER_ON, (isPowerConnected ? 1 : 0));
         newItem.put(History.BATTERY_LEVEL, Math.round(batteryLevel * 100));
         newItem.put(History.NOTIFY_GROUP, notifyGroup);
         newItem.put(History.TIME_STAMP, millis);
-        newItem.put(History.JULIAN_DAY, Time.getJulianDay(millis, (new Time()).gmtoff));
-
+        newItem.put(History.ORDINAL_DAY, ordinalDay);
         context.getContentResolver().insert(
                 History.CONTENT_URI,
                 newItem

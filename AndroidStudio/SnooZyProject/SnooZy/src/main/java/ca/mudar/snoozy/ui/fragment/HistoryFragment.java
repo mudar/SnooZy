@@ -157,7 +157,7 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
                 History.IS_LAST,
                 DailyHistory.TOTAL,
 //                History.NOTIFY_GROUP,
-//                History.JULIAN_DAY
+//                History.ORDINAL_DAY
         };
         final int _ID = 0;
         final int IS_POWER_ON = 1;
@@ -167,6 +167,6 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
         final int IS_LAST = 5;
         final int TOTAL = 6;
 //        final int NOTIFY_GROUP = 6;
-//        final int JULIAN_DAY = 7;
+//        final int ORDINAL_DAY = 7;
     }
 }

@@ -53,21 +53,21 @@ public class ChargerDatabase extends SQLiteOpenHelper {
                 HistoryColumns.BATTERY_LEVEL + " INTEGER NOT NULL," +
                 HistoryColumns.NOTIFY_GROUP + " INTEGER NOT NULL," +
                 HistoryColumns.TIME_STAMP + " INTEGER NOT NULL," +
-                HistoryColumns.JULIAN_DAY + " DATE NOT NULL )"
+                HistoryColumns.ORDINAL_DAY + " DATE NOT NULL )"
         );
 
         db.execSQL("CREATE INDEX " + Indexes.HISTORY_DAY +
                 " ON " + Tables.HISTORY +
-                " (" + HistoryColumns.JULIAN_DAY + ")"
+                " (" + HistoryColumns.ORDINAL_DAY + ")"
         );
 
         db.execSQL("CREATE VIEW " + Tables.DAILY_HISTORY +
-                " AS SELECT " + HistoryColumns.JULIAN_DAY + " AS " + DailyHistoryColumns.JULIAN_DAY + "," +
+                " AS SELECT " + HistoryColumns.ORDINAL_DAY + " AS " + DailyHistoryColumns.JULIAN_DAY + "," +
                 " MIN(" + HistoryColumns.TIME_STAMP + ") AS " + DailyHistoryColumns.MIN + "," +
                 " MAX(" + HistoryColumns.TIME_STAMP + ") AS " + DailyHistoryColumns.MAX + "," +
                 " COUNT(" + BaseColumns._ID + ") AS " + DailyHistoryColumns.TOTAL +
                 " FROM " + Tables.HISTORY +
-                " GROUP BY " + HistoryColumns.JULIAN_DAY
+                " GROUP BY " + HistoryColumns.ORDINAL_DAY
         );
     }
 
@@ -80,7 +80,7 @@ public class ChargerDatabase extends SQLiteOpenHelper {
         String HISTORY = "history";
         String DAILY_HISTORY = "daily_history";
         String HISTORY_JOIN_DAILY = HISTORY + " INNER JOIN " + DAILY_HISTORY +
-                " ON " + HistoryColumns.JULIAN_DAY + " = " + DailyHistoryColumns.JULIAN_DAY;
+                " ON " + HistoryColumns.ORDINAL_DAY + " = " + DailyHistoryColumns.JULIAN_DAY;
     }
 
     private interface Indexes {

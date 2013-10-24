@@ -44,7 +44,7 @@ public class ChargerContract {
         String BATTERY_LEVEL = "h_battery_level";
         String NOTIFY_GROUP = "h_notify_group";
         String TIME_STAMP = "h_time_stamp";
-        String JULIAN_DAY = "h_julian_day";
+        String ORDINAL_DAY = "h_julian_day"; // Renamed in Java but not for sqlite
     }
 
     interface DailyHistoryColumns {
