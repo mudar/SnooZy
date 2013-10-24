@@ -56,6 +56,13 @@
     <string name="prefs_on_power_loss_title">Power loss only</string>
     <!--<string name="prefs_on_power_loss_summary_on">Screen will not be turned off on power connection.</string>-->
     <!--<string name="prefs_on_power_loss_summary_off">Ignores power connection status.</string>-->
+
+    <string name="prefs_delay_to_lock_title">Screen lock delay</string>
+    <string name="prefs_delay_dialog_title">Set lock delay</string>
+    <string name="prefs_delay_fast">Immediately</string>
+    <string name="prefs_delay_moderate">3 seconds</string>
+    <string name="prefs_delay_slow">5 seconds</string>
+
     <string name="prefs_device_admin_title">Device administrators</string>
     <string name="prefs_device_admin_summary_enabled">View or deactivate device administrators. Helpful if you want to uninstall SnooZy</string>
     <string name="prefs_device_admin_summary_disabled">SnooZy is currently not a device administrator: Screen cannot be locked</string>

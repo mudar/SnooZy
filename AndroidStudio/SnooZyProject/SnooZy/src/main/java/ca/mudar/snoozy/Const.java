@@ -43,14 +43,26 @@ public class Const {
         final String NOTIFY_GROUP = "prefs_notify_group";
         final String ON_SCREEN_LOCK = "prefs_on_screen_lock";
         final String ON_POWER_LOSS = "prefs_on_power_loss";
+        final String DELAY_TO_LOCK = "prefs_delay_to_lock";
         final String DEVICE_ADMIN = "prefs_device_admin";
         final String IS_BETA_USER = "prefs_is_beta_user";
     }
+
+    public static interface PrefsValues {
+        final String DELAY_FAST = "0";
+        final String DELAY_MODERATE = "3";
+        final String DELAY_SLOW = "5";
+    }
+
 
     // Intents
     public static interface IntentExtras {
         final String RESET_NOTIFY_NUMBER = "reset_notify_number";
         final String INCREMENT_NOTIFY_GROUP = "inc_notify_group";
+        final String ON_SCREEN_LOCK = "on_screen_lock";
+        final String ON_POWER_LOSS = "on_power_loss";
+        final String IS_CONNECTED = "is_connected";
+        final String DELAY_TO_LOCK = "delay_to_lock";
     }
 
     // Actions

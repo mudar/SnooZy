@@ -52,6 +52,13 @@
     <string name="prefs_has_vibration_title">Vibreur</string>
     <string name="prefs_on_screen_lock_title">Écran de veille uniquement</string>
     <string name="prefs_on_power_loss_title">Déconnexion uniquement</string>
+
+    <string name="prefs_delay_to_lock_title">Délai avant le verrouillage</string>
+    <string name="prefs_delay_dialog_title">Choix du délai avant le verrouillage</string>
+    <string name="prefs_delay_fast">Immédiatement</string>
+    <string name="prefs_delay_moderate">3 secondes</string>
+    <string name="prefs_delay_slow">5 secondes</string>
+
     <string name="prefs_device_admin_title">Administrateurs de l’appareil</string>
     <string name="prefs_device_admin_summary_enabled">Afficher ou désactiver les administrateurs de l’appareil. Utile si vous souhaitez désinstaller SnooZy</string>
     <string name="prefs_device_admin_summary_disabled">SnooZy n’est pas un administrateur de l’appareil actuellement : impossible de verrouiller l’écran</string>

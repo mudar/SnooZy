@@ -119,6 +119,7 @@
                 <action android:name="ca.mudar.snoozy.notify_deleted" />
             </intent-filter>
         </receiver>
+        <service android:name=".service.DelayedLockService" />
 
         <provider
             android:name=".provider.ChargerProvider"

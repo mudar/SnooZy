@@ -141,11 +141,13 @@ public class SettingsActivity extends PreferenceActivity {
             final PreferenceScreen deviceAdminPrefScreen = (PreferenceScreen) findPreference(Const.PrefsNames.DEVICE_ADMIN);
             final Preference onPowerLoss = findPreference(Const.PrefsNames.ON_POWER_LOSS);
             final Preference onScreenLock = findPreference(Const.PrefsNames.ON_SCREEN_LOCK);
+            final Preference delayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
 
             deviceAdminPrefScreen.setSummary(isDeviceAdmin ?
                     R.string.prefs_device_admin_summary_enabled : R.string.prefs_device_admin_summary_disabled);
             onPowerLoss.setEnabled(isDeviceAdmin);
             onScreenLock.setEnabled(isDeviceAdmin);
+            delayToLock.setSummary(getLockDelaySummary());
         }
 
         @Override
@@ -168,6 +170,9 @@ public class SettingsActivity extends PreferenceActivity {
             if (key.equals(Const.PrefsNames.IS_ENABLED)) {
                 ComponentHelper.togglePowerConnectionReceiver(getActivity().getApplicationContext(),
                         sharedPreferences.getBoolean(key, false));
+            } else if (key.equals(Const.PrefsNames.DELAY_TO_LOCK)) {
+                final Preference delayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
+                delayToLock.setSummary(getLockDelaySummary());
             }
         }
 
@@ -183,6 +188,20 @@ public class SettingsActivity extends PreferenceActivity {
                 intentSecuritySettings.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intentSecuritySettings);
             }
+        }
+
+        private int getLockDelaySummary() {
+            final String value = mSharedPrefs.getString(Const.PrefsNames.DELAY_TO_LOCK, Const.PrefsValues.DELAY_FAST);
+            int res;
+            if (value.equals(Const.PrefsValues.DELAY_SLOW)) {
+                res = R.string.prefs_delay_slow;
+            } else if (value.equals(Const.PrefsValues.DELAY_MODERATE)) {
+                res = R.string.prefs_delay_moderate;
+            } else {
+                res = R.string.prefs_delay_fast;
+            }
+
+            return res;
         }
     }
 }

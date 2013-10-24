@@ -23,11 +23,9 @@
 
 package ca.mudar.snoozy.receiver;
 
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -48,9 +46,10 @@ import java.util.Date;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
+import ca.mudar.snoozy.service.DelayedLockService;
 import ca.mudar.snoozy.ui.activity.MainActivity;
 import ca.mudar.snoozy.util.BatteryHelper;
-import ca.mudar.snoozy.util.ComponentHelper;
+import ca.mudar.snoozy.util.LockScreenHelper;
 
 import static ca.mudar.snoozy.provider.ChargerContract.History;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
@@ -75,6 +74,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         final boolean hasSound = sharedPrefs.getBoolean(Const.PrefsNames.HAS_SOUND, false);
         final boolean onScreenLock = sharedPrefs.getBoolean(Const.PrefsNames.ON_SCREEN_LOCK, true);
         final boolean onPowerLoss = sharedPrefs.getBoolean(Const.PrefsNames.ON_POWER_LOSS, false);
+        final int delayToLock = Integer.parseInt(sharedPrefs.getString(Const.PrefsNames.DELAY_TO_LOCK, Const.PrefsValues.DELAY_FAST)) * 1000;
         final int notifyCount = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_COUNT, 1);
         final int notifyGroup = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_GROUP, 1);
 
@@ -92,7 +92,18 @@ public class PowerConnectionReceiver extends BroadcastReceiver
             final boolean isConnectedPower = action.equals(Intent.ACTION_POWER_CONNECTED);
 
             // Lock the screen, following the user preferences
-            lockScreen(context, onScreenLock, onPowerLoss, isConnectedPower);
+            if (delayToLock == 0) {
+                LockScreenHelper.lockScreen(context, onScreenLock, onPowerLoss, isConnectedPower);
+            } else {
+                Intent intentService = new Intent(Intent.ACTION_SYNC, null, context, DelayedLockService.class);
+                Bundle extras = new Bundle();
+                extras.putBoolean(Const.IntentExtras.ON_SCREEN_LOCK, onScreenLock);
+                extras.putBoolean(Const.IntentExtras.ON_POWER_LOSS, onPowerLoss);
+                extras.putBoolean(Const.IntentExtras.IS_CONNECTED, isConnectedPower);
+                extras.putInt(Const.IntentExtras.DELAY_TO_LOCK, delayToLock);
+                intentService.putExtras(extras);
+                context.startService(intentService);
+            }
 
             // Save in database
             saveHistoryItem(context.getApplicationContext(), isConnectedPower, notifyGroup);
@@ -110,37 +121,6 @@ public class PowerConnectionReceiver extends BroadcastReceiver
 
                 nativeRingtone(context, hasSound);
             }
-        }
-    }
-
-    private void lockScreen(Context context, boolean onScreenLock, boolean onPowerLoss, boolean isConnectedPower) {
-
-        if (!ComponentHelper.isDeviceAdmin(context.getApplicationContext())) {
-            return;
-        }
-
-        final boolean isLocked = ((KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE))
-                .inKeyguardRestrictedInputMode();
-
-        if (onScreenLock && onPowerLoss) {
-            if (isLocked && !isConnectedPower) {
-                DevicePolicyManager mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-                mDPM.lockNow();
-            }
-        } else if (onScreenLock) {
-            if (isLocked) {
-                DevicePolicyManager mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-                mDPM.lockNow();
-            }
-
-        } else if (onPowerLoss) {
-            if (!isConnectedPower) {
-                DevicePolicyManager mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-                mDPM.lockNow();
-            }
-        } else {
-            DevicePolicyManager mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-            mDPM.lockNow();
         }
     }
 
