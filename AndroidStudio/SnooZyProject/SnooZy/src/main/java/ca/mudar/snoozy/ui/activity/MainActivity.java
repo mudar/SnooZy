@@ -35,6 +35,7 @@ import android.widget.Toast;
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 import ca.mudar.snoozy.ui.fragment.HistoryFragment;
+import ca.mudar.snoozy.util.CacheHelper;
 import ca.mudar.snoozy.util.ComponentHelper;
 
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
@@ -95,6 +96,10 @@ public class MainActivity extends BaseActivity {
                 mToast = mToast.makeText(this, R.string.toast_running_no_admin, Toast.LENGTH_LONG);
                 mToast.show();
             }
+        }
+
+        if ( CacheHelper.isCacheClearRequired(getApplicationContext())) {
+            CacheHelper.clearHistory(getApplicationContext());
         }
     }
 

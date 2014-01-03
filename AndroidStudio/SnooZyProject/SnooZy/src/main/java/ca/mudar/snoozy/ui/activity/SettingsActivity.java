@@ -23,10 +23,12 @@
 
 package ca.mudar.snoozy.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.Preference;
@@ -48,6 +50,12 @@ import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
 public class SettingsActivity extends PreferenceActivity {
     private static final String TAG = makeLogTag(SettingsActivity.class);
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return SettingsFragment.class.getName().equals(fragmentName);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,12 +150,14 @@ public class SettingsActivity extends PreferenceActivity {
             final Preference onPowerLoss = findPreference(Const.PrefsNames.ON_POWER_LOSS);
             final Preference onScreenLock = findPreference(Const.PrefsNames.ON_SCREEN_LOCK);
             final Preference delayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
+            final Preference cacheAge = findPreference(Const.PrefsNames.CACHE_AGE);
 
             deviceAdminPrefScreen.setSummary(isDeviceAdmin ?
                     R.string.prefs_device_admin_summary_enabled : R.string.prefs_device_admin_summary_disabled);
             onPowerLoss.setEnabled(isDeviceAdmin);
             onScreenLock.setEnabled(isDeviceAdmin);
             delayToLock.setSummary(getLockDelaySummary());
+            cacheAge.setSummary(getCacheAgeSummary());
         }
 
         @Override
@@ -173,6 +183,9 @@ public class SettingsActivity extends PreferenceActivity {
             } else if (key.equals(Const.PrefsNames.DELAY_TO_LOCK)) {
                 final Preference delayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
                 delayToLock.setSummary(getLockDelaySummary());
+            } else if (key.equals(Const.PrefsNames.CACHE_AGE)) {
+                final Preference cacheAge = findPreference(Const.PrefsNames.CACHE_AGE);
+                cacheAge.setSummary(getCacheAgeSummary());
             }
         }
 
@@ -199,6 +212,22 @@ public class SettingsActivity extends PreferenceActivity {
                 res = R.string.prefs_delay_moderate;
             } else {
                 res = R.string.prefs_delay_fast;
+            }
+
+            return res;
+        }
+
+        private int getCacheAgeSummary() {
+            final String value = mSharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
+            int res;
+            if (value.equals(Const.PrefsValues.CACHE_SMALL)) {
+                res = R.string.prefs_cache_age_small;
+            } else if (value.equals(Const.PrefsValues.CACHE_MEDIUM)) {
+                res = R.string.prefs_cache_age_medium;
+            } else if (value.equals(Const.PrefsValues.CACHE_LARGE)) {
+                res = R.string.prefs_cache_age_large;
+            } else {
+                res = R.string.prefs_cache_age_all;
             }
 
             return res;

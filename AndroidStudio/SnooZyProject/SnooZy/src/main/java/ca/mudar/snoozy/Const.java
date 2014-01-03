@@ -24,6 +24,8 @@
 package ca.mudar.snoozy;
 
 
+import android.text.format.DateUtils;
+
 public class Const {
 
     public static final String APP_PREFS_NAME = "snoozy_prefs";
@@ -46,12 +48,25 @@ public class Const {
         final String DELAY_TO_LOCK = "prefs_delay_to_lock";
         final String DEVICE_ADMIN = "prefs_device_admin";
         final String IS_BETA_USER = "prefs_is_beta_user";
+        final String CACHE_AGE = "prefs_cache_age";
+        final String LAST_CACHE_CLEAR = "prefs_last_cache_clear";
     }
 
     public static interface PrefsValues {
         final String DELAY_FAST = "0";
         final String DELAY_MODERATE = "3";
         final String DELAY_SLOW = "5";
+        final String CACHE_SMALL = "7";
+        final String CACHE_MEDIUM = "14";
+        final String CACHE_LARGE = "30";
+        final String CACHE_ALL = "-1";  // Keep all history
+    }
+
+    public static interface CacheAgeValues {
+        final long SMALL = DateUtils.WEEK_IN_MILLIS;
+        final long MEDIUM = 2l * DateUtils.WEEK_IN_MILLIS;
+        final long LARGE = 30l * DateUtils.DAY_IN_MILLIS;
+        final long CACHE_ALL = -1l;
     }
 
 

@@ -24,7 +24,7 @@
 <resources>
 
     <string name="app_name">SnooZy le chargeur</string>
-    <string name="app_version">1.0</string>
+    <string name="app_version">1.1</string>
     <string name="activity_settings">Paramètres</string>
     <string name="activity_about">À propos</string>
     <string name="activity_eula">Licence</string>
@@ -39,25 +39,37 @@
     <!--System-->
     <string name="admin_device_extra_desc_text">Cette application a besoin d’être activée comme administrateur afin de pouvoir verrouiller l’écran…</string>
     <string name="admin_device_app_desc">Autoriser SnooZy le chargeur à verrouiller l’écran. Zzz…</string>
-    <string name="share_intent_title">Découvrez SnooZy Charger sur Googleplay</string>
+    <string name="share_intent_title">Découvrez SnooZy Charger sur Google Play</string>
 
     <!--Settings/Preferences-->
     <string name="prefs_breadcrumb">Paramètres</string>
     <string name="prefs_category_advanced">Verrouillage de l’écran</string>
     <string name="prefs_category_device_admin">Gestion de l’appareil</string>
+    <string name="prefs_category_cache">Cache</string>
 
     <string name="prefs_is_enabled">Activer l’application</string>
     <string name="prefs_has_notifications_title">Notifications</string>
     <string name="prefs_has_sound_title">Sonnerie</string>
     <string name="prefs_has_vibration_title">Vibreur</string>
     <string name="prefs_on_screen_lock_title">Écran de veille uniquement</string>
+    <string name="prefs_on_screen_lock_summary_on">Éteindre l’écran uniquement si l’appareil est verrouillé</string>
+    <string name="prefs_on_screen_lock_summary_off">Ignorer l’état du verrouillage</string>
     <string name="prefs_on_power_loss_title">Déconnexion uniquement</string>
+    <string name="prefs_on_power_loss_summary_on">Éteindre l’écran uniquement si le chargeur est déconnecté</string>
+    <string name="prefs_on_power_loss_summary_off">Ignorer l’état de la connexion</string>
 
     <string name="prefs_delay_to_lock_title">Délai avant le verrouillage</string>
     <string name="prefs_delay_dialog_title">Choix du délai avant le verrouillage</string>
     <string name="prefs_delay_fast">Immédiatement</string>
     <string name="prefs_delay_moderate">3 secondes</string>
     <string name="prefs_delay_slow">5 secondes</string>
+
+    <string name="prefs_cache_age_title">Jours d’historique à sauvegarder</string>
+    <string name="prefs_cache_age_dialog_title">Choix de l’âge de l’historique</string>
+    <string name="prefs_cache_age_small">1 semaine</string>
+    <string name="prefs_cache_age_medium">2 semaines</string>
+    <string name="prefs_cache_age_large">1 mois</string>
+    <string name="prefs_cache_age_all">Tout sauvegarder</string>
 
     <string name="prefs_device_admin_title">Administrateurs de l’appareil</string>
     <string name="prefs_device_admin_summary_enabled">Afficher ou désactiver les administrateurs de l’appareil. Utile si vous souhaitez désinstaller SnooZy</string>
@@ -78,7 +90,6 @@
     <string name="history_empty_list_settings">Vérifier les paramètres pour adapter l’application à vos besoins…</string>
     <string name="history_empty_list_title_connect">connecter</string>
     <string name="history_empty_list_title_disconnect">déconnecter</string>
-
 
     <!--History Header -->
     <string name="history_header">Historique des charges</string>
@@ -101,6 +112,6 @@
     <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
     <string name="about_text_credits">Application Android réalisée par <a href="http://www.mudar.ca/">Mudar Noufal</a>. Le code source est publié sous la licence GPLv3 de la Free Software Foundation. Un grand merci à G&amp;A.</string>
     <string name="about_text_usage">Cette application réduit la consommation d’énergie de l’écran de l’appareil. Elle peut également être utilisée pour l’auto-verrouillage au moment de la déconnexion, ou simplement pour obtenir l’historique des charges.</string>
-    <string name="about_text_usage_extra"><![CDATA[SnooZy est très utile avec les <b>chargeurs solaires</b> et d’une façon plus spécifique avec les téléphones <b>Galaxy Nexus</b> qui rencontrent des problèmes de batterie liés aux connexions fantômes du chargeur.]]></string>
+    <string name="about_text_usage_extra"><![CDATA[SnooZy est très utile avec les <b>chargeurs solaires ou sans-fil</b> et d’une façon plus spécifique avec les téléphones <b>Galaxy Nexus</b> qui rencontrent des problèmes de batterie liés aux connexions fantômes du chargeur.]]></string>
 
 </resources>
