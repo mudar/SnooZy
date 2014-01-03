@@ -54,7 +54,7 @@
     <string name="prefs_on_screen_lock_title">Only when already locked</string>
     <!--<string name="prefs_on_screen_lock_summary_on">Screen will not be turned off while you’re using the device.</string>-->
     <!--<string name="prefs_on_screen_lock_summary_off">Ignores screen lock status.</string>-->
-    <string name="prefs_on_power_loss_title">Only when disconnecting charge</string>
+    <string name="prefs_on_power_loss_title">Only when disconnecting charger</string>
     <!--<string name="prefs_on_power_loss_summary_on">Screen will not be turned off on power connection.</string>-->
     <!--<string name="prefs_on_power_loss_summary_off">Ignores power connection status.</string>-->
 
