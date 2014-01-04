@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SnooZy Charger
+    Power Connection manager. Turn the screen off on power connection
+    or disconnection, to save battery consumption by the phone's display.
+
+    Copyright (C) 2013 Mudar Noufal <mn@mudar.ca>
+    Copyright (C) 2014 Daniel Aleksandersen <code@daniel.priv.no>
+
+    This file is part of SnooZy Charger.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <string name="app_name">SnooZy Charger</string>
+    <string name="app_version">1.0</string>
+    <string name="activity_settings">Innstillinger</string>
+    <string name="activity_about">Om</string>
+    <string name="activity_eula">Brukeravtale</string>
+
+    <!--Menu-->
+    <string name="action_settings">Innstillinger</string>
+    <string name="action_about">Om</string>
+    <string name="action_eula">Lisens</string>
+    <string name="action_share">Del</string>
+    <string name="action_rate">Vurder</string>
+
+    <!--System-->
+    <string name="admin_device_extra_desc_text">Programmet må få Enhetsadministrasjonstillatelser for å kunne kontrollere låseskjermen….</string>
+    <string name="admin_device_app_desc">Tillat at SnooZy Charger kan låse skjermen. Zzz…</string>
+    <string name="share_intent_title">Oppdag SnooZy Charger på Google Play</string>
+
+    <!--Settings/Preferences-->
+    <string name="prefs_breadcrumb">Innstillinger</string>
+    <string name="prefs_category_advanced">Skru av skjermen</string>
+    <string name="prefs_category_device_admin">Enhetsadministrasjon</string>
+
+    <string name="prefs_is_enabled">Bruk app</string>
+    <string name="prefs_has_notifications_title">Varsler</string>
+    <string name="prefs_has_sound_title">Spill av lyd</string>
+    <string name="prefs_has_vibration_title">Vibrer</string>
+    <string name="prefs_on_screen_lock_title">Kun når den allerede er låst</string>
+    <!--<string name="prefs_on_screen_lock_summary_on">Skjermen blir ikke avslått om skjermen ikke er låst.</string>-->
+    <!--<string name="prefs_on_screen_lock_summary_off">Ignorerer skjermens låsetilstand.</string>-->
+    <string name="prefs_on_power_loss_title">Kun når lader kobles fra</string>
+    <!--<string name="prefs_on_power_loss_summary_on">Skjermen blir ikke avslått når lader kobles til.</string>-->
+    <!--<string name="prefs_on_power_loss_summary_off">Ignorer ladestatus.</string>-->
+
+    <string name="prefs_delay_to_lock_title">Forsinket skjermlås</string>
+    <string name="prefs_delay_dialog_title">Velg låseforsinkelse</string>
+    <string name="prefs_delay_fast">Øyeblikkelig</string>
+    <string name="prefs_delay_moderate">3 sekunder</string>
+    <string name="prefs_delay_slow">5 sekunder</string>
+
+    <string name="prefs_device_admin_title">Enhetsadministratorer</string>
+    <string name="prefs_device_admin_summary_enabled">Kontroller enhetsadministratorerene. Nyttig om du vil avinstallere SnooZy.</string>
+    <string name="prefs_device_admin_summary_disabled">SnooZy er for øyeblikket ikke en enhetsadministrator: Skjermen kan ikke låses.</string>
+
+    <!--Notifications-->
+    <string name="notify_content_title">Ladertilkobling</string>
+    <string name="notify_content_text_single_on">Ekstern lader tilkoblet.</string>
+    <string name="notify_content_text_single_off">Ekstern lader fjernet.</string>
+    <string name="notify_content_text_multi">Lader ble tilkoblet/fjernet.</string>
+    <!--<string name="notify_big_content_title">Ladertilkoblingsdetaljer:</string>-->
+
+    <!-- Toast Notifications -->
+    <string name="toast_service_disabled">SnooZy er for øyeblikket ikke aktiv.</string>
+    <string name="toast_running_no_admin">For å tillate skjermlåsing, gi tillatelser til å administrere enheten.</string>
+
+    <!--History ListFragment-->
+    <string name="history_empty_list_title">%s laderen din for å se appen i aksjon!</string>
+    <string name="history_empty_list_settings">Gå igjennom innstillingene for å gjøre appen nyttig for deg…</string>
+    <string name="history_empty_list_title_connect">Koble til</string>
+    <string name="history_empty_list_title_disconnect">Koble fra</string>
+
+
+    <!--History Header -->
+    <string name="history_header">Historikk over laderstatus</string>
+    <string name="history_header_timestamp">Tid</string>
+    <string name="history_header_power_connection">Lader</string>
+    <string name="history_header_battery_level">Batteri</string>
+
+    <!--History Footer -->
+    <string name="history_footer_about">SnooZy kjører som en bakgrunnsprosess. Når en lader kobles til eller fra vil appen slå av skjermen for å spare strøm.</string>
+
+    <!--History ListFragmentItem -->
+    <string name="history_item_power_connected">Ja</string>
+    <string name="history_item_power_disconnected">Nei</string>
+    <string name="history_item_day_today">Idag</string>
+    <string name="history_item_battery_level">%s% %</string>
+
+    <!--About -->
+    <string name="about_title">SnooZy Charger Zzz…</string>
+    <string name="about_project_version">Versjon %s</string>
+    <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
+    <string name="about_text_credits">Android app utviklet av <a href="http://www.mudar.ca/">Mudar Noufal</a>. Kildekoden er utgitt under GPLv3-lisensen fra Free Software Foundation. Mange takk til G&amp;A.</string>
+    <string name="about_text_usage">Denne appen prøver å redusere skjermens batteribruk. Den kan også brukes til å automatisk låse skjermen når en lader kobles til eller fra, eller som en historikk over ladesykluser.</string>
+    <string name="about_text_usage_extra"><![CDATA[SnooZy kan være veldig nyttig sammen med <b>sol- og trådløseladere</b> eller for <b>Galaxy Nexus</b>-telefoner med batteriproblemer relatert til fantomlading.]]></string>
+
+</resources>
