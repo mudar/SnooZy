@@ -26,9 +26,16 @@ package ca.mudar.snoozy.util;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.telephony.TelephonyManager;
 
 public class LockScreenHelper {
-    public  static void lockScreen(Context context, boolean onScreenLock, boolean onPowerLoss, boolean isConnectedPower) {
+    public static void lockScreen(Context context, boolean onScreenLock, boolean onPowerLoss, boolean isConnectedPower) {
+
+        // Do nothing if ringing
+        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (manager.getCallState() == TelephonyManager.CALL_STATE_RINGING) {
+            return;
+        }
 
         if (!ComponentHelper.isDeviceAdmin(context.getApplicationContext())) {
             return;

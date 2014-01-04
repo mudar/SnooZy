@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity {
             }
         }
 
-        if ( CacheHelper.isCacheClearRequired(getApplicationContext())) {
+        if (CacheHelper.isCacheClearRequired(getApplicationContext())) {
             CacheHelper.clearHistory(getApplicationContext());
         }
     }
