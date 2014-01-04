@@ -100,7 +100,7 @@
     <string name="history_header_battery_level">Battery</string>
 
     <!--History Footer -->
-    <string name="history_footer_about">SnooZy runs in the background. On power connection and disconnection, the app turns off the screen to save power.</string>
+    <string name="history_footer_about">SnooZy runs in the background. On charger connection and disconnection, the app turns off the screen to save power.</string>
 
     <!--History ListFragmentItem -->
     <string name="history_item_power_connected">Yes</string>
