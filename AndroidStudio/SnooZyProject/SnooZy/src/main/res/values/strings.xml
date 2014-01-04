@@ -89,15 +89,15 @@
     <!--History Header -->
     <string name="history_header">Power connection history</string>
     <string name="history_header_timestamp">Time</string>
-    <string name="history_header_power_connection">Power</string>
+    <string name="history_header_power_connection">Charging</string>
     <string name="history_header_battery_level">Battery</string>
 
     <!--History Footer -->
-    <string name="history_footer_about">SnooZy runs in the background. On power connection and disconnection, the app turns off the screen to save power.</string>
+    <string name="history_footer_about">SnooZy runs in the background. On charger connection and disconnection, the app turns off the screen to save power.</string>
 
     <!--History ListFragmentItem -->
-    <string name="history_item_power_connected">On</string>
-    <string name="history_item_power_disconnected">Off</string>
+    <string name="history_item_power_connected">Yes</string>
+    <string name="history_item_power_disconnected">No</string>
     <string name="history_item_day_today">Today</string>
     <string name="history_item_battery_level">%s%%</string>
 
