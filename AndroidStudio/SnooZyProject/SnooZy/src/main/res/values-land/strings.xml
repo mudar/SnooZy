@@ -23,7 +23,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="history_header_power_connection">Power connection</string>
+    <string name="history_header_power_connection">Charger connected</string>
     <string name="history_header_battery_level">Battery level</string>
 
 </resources>
