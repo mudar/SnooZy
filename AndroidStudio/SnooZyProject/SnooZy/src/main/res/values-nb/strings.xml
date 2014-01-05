@@ -46,23 +46,31 @@
     <string name="prefs_breadcrumb">Innstillinger</string>
     <string name="prefs_category_advanced">Skru av skjermen</string>
     <string name="prefs_category_device_admin">Enhetsadministrasjon</string>
+    <string name="prefs_category_cache">Mellomlager</string>
 
     <string name="prefs_is_enabled">Bruk app</string>
     <string name="prefs_has_notifications_title">Varsler</string>
     <string name="prefs_has_sound_title">Spill av lyd</string>
     <string name="prefs_has_vibration_title">Vibrer</string>
     <string name="prefs_on_screen_lock_title">Kun når den allerede er låst</string>
-    <!--<string name="prefs_on_screen_lock_summary_on">Skjermen blir ikke avslått om skjermen ikke er låst.</string>-->
-    <!--<string name="prefs_on_screen_lock_summary_off">Ignorerer skjermens låsetilstand.</string>-->
+    <string name="prefs_on_screen_lock_summary_on">Skjermen blir ikke avslått om skjermen ikke er låst.</string>
+    <string name="prefs_on_screen_lock_summary_off">Ignorerer skjermens låsetilstand.</string>
     <string name="prefs_on_power_loss_title">Kun når lader kobles fra</string>
-    <!--<string name="prefs_on_power_loss_summary_on">Skjermen blir ikke avslått når lader kobles til.</string>-->
-    <!--<string name="prefs_on_power_loss_summary_off">Ignorer ladestatus.</string>-->
+    <string name="prefs_on_power_loss_summary_on">Skjermen blir ikke avslått når lader kobles til.</string>
+    <string name="prefs_on_power_loss_summary_off">Ignorer om lader er koblet til eller ikke.</string>
 
     <string name="prefs_delay_to_lock_title">Forsinket skjermlås</string>
     <string name="prefs_delay_dialog_title">Velg låseforsinkelse</string>
     <string name="prefs_delay_fast">Øyeblikkelig</string>
     <string name="prefs_delay_moderate">3 sekunder</string>
     <string name="prefs_delay_slow">5 sekunder</string>
+
+    <string name="prefs_cache_age_title">Behold historikk over antall dager</string>
+    <string name="prefs_cache_age_dialog_title">Velg historieperiode</string>
+    <string name="prefs_cache_age_small">1 uke</string>
+    <string name="prefs_cache_age_medium">2 uker</string>
+    <string name="prefs_cache_age_large">1 måned</string>
+    <string name="prefs_cache_age_all">Behold alt</string>
 
     <string name="prefs_device_admin_title">Enhetsadministratorer</string>
     <string name="prefs_device_admin_summary_enabled">Kontroller enhetsadministratorerene. Nyttig om du vil avinstallere SnooZy.</string>
