@@ -73,7 +73,7 @@
     <string name="prefs_cache_age_all">Behold alt</string>
 
     <string name="prefs_device_admin_title">Enhetsadministratorer</string>
-    <string name="prefs_device_admin_summary_enabled">Kontroller enhetsadministratorerene. Nyttig om du vil avinstallere SnooZy.</string>
+    <string name="prefs_device_admin_summary_enabled">Se eller deaktiver enhetsadministratorer. Nyttig om du vil avinstallere SnooZy.</string>
     <string name="prefs_device_admin_summary_disabled">SnooZy er for øyeblikket ikke en enhetsadministrator: Skjermen kan ikke låses.</string>
 
     <!--Notifications-->
