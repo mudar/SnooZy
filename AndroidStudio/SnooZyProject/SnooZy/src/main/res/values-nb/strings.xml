@@ -25,7 +25,6 @@
 <resources>
 
     <string name="app_name">SnooZy Charger</string>
-    <string name="app_version">1.0</string>
     <string name="activity_settings">Innstillinger</string>
     <string name="activity_about">Om</string>
     <string name="activity_eula">Brukeravtale</string>
@@ -107,13 +106,13 @@
     <string name="history_item_power_connected">Ja</string>
     <string name="history_item_power_disconnected">Nei</string>
     <string name="history_item_day_today">Idag</string>
-    <string name="history_item_battery_level">%s% %</string>
+    <string name="history_item_battery_level">%s%%</string>
 
     <!--About -->
     <string name="about_title">SnooZy Charger Zzz…</string>
     <string name="about_project_version">Versjon %s</string>
     <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
-    <string name="about_text_credits">Android app utviklet av <a href="http://www.mudar.ca/">Mudar Noufal</a>. Kildekoden er utgitt under GPLv3-lisensen fra Free Software Foundation. Mange takk til G&amp;A.</string>
+    <string name="about_text_credits">Android app utviklet av <a href="http://www.mudar.ca/">Mudar Noufal</a>. Kildekoden er utgitt under GPLv3-lisensen fra Free Software Foundation. Takk til <a href="http://www.aeyoun.priv.no/">Daniel Aleksandersen</a> for den norske oversettelsen.</string>
     <string name="about_text_usage">Denne appen prøver å redusere skjermens batteribruk. Den kan også brukes til å automatisk låse skjermen når en lader kobles til eller fra, eller som en historikk over ladesykluser.</string>
     <string name="about_text_usage_extra"><![CDATA[SnooZy kan være veldig nyttig sammen med <b>sol- og trådløseladere</b> eller for <b>Galaxy Nexus</b>-telefoner med batteriproblemer relatert til fantomlading.]]></string>
 
