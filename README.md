@@ -42,7 +42,8 @@ SnooZy Charger was developed as a (partial) software solution for this issue: it
 
 ## Credits
 
-* Developed by [Mudar Noufal][link_mudar_ca]  &lt;<mn@mudar.ca>&gt;
+* Developed by [Mudar Noufal][link_mudar_ca] &lt;<mn@mudar.ca>&gt;
+* Norwegian translation by [Daniel Aleksandersen][link_aeyoun] &lt;<code@daniel.priv.no>&gt;
 * Many thanks to G&A!
 
 The Android app includes (thanks!) libraries and derivative work of the following projects:
@@ -83,6 +84,7 @@ These three projects are all released under the [Apache License v2.0][link_apach
 [link_snoozy_website]: http://snoozy.mudar.ca/
 [link_snoozy_privacy]: http://snoozy.mudar.ca/privacy.html
 [link_mudar_ca]: http://www.mudar.ca/
+[link_aeyoun]: https://github.com/Aeyoun
 [link_gpl]: http://www.gnu.org/licenses/gpl.html
 [img_devices]: http://snoozy.mudar.ca/images/snoozy-devices.png
 [img_playstore_badge]: http://snoozy.mudar.ca/images/en_app_rgb_wo_60.png
