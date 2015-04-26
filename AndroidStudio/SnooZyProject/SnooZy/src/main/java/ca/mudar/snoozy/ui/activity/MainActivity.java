@@ -40,7 +40,8 @@ import ca.mudar.snoozy.util.ComponentHelper;
 
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements
+        SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = makeLogTag(MainActivity.class);
     private boolean mHasDeviceAdminIntent = false;
     private Toast mToast;
@@ -48,9 +49,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.preferences, false);
-        PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.preferences_beta, false);
 
         super.onCreate(savedInstanceState);
+
+        final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        sharedPrefs.registerOnSharedPreferenceChangeListener(this);
 
         if (getIntent().getExtras() != null) {
             updateNotifyPrefs(getIntent());
@@ -58,7 +61,7 @@ public class MainActivity extends BaseActivity {
             getIntent().removeExtra(Const.IntentExtras.INCREMENT_NOTIFY_GROUP);
         }
 
-        FragmentManager fm = getFragmentManager();
+        final FragmentManager fm = getFragmentManager();
 
         if (fm.findFragmentById(android.R.id.content) == null) {
             HistoryFragment fragment = new HistoryFragment();
@@ -66,7 +69,7 @@ public class MainActivity extends BaseActivity {
         }
 
         if (ComponentHelper.isDeviceAdmin(this)) {
-            // Start the background service which will register the BroadcastReceiver
+            // Start the service component which will register the BroadcastReceiver
             togglePowerConnectionReceiver(true);
         } else {
             togglePowerConnectionReceiver(false);
@@ -83,8 +86,6 @@ public class MainActivity extends BaseActivity {
 
         final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
         final boolean isEnabledPrefs = sharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
-
-        final boolean isBetaUser = sharedPrefs.getBoolean(Const.PrefsNames.IS_BETA_USER, false);
 
         if (ComponentHelper.isDeviceAdmin(this)) {
             if (!isEnabledPrefs) {
@@ -109,6 +110,14 @@ public class MainActivity extends BaseActivity {
             mHasDeviceAdminIntent = false;
             togglePowerConnectionReceiver(resultCode == RESULT_OK);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        sharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
+
+        super.onDestroy();
     }
 
     @Override
@@ -137,16 +146,25 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (Const.PrefsNames.CACHE_AGE.equals(key)) {
+            CacheHelper.clearHistory(getApplicationContext());
+        }
+    }
+
     private void togglePowerConnectionReceiver(boolean isDeviceAdmin) {
 
         final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
         final boolean isEnabledPrefs = sharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
 
         if (isDeviceAdmin && isEnabledPrefs) {
-            ComponentHelper.togglePowerConnectionReceiver(getApplicationContext(),
+            ComponentHelper.togglePowerConnectionReceiver(
+                    getApplicationContext(),
                     true);
         } else {
-            ComponentHelper.togglePowerConnectionReceiver(getApplicationContext(),
+            ComponentHelper.togglePowerConnectionReceiver(
+                    getApplicationContext(),
                     isEnabledPrefs);
         }
     }

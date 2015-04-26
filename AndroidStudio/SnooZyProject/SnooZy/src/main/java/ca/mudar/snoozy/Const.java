@@ -36,66 +36,66 @@ public class Const {
     public static final String URL_PLAYSTORE = "http://play.google.com/store/apps/details?id=ca.mudar.snoozy";
 
     // Preferences
-    public static interface PrefsNames {
-        final String IS_ENABLED = "prefs_is_enabled";
-        final String HAS_NOTIFICATIONS = "prefs_has_notifications";
-        final String HAS_VIBRATION = "prefs_has_vibration";
-        final String HAS_SOUND = "prefs_has_sound";
-        final String NOTIFY_COUNT = "prefs_notify_count";
-        final String NOTIFY_GROUP = "prefs_notify_group";
-        final String ON_SCREEN_LOCK = "prefs_on_screen_lock";
-        final String ON_POWER_LOSS = "prefs_on_power_loss";
-        final String DELAY_TO_LOCK = "prefs_delay_to_lock";
-        final String DEVICE_ADMIN = "prefs_device_admin";
-        final String IS_BETA_USER = "prefs_is_beta_user";
-        final String CACHE_AGE = "prefs_cache_age";
-        final String LAST_CACHE_CLEAR = "prefs_last_cache_clear";
+    public interface PrefsNames {
+        String IS_ENABLED = "prefs_is_enabled";
+        String HAS_NOTIFICATIONS = "prefs_has_notifications";
+        String HAS_VIBRATION = "prefs_has_vibration";
+        String HAS_SOUND = "prefs_has_sound";
+        String NOTIFY_COUNT = "prefs_notify_count";
+        String NOTIFY_GROUP = "prefs_notify_group";
+        String ON_SCREEN_LOCK = "prefs_on_screen_lock";
+        String ON_POWER_LOSS = "prefs_on_power_loss";
+        String DELAY_TO_LOCK = "prefs_delay_to_lock";
+        String DEVICE_ADMIN = "prefs_device_admin";
+//        String IS_BETA_USER = "prefs_is_beta_user";
+        String CACHE_AGE = "prefs_cache_age";
+        String LAST_CACHE_CLEAR = "prefs_last_cache_clear";
     }
 
-    public static interface PrefsValues {
-        final String DELAY_FAST = "0";
-        final String DELAY_MODERATE = "3";
-        final String DELAY_SLOW = "5";
-        final String CACHE_SMALL = "7";
-        final String CACHE_MEDIUM = "14";
-        final String CACHE_LARGE = "30";
-        final String CACHE_ALL = "-1";  // Keep all history
+    public interface PrefsValues {
+        String DELAY_FAST = "0";
+        String DELAY_MODERATE = "3";
+        String DELAY_SLOW = "5";
+        String CACHE_NONE = "0";
+        String CACHE_SMALL = "7";
+        String CACHE_MEDIUM = "14";
+        String CACHE_LARGE = "30";
+        String CACHE_ALL = "-1";  // Keep all history
     }
 
-    public static interface CacheAgeValues {
-        final long SMALL = DateUtils.WEEK_IN_MILLIS;
-        final long MEDIUM = 2l * DateUtils.WEEK_IN_MILLIS;
-        final long LARGE = 30l * DateUtils.DAY_IN_MILLIS;
-        final long CACHE_ALL = -1l;
+    public interface CacheAgeValues {
+        long SMALL = DateUtils.WEEK_IN_MILLIS;
+        long MEDIUM = 2l * DateUtils.WEEK_IN_MILLIS;
+        long LARGE = 30l * DateUtils.DAY_IN_MILLIS;
     }
 
 
     // Intents
-    public static interface IntentExtras {
-        final String RESET_NOTIFY_NUMBER = "reset_notify_number";
-        final String INCREMENT_NOTIFY_GROUP = "inc_notify_group";
-        final String ON_SCREEN_LOCK = "on_screen_lock";
-        final String ON_POWER_LOSS = "on_power_loss";
-        final String IS_CONNECTED = "is_connected";
-        final String DELAY_TO_LOCK = "delay_to_lock";
+    public interface IntentExtras {
+        String RESET_NOTIFY_NUMBER = "reset_notify_number";
+        String INCREMENT_NOTIFY_GROUP = "inc_notify_group";
+        String ON_SCREEN_LOCK = "on_screen_lock";
+        String ON_POWER_LOSS = "on_power_loss";
+        String IS_CONNECTED = "is_connected";
+        String DELAY_TO_LOCK = "delay_to_lock";
     }
 
     // Actions
-    public static interface IntentActions {
-        final String NOTIFY_DELETE = "ca.mudar.snoozy.notify_deleted";
-        final String ANDROID_SETTINGS = "com.android.settings";
-        final String ANDROID_DEVICE_ADMIN = "com.android.settings.DeviceAdminSettings";
+    public interface IntentActions {
+        String NOTIFY_DELETE = "ca.mudar.snoozy.notify_deleted";
+        String ANDROID_SETTINGS = "com.android.settings";
+        String ANDROID_DEVICE_ADMIN = "com.android.settings.DeviceAdminSettings";
     }
 
     // Request Codes
-    public static interface RequestCodes {
-        final int ENABLE_ADMIN = 0x1;
-        final int RESET_NOTIFY_NUMBER = 0x2;
+    public interface RequestCodes {
+        int ENABLE_ADMIN = 0x1;
+        int RESET_NOTIFY_NUMBER = 0x2;
     }
 
     // Assets
-    public static interface LocalAssets {
-        final String LICENSE = "gpl-3.0-standalone.html";
+    public interface LocalAssets {
+        String LICENSE = "gpl-3.0-standalone.html";
     }
 
 }

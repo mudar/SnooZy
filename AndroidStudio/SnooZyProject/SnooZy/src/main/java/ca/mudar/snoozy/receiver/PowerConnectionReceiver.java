@@ -69,6 +69,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         // Get user preferences
         final SharedPreferences sharedPrefs = context.getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
         final SharedPreferences.Editor sharedPrefsEditor = sharedPrefs.edit();
+        final String cacheAge = sharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
         final boolean hasNotifications = sharedPrefs.getBoolean(Const.PrefsNames.HAS_NOTIFICATIONS, false);
         final boolean hasVibration = (sharedPrefs.getBoolean(Const.PrefsNames.HAS_VIBRATION, false) && vibrator.hasVibrator());
         final boolean hasSound = sharedPrefs.getBoolean(Const.PrefsNames.HAS_SOUND, false);
@@ -105,8 +106,10 @@ public class PowerConnectionReceiver extends BroadcastReceiver
                 context.startService(intentService);
             }
 
-            // Save in database
-            saveHistoryItem(context.getApplicationContext(), isConnectedPower, notifyGroup);
+            if (!Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
+                // Save in database
+                saveHistoryItem(context.getApplicationContext(), isConnectedPower, notifyGroup);
+            }
 
             if (hasNotifications) {
                 // Send notification, with sound and vibration

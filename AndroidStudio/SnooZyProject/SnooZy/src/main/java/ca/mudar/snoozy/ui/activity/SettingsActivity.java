@@ -206,9 +206,9 @@ public class SettingsActivity extends PreferenceActivity {
         private int getLockDelaySummary() {
             final String value = mSharedPrefs.getString(Const.PrefsNames.DELAY_TO_LOCK, Const.PrefsValues.DELAY_FAST);
             int res;
-            if (value.equals(Const.PrefsValues.DELAY_SLOW)) {
+            if (Const.PrefsValues.DELAY_SLOW.equals(value)) {
                 res = R.string.prefs_delay_slow;
-            } else if (value.equals(Const.PrefsValues.DELAY_MODERATE)) {
+            } else if (Const.PrefsValues.DELAY_MODERATE.equals(value)) {
                 res = R.string.prefs_delay_moderate;
             } else {
                 res = R.string.prefs_delay_fast;
@@ -220,11 +220,13 @@ public class SettingsActivity extends PreferenceActivity {
         private int getCacheAgeSummary() {
             final String value = mSharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
             int res;
-            if (value.equals(Const.PrefsValues.CACHE_SMALL)) {
+            if (Const.PrefsValues.CACHE_NONE.equals(value)) {
+                res = R.string.prefs_cache_age_none;
+            } else if (Const.PrefsValues.CACHE_SMALL.equals(value)) {
                 res = R.string.prefs_cache_age_small;
-            } else if (value.equals(Const.PrefsValues.CACHE_MEDIUM)) {
+            } else if (Const.PrefsValues.CACHE_MEDIUM.equals(value)) {
                 res = R.string.prefs_cache_age_medium;
-            } else if (value.equals(Const.PrefsValues.CACHE_LARGE)) {
+            } else if (Const.PrefsValues.CACHE_LARGE.equals(value)) {
                 res = R.string.prefs_cache_age_large;
             } else {
                 res = R.string.prefs_cache_age_all;

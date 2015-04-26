@@ -65,6 +65,7 @@
 
     <string name="prefs_cache_age_title">Jours d’historique à sauvegarder</string>
     <string name="prefs_cache_age_dialog_title">Choix de l’âge de l’historique</string>
+    <string name="prefs_cache_age_none">Aucun historique</string>
     <string name="prefs_cache_age_small">1 semaine</string>
     <string name="prefs_cache_age_medium">2 semaines</string>
     <string name="prefs_cache_age_large">1 mois</string>

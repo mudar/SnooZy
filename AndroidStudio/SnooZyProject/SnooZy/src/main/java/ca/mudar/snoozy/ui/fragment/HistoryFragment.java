@@ -25,8 +25,10 @@ package ca.mudar.snoozy.ui.fragment;
 
 import android.app.ListFragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 import ca.mudar.snoozy.ui.widget.HistoryCursorAdapter;
 import ca.mudar.snoozy.util.BatteryHelper;
@@ -138,11 +141,19 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
     }
 
     private void setIntroTitle() {
-        final boolean isPowerConnected = BatteryHelper.isPowerConnected(getActivity().getApplicationContext());
+        final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        final String cacheAge = sharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
+
         final TextView vIntro = (TextView) mRootView.findViewById(R.id.history_empty_list_title);
-        final Resources res = getResources();
-        final String powerAction = res.getString(isPowerConnected ? R.string.history_empty_list_title_disconnect : R.string.history_empty_list_title_connect);
-        vIntro.setText(String.format(res.getString(R.string.history_empty_list_title), powerAction));
+
+        if (Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
+            vIntro.setVisibility(View.GONE);
+        } else {
+            final boolean isPowerConnected = BatteryHelper.isPowerConnected(getActivity().getApplicationContext());
+            final Resources res = getResources();
+            final String powerAction = res.getString(isPowerConnected ? R.string.history_empty_list_title_disconnect : R.string.history_empty_list_title_connect);
+            vIntro.setText(String.format(res.getString(R.string.history_empty_list_title), powerAction));
+        }
     }
 
 

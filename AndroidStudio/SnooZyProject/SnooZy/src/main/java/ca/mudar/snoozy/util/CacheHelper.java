@@ -53,25 +53,37 @@ public class CacheHelper {
         final long midnightInMillis = midnight.getTimeInMillis();
 
         // Do the database cleanup
-        final long clearTime = midnightInMillis - getCacheAgeInMillis(cacheAge);
-        context.getContentResolver().delete(
-                ChargerContract.History.CONTENT_URI,
-                ChargerContract.History.TIME_STAMP + " < ? ",
-                new String[] {String.valueOf(clearTime)}
-        );
+        if (!Const.PrefsValues.CACHE_ALL.equals(cacheAge)) {
+            if (Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
+                // No filter, delete all cache content
+                context.getContentResolver().delete(
+                        ChargerContract.History.CONTENT_URI,
+                        null,
+                        null
+                );
+            } else {
+                // Delete older entries
+                final long clearTime = midnightInMillis - getCacheAgeInMillis(cacheAge);
+                context.getContentResolver().delete(
+                        ChargerContract.History.CONTENT_URI,
+                        ChargerContract.History.TIME_STAMP + " < ? ",
+                        new String[] {String.valueOf(clearTime)}
+                );
+            }
+        }
 
         // Set lastClear timestamp to midnight.
         // This allows one cleanup per day instead of every 24 hours.
         final SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putLong(Const.PrefsNames.LAST_CACHE_CLEAR, midnightInMillis);
-        editor.commit();
+        editor.apply();
     }
 
     public static boolean isCacheClearRequired(Context context) {
         final SharedPreferences sharedPrefs = context.getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
 
         final String cacheAge = sharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
-        if (cacheAge.equals(Const.PrefsValues.CACHE_ALL)) {
+        if (Const.PrefsValues.CACHE_ALL.equals(cacheAge)) {
             return false;
         }
 
@@ -93,8 +105,8 @@ public class CacheHelper {
             return Const.CacheAgeValues.MEDIUM;
         } else if (age.equals(Const.PrefsValues.CACHE_LARGE)) {
             return Const.CacheAgeValues.LARGE;
-        } else {
-            return Const.CacheAgeValues.CACHE_ALL;
         }
+
+        return 0;
     }
 }
