@@ -30,6 +30,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
+import java.util.List;
+
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 import ca.mudar.snoozy.receiver.ForceLockDeviceAdminReceiver;
@@ -37,6 +39,32 @@ import ca.mudar.snoozy.receiver.PowerConnectionReceiver;
 
 
 public class ComponentHelper {
+
+    public static boolean disableDeviceAdmin(Context context) {
+        try {
+            final DevicePolicyManager mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            final String packageName = context.getApplicationContext().getPackageName();
+            List<ComponentName> activeAdmins = mDPM.getActiveAdmins();
+            for (ComponentName admin : activeAdmins) {
+                if (packageName.equals(admin.getPackageName())) {
+                    mDPM.removeActiveAdmin(admin);
+                }
+            }
+
+            activeAdmins = mDPM.getActiveAdmins();
+            for (ComponentName admin : activeAdmins) {
+                if (packageName.equals(admin.getPackageName())) {
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
     public static void togglePowerConnectionReceiver(Context context, boolean enabled) {
         final int newState = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
