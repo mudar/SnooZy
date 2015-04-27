@@ -36,7 +36,6 @@ import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
@@ -73,8 +72,9 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         final boolean hasNotifications = sharedPrefs.getBoolean(Const.PrefsNames.HAS_NOTIFICATIONS, false);
         final boolean hasVibration = (sharedPrefs.getBoolean(Const.PrefsNames.HAS_VIBRATION, false) && vibrator.hasVibrator());
         final boolean hasSound = sharedPrefs.getBoolean(Const.PrefsNames.HAS_SOUND, false);
-        final boolean onScreenLock = sharedPrefs.getBoolean(Const.PrefsNames.ON_SCREEN_LOCK, true);
-        final boolean onPowerLoss = sharedPrefs.getBoolean(Const.PrefsNames.ON_POWER_LOSS, false);
+        final String screenLockStatus = sharedPrefs.getString(Const.PrefsNames.SCREEN_LOCK_STATUS, Const.PrefsValues.SCREEN_LOCKED);
+        final String powerConnectionStatus = sharedPrefs.getString(Const.PrefsNames.POWER_CONNECTION_STATUS, Const.PrefsValues.IGNORE);
+        final String powerConnectionType = sharedPrefs.getString(Const.PrefsNames.POWER_CONNECTION_TYPE, Const.PrefsValues.IGNORE);
         final int delayToLock = Integer.parseInt(sharedPrefs.getString(Const.PrefsNames.DELAY_TO_LOCK, Const.PrefsValues.DELAY_FAST)) * 1000;
         final int notifyCount = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_COUNT, 1);
         final int notifyGroup = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_GROUP, 1);
@@ -94,16 +94,18 @@ public class PowerConnectionReceiver extends BroadcastReceiver
 
             // Lock the screen, following the user preferences
             if (delayToLock == 0) {
-                LockScreenHelper.lockScreen(context, onScreenLock, onPowerLoss, isConnectedPower);
+                LockScreenHelper.lockScreen(context,
+                        screenLockStatus,
+                        powerConnectionStatus,
+                        powerConnectionType,
+                        isConnectedPower);
             } else {
-                Intent intentService = new Intent(Intent.ACTION_SYNC, null, context, DelayedLockService.class);
-                Bundle extras = new Bundle();
-                extras.putBoolean(Const.IntentExtras.ON_SCREEN_LOCK, onScreenLock);
-                extras.putBoolean(Const.IntentExtras.ON_POWER_LOSS, onPowerLoss);
-                extras.putBoolean(Const.IntentExtras.IS_CONNECTED, isConnectedPower);
-                extras.putInt(Const.IntentExtras.DELAY_TO_LOCK, delayToLock);
-                intentService.putExtras(extras);
-                context.startService(intentService);
+                context.startService(DelayedLockService.newIntent(context,
+                        screenLockStatus,
+                        powerConnectionStatus,
+                        powerConnectionType,
+                        isConnectedPower,
+                        delayToLock));
             }
 
             if (!Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
@@ -155,11 +157,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         }
 
         // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(context, MainActivity.class);
-        final Bundle extras = new Bundle();
-        extras.putBoolean(Const.IntentExtras.INCREMENT_NOTIFY_GROUP, true);
-        extras.putBoolean(Const.IntentExtras.RESET_NOTIFY_NUMBER, true);
-        resultIntent.putExtras(extras);
+        final Intent resultIntent = MainActivity.newIntent(context);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

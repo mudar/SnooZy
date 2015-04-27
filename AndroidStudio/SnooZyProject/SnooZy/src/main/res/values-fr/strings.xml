@@ -50,12 +50,35 @@
     <string name="prefs_has_notifications_title">Notifications</string>
     <string name="prefs_has_sound_title">Sonnerie</string>
     <string name="prefs_has_vibration_title">Vibreur</string>
-    <string name="prefs_on_screen_lock_title">Écran de veille uniquement</string>
-    <string name="prefs_on_screen_lock_summary_on">Éteindre l’écran uniquement si l’appareil est verrouillé</string>
-    <string name="prefs_on_screen_lock_summary_off">Ignorer l’état du verrouillage</string>
-    <string name="prefs_on_power_loss_title">Déconnexion uniquement</string>
-    <string name="prefs_on_power_loss_summary_on">Éteindre l’écran uniquement si le chargeur est déconnecté</string>
-    <string name="prefs_on_power_loss_summary_off">Ignorer l’état de la connexion</string>
+
+    <string name="prefs_screen_lock_status_title">État du verrouillage de l’écran</string>
+    <string name="prefs_screen_lock_status_dialog_title">Choix de l’état du verrouillage</string>
+    <string name="prefs_screen_locked">Écran verrouillé</string>
+    <string name="prefs_screen_unlocked">Écran déverrouillé</string>
+    <string name="prefs_screen_both">Les deux</string>
+    <string name="prefs_screen_lock_unlocked">Écran déverrouillé uniquement</string>
+    <string name="prefs_screen_lock_locked">Écran de veille uniquement, ne pas éteindre l’écran si l’appareil est en cours d’utilisation</string>
+    <string name="prefs_screen_lock_both">Ignorer l’état du verrouillage de l’écran</string>
+
+    <string name="prefs_connection_status_title">État de la connexion</string>
+    <string name="prefs_connection_status_dialog_title">Choix de l’état de la connexion</string>
+    <string name="prefs_connection_on">Connexion</string>
+    <string name="prefs_connection_off">Déconnexion</string>
+    <string name="prefs_connection_both">Les deux</string>
+    <string name="prefs_power_connection_on">Connexion uniquement</string>
+    <string name="prefs_power_connection_off">Déconnexion uniquement</string>
+    <string name="prefs_power_connection_both">Éteindre l’écran au moment de la connexion ou de la déconnexion</string>
+
+    <string name="prefs_connection_type_title">Type de chargeur</string>
+    <string name="prefs_connection_type_dialog_title">Choix du type de chargeur</string>
+    <string name="prefs_connection_ac">Adaptateur secteur</string>
+    <string name="prefs_connection_usb">Port USB</string>
+    <string name="prefs_connection_wireless">Chargeur sans fil</string>
+    <string name="prefs_connection_all">Tous</string>
+    <string name="prefs_power_connection_ac">Adaptateur secteur uniquement</string>
+    <string name="prefs_power_connection_usb">Connexion à un port USB uniquement</string>
+    <string name="prefs_power_connection_wireless">Chargeur sans fil uniquement</string>
+    <string name="prefs_power_connection_all">Ignorer le type de chargeur</string>
 
     <string name="prefs_delay_to_lock_title">Délai avant le verrouillage</string>
     <string name="prefs_delay_dialog_title">Choix du délai avant le verrouillage</string>

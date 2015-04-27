@@ -26,7 +26,10 @@ package ca.mudar.snoozy.util;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.BatteryManager;
+
+import ca.mudar.snoozy.Const;
 
 
 public class BatteryHelper {
@@ -46,12 +49,47 @@ public class BatteryHelper {
 
     public static boolean isPowerConnected(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        if (batteryIntent == null) {
+            return false;
+        }
 
         int status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        boolean isCharging = ((status == BatteryManager.BATTERY_STATUS_CHARGING) ||
-                (status == BatteryManager.BATTERY_STATUS_FULL));
 
-        return isCharging;
+        return ((status == BatteryManager.BATTERY_STATUS_CHARGING) ||
+                (status == BatteryManager.BATTERY_STATUS_FULL));
+    }
+
+    public static int getPowerConnectionType(Context context) {
+        final Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        if (batteryIntent == null) {
+            return -1;
+        }
+
+        final int pluggedState = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+
+        switch (pluggedState) {
+            case BatteryManager.BATTERY_PLUGGED_AC:
+            case BatteryManager.BATTERY_PLUGGED_USB:
+            case BatteryManager.BATTERY_PLUGGED_WIRELESS:
+                setLastConnectionType(context, pluggedState);
+                return pluggedState;
+            case 0:
+                // Disconnection, return last connection type
+                return getLastConnectionType(context);
+        }
+
+        return -1;
+    }
+
+    private static void setLastConnectionType(Context context, int state) {
+        final SharedPreferences.Editor editor = context.getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE).edit();
+        editor.putInt(Const.PrefsValues.LAST_CONNECTION_TYPE, state);
+        editor.apply();
+    }
+
+    private static int getLastConnectionType(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getInt(Const.PrefsValues.LAST_CONNECTION_TYPE, -1);
     }
 }
 

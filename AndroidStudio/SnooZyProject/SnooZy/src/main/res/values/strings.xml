@@ -51,12 +51,35 @@
     <string name="prefs_has_notifications_title">Notifications</string>
     <string name="prefs_has_sound_title">Play sound</string>
     <string name="prefs_has_vibration_title">Vibrate</string>
-    <string name="prefs_on_screen_lock_title">Locked screen only</string>
-    <string name="prefs_on_screen_lock_summary_on">Turns display off only if the device is locked</string>
-    <string name="prefs_on_screen_lock_summary_off">Ignores screen lock status.</string>
-    <string name="prefs_on_power_loss_title">Power loss only</string>
-    <string name="prefs_on_power_loss_summary_on">Turns display off only when disconnecting the charger</string>
-    <string name="prefs_on_power_loss_summary_off">Ignores power connection status.</string>
+
+    <string name="prefs_screen_lock_status_title">Screen lock status</string>
+    <string name="prefs_screen_lock_status_dialog_title">Select screen status</string>
+    <string name="prefs_screen_locked">Locked screen</string>
+    <string name="prefs_screen_unlocked">Unlocked screen</string>
+    <string name="prefs_screen_both">Both</string>
+    <string name="prefs_screen_lock_unlocked">Unlocked screen only</string>
+    <string name="prefs_screen_lock_locked">Locked screen only, doesn’t turn display off when you’re using the device</string>
+    <string name="prefs_screen_lock_both">Ignores screen lock status</string>
+
+    <string name="prefs_connection_status_title">Connection status</string>
+    <string name="prefs_connection_status_dialog_title">Select connection status</string>
+    <string name="prefs_connection_on">Power connection</string>
+    <string name="prefs_connection_off">Power disconnection</string>
+    <string name="prefs_connection_both">Both</string>
+    <string name="prefs_power_connection_on">Power connection only</string>
+    <string name="prefs_power_connection_off">Power loss only</string>
+    <string name="prefs_power_connection_both">Turns display off on both power connection and disconnection</string>
+
+    <string name="prefs_connection_type_title">Charger type</string>
+    <string name="prefs_connection_type_dialog_title">Select charger type</string>
+    <string name="prefs_connection_ac">AC adapter</string>
+    <string name="prefs_connection_usb">USB port</string>
+    <string name="prefs_connection_wireless">Wireless</string>
+    <string name="prefs_connection_all">All</string>
+    <string name="prefs_power_connection_ac">AC adapter only</string>
+    <string name="prefs_power_connection_usb">USB port connection only</string>
+    <string name="prefs_power_connection_wireless">Wireless charger only</string>
+    <string name="prefs_power_connection_all">Turns display off with any kind of charger</string>
 
     <string name="prefs_delay_to_lock_title">Screen lock delay</string>
     <string name="prefs_delay_dialog_title">Set lock delay</string>

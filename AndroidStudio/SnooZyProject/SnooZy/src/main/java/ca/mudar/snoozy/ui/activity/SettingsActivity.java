@@ -147,15 +147,21 @@ public class SettingsActivity extends PreferenceActivity {
             final boolean isDeviceAdmin = ComponentHelper.isDeviceAdmin(getActivity());
 
             final PreferenceScreen deviceAdminPrefScreen = (PreferenceScreen) findPreference(Const.PrefsNames.DEVICE_ADMIN);
-            final Preference onPowerLoss = findPreference(Const.PrefsNames.ON_POWER_LOSS);
-            final Preference onScreenLock = findPreference(Const.PrefsNames.ON_SCREEN_LOCK);
+            final Preference screenLockStatus = findPreference(Const.PrefsNames.SCREEN_LOCK_STATUS);
+            final Preference powerConnectionStatus = findPreference(Const.PrefsNames.POWER_CONNECTION_STATUS);
+            final Preference powerConnectionType = findPreference(Const.PrefsNames.POWER_CONNECTION_TYPE);
             final Preference delayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
             final Preference cacheAge = findPreference(Const.PrefsNames.CACHE_AGE);
 
             deviceAdminPrefScreen.setSummary(isDeviceAdmin ?
                     R.string.prefs_device_admin_summary_enabled : R.string.prefs_device_admin_summary_disabled);
-            onPowerLoss.setEnabled(isDeviceAdmin);
-            onScreenLock.setEnabled(isDeviceAdmin);
+            screenLockStatus.setEnabled(isDeviceAdmin);
+            screenLockStatus.setSummary(getLockStatusSummary());
+            powerConnectionStatus.setEnabled(isDeviceAdmin);
+            powerConnectionStatus.setSummary(getConnectionStatusSummary());
+            powerConnectionType.setEnabled(isDeviceAdmin);
+            powerConnectionType.setSummary(getConnectionTypeSummary());
+            delayToLock.setEnabled(isDeviceAdmin);
             delayToLock.setSummary(getLockDelaySummary());
             cacheAge.setSummary(getCacheAgeSummary());
         }
@@ -181,11 +187,20 @@ public class SettingsActivity extends PreferenceActivity {
                 ComponentHelper.togglePowerConnectionReceiver(getActivity().getApplicationContext(),
                         sharedPreferences.getBoolean(key, false));
             } else if (key.equals(Const.PrefsNames.DELAY_TO_LOCK)) {
-                final Preference delayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
-                delayToLock.setSummary(getLockDelaySummary());
+                findPreference(Const.PrefsNames.DELAY_TO_LOCK)
+                        .setSummary(getLockDelaySummary());
             } else if (key.equals(Const.PrefsNames.CACHE_AGE)) {
-                final Preference cacheAge = findPreference(Const.PrefsNames.CACHE_AGE);
-                cacheAge.setSummary(getCacheAgeSummary());
+                findPreference(Const.PrefsNames.CACHE_AGE)
+                        .setSummary(getCacheAgeSummary());
+            } else if (key.equals(Const.PrefsNames.SCREEN_LOCK_STATUS)) {
+                findPreference(Const.PrefsNames.SCREEN_LOCK_STATUS)
+                        .setSummary(getLockStatusSummary());
+            } else if (key.equals(Const.PrefsNames.POWER_CONNECTION_STATUS)) {
+                findPreference(Const.PrefsNames.POWER_CONNECTION_STATUS)
+                        .setSummary(getConnectionStatusSummary());
+            } else if (key.equals(Const.PrefsNames.POWER_CONNECTION_TYPE)) {
+                findPreference(Const.PrefsNames.POWER_CONNECTION_TYPE)
+                        .setSummary(getConnectionTypeSummary());
             }
         }
 
@@ -230,6 +245,50 @@ public class SettingsActivity extends PreferenceActivity {
                 res = R.string.prefs_cache_age_large;
             } else {
                 res = R.string.prefs_cache_age_all;
+            }
+
+            return res;
+        }
+
+        private int getLockStatusSummary() {
+            final String value = mSharedPrefs.getString(Const.PrefsNames.SCREEN_LOCK_STATUS, Const.PrefsValues.SCREEN_LOCKED);
+            int res;
+            if (Const.PrefsValues.SCREEN_LOCKED.equals(value)) {
+                res = R.string.prefs_screen_lock_locked;
+            } else if (Const.PrefsValues.SCREEN_UNLOCKED.equals(value)) {
+                res = R.string.prefs_screen_lock_unlocked;
+            } else {
+                res = R.string.prefs_screen_lock_both;
+            }
+
+            return res;
+        }
+
+        private int getConnectionStatusSummary() {
+            final String value = mSharedPrefs.getString(Const.PrefsNames.POWER_CONNECTION_STATUS, Const.PrefsValues.IGNORE);
+            int res;
+            if (Const.PrefsValues.CONNECTION_ON.equals(value)) {
+                res = R.string.prefs_power_connection_on;
+            } else if (Const.PrefsValues.CONNECTION_OFF.equals(value)) {
+                res = R.string.prefs_power_connection_off;
+            } else {
+                res = R.string.prefs_power_connection_both;
+            }
+
+            return res;
+        }
+
+        private int getConnectionTypeSummary() {
+            final String value = mSharedPrefs.getString(Const.PrefsNames.POWER_CONNECTION_TYPE, Const.PrefsValues.IGNORE);
+            int res;
+            if (Const.PrefsValues.CONNECTION_AC.equals(value)) {
+                res = R.string.prefs_power_connection_ac;
+            } else if (Const.PrefsValues.CONNECTION_USB.equals(value)) {
+                res = R.string.prefs_power_connection_usb;
+            } else if (Const.PrefsValues.CONNECTION_WIRELESS.equals(value)) {
+                res = R.string.prefs_power_connection_wireless;
+            } else {
+                res = R.string.prefs_power_connection_all;
             }
 
             return res;

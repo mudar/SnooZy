@@ -27,10 +27,42 @@
         <item>@string/prefs_delay_moderate</item>
         <item>@string/prefs_delay_slow</item>
     </string-array>
-    <string-array name="prefs_delay_values">
+    <string-array name="prefs_delay_values" translatable="false">
         <item>0</item>
         <item>3</item>
         <item>5</item>
+    </string-array>
+    <string-array name="prefs_screen_lock_status_entries">
+        <item>@string/prefs_screen_locked</item>
+        <item>@string/prefs_screen_unlocked</item>
+        <item>@string/prefs_screen_both</item>
+    </string-array>
+    <string-array name="prefs_screen_lock_status_values" translatable="false">
+        <item>locked</item>
+        <item>unlocked</item>
+        <item>ignore</item>
+    </string-array>
+    <string-array name="prefs_connection_status_entries">
+        <item>@string/prefs_connection_on</item>
+        <item>@string/prefs_connection_off</item>
+        <item>@string/prefs_connection_both</item>
+    </string-array>
+    <string-array name="prefs_connection_status_values" translatable="false">
+        <item>on</item>
+        <item>off</item>
+        <item>ignore</item>
+    </string-array>
+    <string-array name="prefs_connection_type_entries">
+        <item>@string/prefs_connection_ac</item>
+        <item>@string/prefs_connection_usb</item>
+        <item>@string/prefs_connection_wireless</item>
+        <item>@string/prefs_connection_all</item>
+    </string-array>
+    <string-array name="prefs_connection_type_values" translatable="false">
+        <item>ac</item>
+        <item>usb</item>
+        <item>wireless</item>
+        <item>ignore</item>
     </string-array>
     <string-array name="prefs_cache_entries">
         <item>@string/prefs_cache_age_none</item>
@@ -39,7 +71,7 @@
         <item>@string/prefs_cache_age_large</item>
         <item>@string/prefs_cache_age_all</item>
     </string-array>
-    <string-array name="prefs_cache_values">
+    <string-array name="prefs_cache_values" translatable="false">
         <item>0</item>
         <item>7</item>
         <item>14</item>

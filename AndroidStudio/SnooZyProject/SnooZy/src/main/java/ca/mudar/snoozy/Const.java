@@ -43,16 +43,29 @@ public class Const {
         String HAS_SOUND = "prefs_has_sound";
         String NOTIFY_COUNT = "prefs_notify_count";
         String NOTIFY_GROUP = "prefs_notify_group";
+        @Deprecated
         String ON_SCREEN_LOCK = "prefs_on_screen_lock";
+        @Deprecated
         String ON_POWER_LOSS = "prefs_on_power_loss";
+        String SCREEN_LOCK_STATUS = "prefs_screen_lock_status";
+        String POWER_CONNECTION_STATUS = "prefs_connection_status";
+        String POWER_CONNECTION_TYPE = "prefs_connection_type";
         String DELAY_TO_LOCK = "prefs_delay_to_lock";
         String DEVICE_ADMIN = "prefs_device_admin";
-//        String IS_BETA_USER = "prefs_is_beta_user";
         String CACHE_AGE = "prefs_cache_age";
         String LAST_CACHE_CLEAR = "prefs_last_cache_clear";
     }
 
     public interface PrefsValues {
+        String IGNORE = "ignore";
+        String CONNECTION_ON = "on";
+        String CONNECTION_OFF = "off";
+        String CONNECTION_AC = "ac";
+        String CONNECTION_USB = "usb";
+        String CONNECTION_WIRELESS = "wireless";
+        String LAST_CONNECTION_TYPE = "last_connection";
+        String SCREEN_LOCKED = "locked";
+        String SCREEN_UNLOCKED = "unlocked";
         String DELAY_FAST = "0";
         String DELAY_MODERATE = "3";
         String DELAY_SLOW = "5";
@@ -74,8 +87,9 @@ public class Const {
     public interface IntentExtras {
         String RESET_NOTIFY_NUMBER = "reset_notify_number";
         String INCREMENT_NOTIFY_GROUP = "inc_notify_group";
-        String ON_SCREEN_LOCK = "on_screen_lock";
-        String ON_POWER_LOSS = "on_power_loss";
+        String SCREEN_LOCK_STATUS = "screen_lock_status";
+        String POWER_CONNECTION_STATUS = "power_connection_status";
+        String POWER_CONNECTION_TYPE = "power_connection_type";
         String IS_CONNECTED = "is_connected";
         String DELAY_TO_LOCK = "delay_to_lock";
     }

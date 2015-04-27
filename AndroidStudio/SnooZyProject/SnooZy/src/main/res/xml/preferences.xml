@@ -24,50 +24,26 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <SwitchPreference
         android:defaultValue="true"
-        android:key="prefs_is_enabled"
+        android:key="@string/prefs_key_is_enabled"
         android:title="@string/prefs_is_enabled" />
 
     <CheckBoxPreference
         android:defaultValue="true"
-        android:dependency="prefs_is_enabled"
-        android:key="prefs_has_notifications"
+        android:dependency="@string/prefs_key_is_enabled"
+        android:key="@string/prefs_key_has_notifications"
         android:title="@string/prefs_has_notifications_title" />
 
     <CheckBoxPreference
         android:defaultValue="false"
-        android:dependency="prefs_is_enabled"
-        android:key="prefs_has_vibration"
+        android:dependency="@string/prefs_key_is_enabled"
+        android:key="@string/prefs_key_has_vibration"
         android:title="@string/prefs_has_vibration_title" />
 
     <CheckBoxPreference
         android:defaultValue="false"
-        android:dependency="prefs_is_enabled"
-        android:key="prefs_has_sound"
+        android:dependency="@string/prefs_key_is_enabled"
+        android:key="@string/prefs_key_has_sound"
         android:title="@string/prefs_has_sound_title" />
-
-    <PreferenceCategory android:title="@string/prefs_category_advanced">
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:dependency="prefs_is_enabled"
-            android:key="prefs_on_screen_lock"
-            android:summaryOff="@string/prefs_on_screen_lock_summary_off"
-            android:summaryOn="@string/prefs_on_screen_lock_summary_on"
-            android:title="@string/prefs_on_screen_lock_title" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:dependency="prefs_is_enabled"
-            android:key="prefs_on_power_loss"
-            android:summaryOff="@string/prefs_on_power_loss_summary_off"
-            android:summaryOn="@string/prefs_on_power_loss_summary_on"
-            android:title="@string/prefs_on_power_loss_title" />
-        <ListPreference
-            android:defaultValue="0"
-            android:dialogTitle="@string/prefs_delay_dialog_title"
-            android:entries="@array/prefs_delay_entries"
-            android:entryValues="@array/prefs_delay_values"
-            android:key="prefs_delay_to_lock"
-            android:title="@string/prefs_delay_to_lock_title" />
-    </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/prefs_category_cache">
         <ListPreference
@@ -75,15 +51,50 @@
             android:dialogTitle="@string/prefs_cache_age_dialog_title"
             android:entries="@array/prefs_cache_entries"
             android:entryValues="@array/prefs_cache_values"
-            android:key="prefs_cache_age"
+            android:key="@string/prefs_key_cache_age"
             android:title="@string/prefs_cache_age_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefs_category_advanced">
+        <ListPreference
+            android:defaultValue="locked"
+            android:dependency="@string/prefs_key_is_enabled"
+            android:dialogTitle="@string/prefs_screen_lock_status_dialog_title"
+            android:entries="@array/prefs_screen_lock_status_entries"
+            android:entryValues="@array/prefs_screen_lock_status_values"
+            android:key="@string/prefs_key_screen_lock_status"
+            android:title="@string/prefs_screen_lock_status_title" />
+        <ListPreference
+            android:defaultValue="ignore"
+            android:dependency="@string/prefs_key_is_enabled"
+            android:dialogTitle="@string/prefs_connection_status_dialog_title"
+            android:entries="@array/prefs_connection_status_entries"
+            android:entryValues="@array/prefs_connection_status_values"
+            android:key="@string/prefs_key_connection_status"
+            android:title="@string/prefs_connection_status_title" />
+        <ListPreference
+            android:defaultValue="ignore"
+            android:dependency="@string/prefs_key_is_enabled"
+            android:dialogTitle="@string/prefs_connection_type_dialog_title"
+            android:entries="@array/prefs_connection_type_entries"
+            android:entryValues="@array/prefs_connection_type_values"
+            android:key="@string/prefs_key_connection_type"
+            android:title="@string/prefs_connection_type_title" />
+        <ListPreference
+            android:defaultValue="0"
+            android:dependency="@string/prefs_key_is_enabled"
+            android:dialogTitle="@string/prefs_delay_dialog_title"
+            android:entries="@array/prefs_delay_entries"
+            android:entryValues="@array/prefs_delay_values"
+            android:key="@string/prefs_key_delay_to_lock"
+            android:title="@string/prefs_delay_to_lock_title" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/prefs_category_device_admin">
         <PreferenceScreen
-            android:key="prefs_device_admin"
+            android:key="@string/prefs_key_device_admin"
             android:summary="@string/prefs_device_admin_summary_enabled"
-            android:title="@string/prefs_device_admin_title"></PreferenceScreen>
+            android:title="@string/prefs_device_admin_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>

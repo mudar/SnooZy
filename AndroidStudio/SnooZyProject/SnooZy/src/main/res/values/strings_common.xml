@@ -24,6 +24,21 @@
 -->
 <resources>
 
-    <string name="app_version">1.2</string>
+    <string name="app_version" translatable="false">1.2</string>
+
+    <!--Prefs keys-->
+    <string name="prefs_key_is_enabled" translatable="false">prefs_is_enabled</string>
+    <string name="prefs_key_has_notifications" translatable="false">prefs_has_notifications</string>
+    <string name="prefs_key_has_vibration" translatable="false">prefs_has_vibration</string>
+    <string name="prefs_key_has_sound" translatable="false">prefs_has_sound</string>
+    <string name="prefs_key_notify_count" translatable="false">prefs_notify_count</string>
+    <string name="prefs_key_notify_group" translatable="false">prefs_notify_group</string>
+    <string name="prefs_key_screen_lock_status" translatable="false">prefs_screen_lock_status</string>
+    <string name="prefs_key_connection_status" translatable="false">prefs_connection_status</string>
+    <string name="prefs_key_connection_type" translatable="false">prefs_connection_type</string>
+    <string name="prefs_key_delay_to_lock" translatable="false">prefs_delay_to_lock</string>
+    <string name="prefs_key_device_admin" translatable="false">prefs_device_admin</string>
+    <string name="prefs_key_cache_age" translatable="false">prefs_cache_age</string>
+    <string name="prefs_key_last_cache_clear" translatable="false">prefs_last_cache_clear</string>
 
 </resources>

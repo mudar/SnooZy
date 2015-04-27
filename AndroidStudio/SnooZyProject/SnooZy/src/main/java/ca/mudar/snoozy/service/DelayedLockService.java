@@ -24,7 +24,9 @@
 package ca.mudar.snoozy.service;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.SystemClock;
 
 import ca.mudar.snoozy.Const;
@@ -40,6 +42,25 @@ public class DelayedLockService extends IntentService {
         super(TAG);
     }
 
+    public static Intent newIntent(Context context,
+                                   String screenLockStatus,
+                                   String powerConnectionStatus,
+                                   String powerConnectionType,
+                                   boolean isConnectedPower,
+                                   int delayToLock) {
+        final Intent intent = new Intent(Intent.ACTION_SYNC, null, context, DelayedLockService.class);
+
+        final Bundle extras = new Bundle();
+        extras.putString(Const.IntentExtras.SCREEN_LOCK_STATUS, screenLockStatus);
+        extras.putString(Const.IntentExtras.POWER_CONNECTION_STATUS, powerConnectionStatus);
+        extras.putString(Const.IntentExtras.POWER_CONNECTION_TYPE, powerConnectionType);
+        extras.putBoolean(Const.IntentExtras.IS_CONNECTED, isConnectedPower);
+        extras.putInt(Const.IntentExtras.DELAY_TO_LOCK, delayToLock);
+        intent.putExtras(extras);
+
+        return intent;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -51,15 +72,20 @@ public class DelayedLockService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (mIsRunning) return;
 
-        final boolean onScreenLock = intent.getBooleanExtra(Const.IntentExtras.ON_SCREEN_LOCK, true);
-        final boolean onPowerLoss = intent.getBooleanExtra(Const.IntentExtras.ON_POWER_LOSS, false);
+        final String screenLockStatus = intent.getStringExtra(Const.IntentExtras.SCREEN_LOCK_STATUS);
+        final String powerConnectionStatus = intent.getStringExtra(Const.IntentExtras.POWER_CONNECTION_STATUS);
+        final String powerConnectionType = intent.getStringExtra(Const.IntentExtras.POWER_CONNECTION_TYPE);
         final boolean isConnectedPower = intent.getBooleanExtra(Const.IntentExtras.IS_CONNECTED, true);
         final int delayToLock = intent.getIntExtra(Const.IntentExtras.DELAY_TO_LOCK, 0);
 
         mIsRunning = true;
         SystemClock.sleep((long) delayToLock);
 
-        LockScreenHelper.lockScreen(getApplicationContext(), onScreenLock, onPowerLoss, isConnectedPower);
+        LockScreenHelper.lockScreen(getApplicationContext(),
+                screenLockStatus,
+                powerConnectionStatus,
+                powerConnectionType,
+                isConnectedPower);
     }
 
     @Override
