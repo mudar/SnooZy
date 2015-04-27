@@ -110,11 +110,13 @@
                 <action android:name="ca.mudar.snoozy.notify_deleted" />
             </intent-filter>
         </receiver>
+
         <service android:name=".service.DelayedLockService" />
 
         <provider
             android:name=".provider.ChargerProvider"
-            android:authorities="ca.mudar.snoozy.provider" />
+            android:authorities="ca.mudar.snoozy.provider"
+            android:exported="false" />
     </application>
 
 </manifest>
