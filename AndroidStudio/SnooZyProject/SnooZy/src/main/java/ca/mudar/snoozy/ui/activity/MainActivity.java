@@ -46,14 +46,22 @@ public class MainActivity extends BaseActivity implements
     private boolean mHasDeviceAdminIntent = false;
     private Toast mToast;
 
+    public static Intent newIntent(Context context) {
+        final Intent intent = new Intent(context, MainActivity.class);
+
+        final Bundle extras = new Bundle();
+        extras.putBoolean(Const.IntentExtras.INCREMENT_NOTIFY_GROUP, true);
+        extras.putBoolean(Const.IntentExtras.RESET_NOTIFY_NUMBER, true);
+        intent.putExtras(extras);
+
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.preferences, false);
-
         super.onCreate(savedInstanceState);
 
-        final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        sharedPrefs.registerOnSharedPreferenceChangeListener(this);
+        initializePrefsAndListener();
 
         if (getIntent().getExtras() != null) {
             updateNotifyPrefs(getIntent());
@@ -167,6 +175,43 @@ public class MainActivity extends BaseActivity implements
                     getApplicationContext(),
                     isEnabledPrefs);
         }
+    }
+
+    private void initializePrefsAndListener() {
+        PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.preferences, false);
+
+        // Merge prefs legacy values
+        final SharedPreferences legacySp = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        if (legacySp.contains(Const.PrefsNames.ON_SCREEN_LOCK) ||
+                legacySp.contains(Const.PrefsNames.ON_POWER_LOSS)) {
+            final SharedPreferences.Editor editor = legacySp.edit();
+
+            boolean hasChanges = false;
+            if (legacySp.contains(Const.PrefsNames.ON_SCREEN_LOCK)) {
+                hasChanges = true;
+                boolean onScreenLock = legacySp.getBoolean(Const.PrefsNames.ON_SCREEN_LOCK, true);
+                editor.remove(Const.PrefsNames.ON_SCREEN_LOCK);
+
+                editor.putString(Const.PrefsNames.SCREEN_LOCK_STATUS,
+                        onScreenLock ? Const.PrefsValues.SCREEN_LOCKED : Const.PrefsValues.IGNORE);
+            }
+            if (legacySp.contains(Const.PrefsNames.ON_POWER_LOSS)) {
+                hasChanges = true;
+                boolean onPowerLoss = legacySp.getBoolean(Const.PrefsNames.ON_POWER_LOSS, false);
+                editor.remove(Const.PrefsNames.ON_POWER_LOSS);
+
+                editor.putString(Const.PrefsNames.POWER_CONNECTION_STATUS,
+                        onPowerLoss ? Const.PrefsValues.CONNECTION_OFF : Const.PrefsValues.IGNORE);
+            }
+
+            if (hasChanges) {
+                // Remove legacy and save new prefs
+                editor.apply();
+            }
+        }
+
+        // Register listener
+        legacySp.registerOnSharedPreferenceChangeListener(this);
     }
 
     private void updateNotifyPrefs(Intent intent) {
