@@ -66,6 +66,7 @@
 
     <string name="prefs_cache_age_title">Behold historikk over antall dager</string>
     <string name="prefs_cache_age_dialog_title">Velg historieperiode</string>
+    <string name="prefs_cache_age_none">Ingen historie</string>
     <string name="prefs_cache_age_small">1 uke</string>
     <string name="prefs_cache_age_medium">2 uker</string>
     <string name="prefs_cache_age_large">1 måned</string>
