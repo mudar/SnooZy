@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     SnooZy Charger
     Power Connection manager. Turn the screen off on power connection
     or disconnection, to save battery consumption by the phone's display.
@@ -22,67 +21,42 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="@string/prefs_key_is_enabled"
-        android:title="@string/prefs_is_enabled" />
 
     <CheckBoxPreference
-        android:defaultValue="true"
-        android:dependency="@string/prefs_key_is_enabled"
+        android:icon="@drawable/ic_notification"
         android:key="@string/prefs_key_has_notifications"
         android:title="@string/prefs_has_notifications_title" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:dependency="@string/prefs_key_is_enabled"
+        android:icon="@drawable/ic_vibration"
         android:key="@string/prefs_key_has_vibration"
         android:title="@string/prefs_has_vibration_title" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:dependency="@string/prefs_key_is_enabled"
+        android:icon="@drawable/ic_audio_notification"
         android:key="@string/prefs_key_has_sound"
         android:title="@string/prefs_has_sound_title" />
 
-    <PreferenceCategory android:title="@string/prefs_category_cache">
-        <ListPreference
-            android:defaultValue="-1"
-            android:dialogTitle="@string/prefs_cache_age_dialog_title"
-            android:entries="@array/prefs_cache_entries"
-            android:entryValues="@array/prefs_cache_values"
-            android:key="@string/prefs_key_cache_age"
-            android:title="@string/prefs_cache_age_title" />
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/prefs_category_advanced">
         <ListPreference
-            android:defaultValue="locked"
-            android:dependency="@string/prefs_key_is_enabled"
             android:dialogTitle="@string/prefs_screen_lock_status_dialog_title"
             android:entries="@array/prefs_screen_lock_status_entries"
             android:entryValues="@array/prefs_screen_lock_status_values"
             android:key="@string/prefs_key_screen_lock_status"
             android:title="@string/prefs_screen_lock_status_title" />
         <ListPreference
-            android:defaultValue="ignore"
-            android:dependency="@string/prefs_key_is_enabled"
             android:dialogTitle="@string/prefs_connection_status_dialog_title"
             android:entries="@array/prefs_connection_status_entries"
             android:entryValues="@array/prefs_connection_status_values"
             android:key="@string/prefs_key_connection_status"
             android:title="@string/prefs_connection_status_title" />
         <ListPreference
-            android:defaultValue="ignore"
-            android:dependency="@string/prefs_key_is_enabled"
             android:dialogTitle="@string/prefs_connection_type_dialog_title"
             android:entries="@array/prefs_connection_type_entries"
             android:entryValues="@array/prefs_connection_type_values"
             android:key="@string/prefs_key_connection_type"
             android:title="@string/prefs_connection_type_title" />
         <ListPreference
-            android:defaultValue="0"
-            android:dependency="@string/prefs_key_is_enabled"
             android:dialogTitle="@string/prefs_delay_dialog_title"
             android:entries="@array/prefs_delay_entries"
             android:entryValues="@array/prefs_delay_values"
@@ -90,8 +64,17 @@
             android:title="@string/prefs_delay_to_lock_title" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/prefs_category_device_admin">
+    <PreferenceCategory android:title="@string/prefs_category_other">
+        <ListPreference
+            android:icon="@drawable/ic_calendar"
+            android:dialogTitle="@string/prefs_cache_age_dialog_title"
+            android:entries="@array/prefs_cache_entries"
+            android:entryValues="@array/prefs_cache_values"
+            android:key="@string/prefs_key_cache_age"
+            android:title="@string/prefs_cache_age_title" />
+
         <PreferenceScreen
+            android:icon="@drawable/ic_delete"
             android:key="@string/prefs_key_device_admin"
             android:summary="@string/prefs_device_admin_summary_enabled"
             android:title="@string/prefs_device_admin_title" />
