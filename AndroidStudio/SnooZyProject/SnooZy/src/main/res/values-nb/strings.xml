@@ -25,6 +25,7 @@
 <resources>
 
     <string name="app_name">SnooZy Charger</string>
+    <string name="activity_main">Historikk over laderstatus</string>
     <string name="activity_settings">Innstillinger</string>
     <string name="activity_about">Om</string>
     <string name="activity_eula">Brukeravtale</string>
@@ -123,7 +124,6 @@
     <string name="history_empty_list_title_disconnect">Koble fra</string>
 
     <!--History Header -->
-    <string name="history_header">Historikk over laderstatus</string>
     <string name="history_header_timestamp">Tid</string>
     <string name="history_header_power_connection">Lader</string>
     <string name="history_header_battery_level">Batteri</string>

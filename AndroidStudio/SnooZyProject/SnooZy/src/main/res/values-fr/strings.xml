@@ -24,6 +24,7 @@
 <resources>
 
     <string name="app_name">SnooZy le chargeur</string>
+    <string name="activity_main">Historique des charges</string>
     <string name="activity_settings">Paramètres</string>
     <string name="activity_about">À propos</string>
     <string name="activity_eula">Licence</string>
@@ -115,7 +116,6 @@
     <string name="history_empty_list_title_disconnect">déconnecter</string>
 
     <!--History Header -->
-    <string name="history_header">Historique des charges</string>
     <string name="history_header_timestamp">Heure</string>
     <string name="history_header_power_connection">Connecté</string>
     <string name="history_header_battery_level">Batterie</string>
