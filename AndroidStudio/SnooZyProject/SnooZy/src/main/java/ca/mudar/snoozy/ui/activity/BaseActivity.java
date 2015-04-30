@@ -23,18 +23,28 @@
 
 package ca.mudar.snoozy.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends ActionBarActivity {
     private static final String SEND_INTENT_TYPE = "text/plain";
+
+    private Toolbar mActionBarToolbar = null;
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        getActionBarToolbar();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -78,5 +88,17 @@ public class BaseActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected Toolbar getActionBarToolbar() {
+        if (mActionBarToolbar == null) {
+            mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+            if (mActionBarToolbar != null) {
+//                ViewCompat.setElevation(mActionBarToolbar,
+//                        getResources().getDimensionPixelSize(R.dimen.headerbar_elevation));
+                setSupportActionBar(mActionBarToolbar);
+            }
+        }
+        return mActionBarToolbar;
     }
 }

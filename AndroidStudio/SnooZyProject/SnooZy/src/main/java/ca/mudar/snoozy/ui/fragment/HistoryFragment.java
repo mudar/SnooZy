@@ -23,18 +23,20 @@
 
 package ca.mudar.snoozy.ui.fragment;
 
-import android.app.ListFragment;
-import android.app.LoaderManager;
+
 import android.content.Context;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import ca.mudar.snoozy.Const;
@@ -46,19 +48,22 @@ import static ca.mudar.snoozy.provider.ChargerContract.DailyHistory;
 import static ca.mudar.snoozy.provider.ChargerContract.History;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
-public class HistoryFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class HistoryFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = makeLogTag(HistoryFragment.class);
     protected Cursor mCursor = null;
     protected HistoryCursorAdapter mAdapter;
     private View mRootView;
     private View mHeaderView;
     private View mFooterView;
+    private ListView mListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         mRootView = inflater.inflate(R.layout.fragment_list_history, null);
+        mListView = (ListView) mRootView.findViewById(android.R.id.list);
         mHeaderView = inflater.inflate(R.layout.fragment_list_history_header, null);
         mFooterView = inflater.inflate(R.layout.fragment_list_history_footer, null);
 
@@ -84,7 +89,7 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
             }
         }
 
-        setListAdapter(null);
+        mListView.setAdapter(null);
 
         mAdapter = new HistoryCursorAdapter(getActivity(),
                 R.layout.fragment_list_item_history,
@@ -103,7 +108,7 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
                 },
                 0);
 
-        setListAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
         getLoaderManager().initLoader(HistoryQuery._TOKEN, null, this);
     }
@@ -120,7 +125,6 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
         mAdapter.swapCursor(data);
 
         if ((data == null) || (data.getCount() == 0)) {
@@ -138,6 +142,11 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
+
+    }
+
+    private ListView getListView() {
+        return mListView;
     }
 
     private void setIntroTitle() {

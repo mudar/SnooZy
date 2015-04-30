@@ -42,21 +42,20 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         setContentView(R.layout.activity_about);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Resources res = getResources();
 
-        /*
-         Display version number in the About header.
+        /**
+         * Display version number in the About header.
          */
         ((TextView) findViewById(R.id.about_project_version))
                 .setText(String.format(res.getString(R.string.about_project_version),
                         res.getString(R.string.app_version)));
 
-        /*
-         Handle web links.
+        /**
+         * Handle web links.
          */
         MovementMethod method = LinkMovementMethod.getInstance();
         ((TextView) findViewById(R.id.about_text_credits)).setMovementMethod(method);
