@@ -47,7 +47,8 @@
             android:name=".ui.activity.SettingsActivity"
             android:exported="false"
             android:label="@string/activity_settings"
-            android:parentActivityName="ca.mudar.snoozy.ui.activity.MainActivity">
+            android:parentActivityName="ca.mudar.snoozy.ui.activity.MainActivity"
+            android:theme="@style/AppThemeNoBg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
