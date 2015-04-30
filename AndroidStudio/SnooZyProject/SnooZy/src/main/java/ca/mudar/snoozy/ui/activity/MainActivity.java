@@ -23,7 +23,6 @@
 
 package ca.mudar.snoozy.ui.activity;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +43,7 @@ public class MainActivity extends BaseActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = makeLogTag(MainActivity.class);
     private boolean mHasDeviceAdminIntent = false;
+    private SharedPreferences mSharedPrefs;
     private Toast mToast;
 
     public static Intent newIntent(Context context) {
@@ -61,30 +61,28 @@ public class MainActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initializePrefsAndListener();
+        setContentView(R.layout.activity_main);
+        setTitle(R.string.activity_main);
+
+        mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+
+        setupDeviceAdminIfNecessary();
+        setupPreferences();
+
+        // Register listener
+        mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
 
         if (getIntent().getExtras() != null) {
-            updateNotifyPrefs(getIntent());
+            updateNotificationCount(getIntent());
             getIntent().removeExtra(Const.IntentExtras.RESET_NOTIFY_NUMBER);
             getIntent().removeExtra(Const.IntentExtras.INCREMENT_NOTIFY_GROUP);
         }
 
-        final FragmentManager fm = getFragmentManager();
-
-        if (fm.findFragmentById(android.R.id.content) == null) {
-            HistoryFragment fragment = new HistoryFragment();
-            fm.beginTransaction().add(android.R.id.content, fragment).commit();
-        }
-
-        if (ComponentHelper.isDeviceAdmin(this)) {
-            // Start the service component which will register the BroadcastReceiver
-            togglePowerConnectionReceiver(true);
-        } else {
-            togglePowerConnectionReceiver(false);
-
-            Intent intent = ComponentHelper.getDeviceAdminAddIntent(this);
-            startActivityForResult(intent, Const.RequestCodes.ENABLE_ADMIN);
-            mHasDeviceAdminIntent = true;
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.main_content, new HistoryFragment())
+                    .commit();
         }
     }
 
@@ -92,20 +90,7 @@ public class MainActivity extends BaseActivity implements
     protected void onResume() {
         super.onResume();
 
-        final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        final boolean isEnabledPrefs = sharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
-
-        if (ComponentHelper.isDeviceAdmin(this)) {
-            if (!isEnabledPrefs) {
-                mToast = mToast.makeText(this, R.string.toast_service_disabled, Toast.LENGTH_SHORT);
-                mToast.show();
-            }
-        } else {
-            if (isEnabledPrefs && !mHasDeviceAdminIntent) {
-                mToast = mToast.makeText(this, R.string.toast_running_no_admin, Toast.LENGTH_LONG);
-                mToast.show();
-            }
-        }
+        showMessageIfNecessary();
 
         if (CacheHelper.isCacheClearRequired(getApplicationContext())) {
             CacheHelper.clearHistory(getApplicationContext());
@@ -113,17 +98,8 @@ public class MainActivity extends BaseActivity implements
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Const.RequestCodes.ENABLE_ADMIN) {
-            mHasDeviceAdminIntent = false;
-            togglePowerConnectionReceiver(resultCode == RESULT_OK);
-        }
-    }
-
-    @Override
     protected void onDestroy() {
-        final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        sharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
+        mSharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
 
         super.onDestroy();
     }
@@ -131,7 +107,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     protected void onNewIntent(Intent intent) {
         if (intent.getExtras() != null) {
-            updateNotifyPrefs(intent);
+            updateNotificationCount(intent);
         }
 
         intent.removeExtra(Const.IntentExtras.RESET_NOTIFY_NUMBER);
@@ -151,7 +127,8 @@ public class MainActivity extends BaseActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -161,43 +138,37 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    private void togglePowerConnectionReceiver(boolean isDeviceAdmin) {
+    private void setupDeviceAdminIfNecessary() {
+        final boolean isFirstLaunch = !mSharedPrefs.contains(Const.PrefsNames.IS_ENABLED);
+        final boolean isDeviceAdmin = ComponentHelper.isDeviceAdmin(this);
 
-        final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        final boolean isEnabledPrefs = sharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
-
-        if (isDeviceAdmin && isEnabledPrefs) {
-            ComponentHelper.togglePowerConnectionReceiver(
-                    getApplicationContext(),
-                    true);
-        } else {
-            ComponentHelper.togglePowerConnectionReceiver(
-                    getApplicationContext(),
-                    isEnabledPrefs);
+        if (isFirstLaunch && !isDeviceAdmin) {
+            startActivityForResult(ComponentHelper.getDeviceAdminAddIntent(this),
+                    Const.RequestCodes.ENABLE_ADMIN);
+            mHasDeviceAdminIntent = true;
         }
     }
 
-    private void initializePrefsAndListener() {
-        PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.preferences, false);
+    private void setupPreferences() {
+        PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.default_preferences, false);
 
         // Merge prefs legacy values
-        final SharedPreferences legacySp = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        if (legacySp.contains(Const.PrefsNames.ON_SCREEN_LOCK) ||
-                legacySp.contains(Const.PrefsNames.ON_POWER_LOSS)) {
-            final SharedPreferences.Editor editor = legacySp.edit();
+        if (mSharedPrefs.contains(Const.PrefsNames.ON_SCREEN_LOCK) ||
+                mSharedPrefs.contains(Const.PrefsNames.ON_POWER_LOSS)) {
+            final SharedPreferences.Editor editor = mSharedPrefs.edit();
 
             boolean hasChanges = false;
-            if (legacySp.contains(Const.PrefsNames.ON_SCREEN_LOCK)) {
+            if (mSharedPrefs.contains(Const.PrefsNames.ON_SCREEN_LOCK)) {
                 hasChanges = true;
-                boolean onScreenLock = legacySp.getBoolean(Const.PrefsNames.ON_SCREEN_LOCK, true);
+                boolean onScreenLock = mSharedPrefs.getBoolean(Const.PrefsNames.ON_SCREEN_LOCK, true);
                 editor.remove(Const.PrefsNames.ON_SCREEN_LOCK);
 
                 editor.putString(Const.PrefsNames.SCREEN_LOCK_STATUS,
                         onScreenLock ? Const.PrefsValues.SCREEN_LOCKED : Const.PrefsValues.IGNORE);
             }
-            if (legacySp.contains(Const.PrefsNames.ON_POWER_LOSS)) {
+            if (mSharedPrefs.contains(Const.PrefsNames.ON_POWER_LOSS)) {
                 hasChanges = true;
-                boolean onPowerLoss = legacySp.getBoolean(Const.PrefsNames.ON_POWER_LOSS, false);
+                boolean onPowerLoss = mSharedPrefs.getBoolean(Const.PrefsNames.ON_POWER_LOSS, false);
                 editor.remove(Const.PrefsNames.ON_POWER_LOSS);
 
                 editor.putString(Const.PrefsNames.POWER_CONNECTION_STATUS,
@@ -210,30 +181,46 @@ public class MainActivity extends BaseActivity implements
             }
         }
 
-        // Register listener
-        legacySp.registerOnSharedPreferenceChangeListener(this);
+        final boolean isEnabledPrefs = mSharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
+        ComponentHelper.togglePowerConnectionReceiver(getApplicationContext(), isEnabledPrefs);
     }
 
-    private void updateNotifyPrefs(Intent intent) {
-        final SharedPreferences sharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor sharedPrefsEditor = sharedPrefs.edit();
+    private void showMessageIfNecessary() {
+        final boolean isEnabled = mSharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
 
+        if (!isEnabled) {
+            mToast = mToast.makeText(this, R.string.toast_service_disabled, Toast.LENGTH_SHORT);
+            mToast.show();
+        } else if (!mHasDeviceAdminIntent && !ComponentHelper.isDeviceAdmin(this)){
+            mToast = mToast.makeText(this, R.string.toast_running_no_admin, Toast.LENGTH_LONG);
+            mToast.show();
+        }
+    }
+
+    private void updateNotificationCount(Intent intent) {
         if (intent != null) {
+            final SharedPreferences.Editor prefsEditor = mSharedPrefs.edit();
+
             final boolean hasResetNotifyNumber = intent
                     .getBooleanExtra(Const.IntentExtras.RESET_NOTIFY_NUMBER, false);
             final boolean hasIncrementNotifyGroup = intent
                     .getBooleanExtra(Const.IntentExtras.INCREMENT_NOTIFY_GROUP, false);
 
+            boolean hasChanges = false;
             if (hasResetNotifyNumber) {
-                sharedPrefsEditor.putInt(Const.PrefsNames.NOTIFY_COUNT, 1);
+                hasChanges = true;
+                prefsEditor.putInt(Const.PrefsNames.NOTIFY_COUNT, 1);
             }
 
             if (hasIncrementNotifyGroup) {
-                final int notifyGroup = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_GROUP, 1);
-                sharedPrefsEditor.putInt(Const.PrefsNames.NOTIFY_GROUP, notifyGroup + 1);
+                hasChanges = true;
+                final int notifyGroup = mSharedPrefs.getInt(Const.PrefsNames.NOTIFY_GROUP, 1);
+                prefsEditor.putInt(Const.PrefsNames.NOTIFY_GROUP, notifyGroup + 1);
             }
 
-            sharedPrefsEditor.apply();
+            if (hasChanges) {
+                prefsEditor.apply();
+            }
         }
     }
 }
