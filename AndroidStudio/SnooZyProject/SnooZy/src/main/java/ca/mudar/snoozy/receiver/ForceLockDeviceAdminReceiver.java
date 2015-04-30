@@ -24,9 +24,36 @@
 package ca.mudar.snoozy.receiver;
 
 import android.app.admin.DeviceAdminReceiver;
+import android.content.Context;
+import android.content.Intent;
 
+import ca.mudar.snoozy.Const;
+import ca.mudar.snoozy.util.ComponentHelper;
+
+/**
+ * force-lock policy is defined in res/xml/device_admin.xml
+ */
 public class ForceLockDeviceAdminReceiver extends DeviceAdminReceiver {
-    /*
-     force-lock policy is defined in res/xml/device_admin.xml
-      */
+
+    @Override
+    public CharSequence onDisableRequested(Context context, Intent intent) {
+        try {
+            // Update preferences
+            context.getApplicationContext()
+                    .getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean(Const.PrefsNames.IS_ENABLED, false)
+                    .apply();
+
+            // Disable receiver
+            ComponentHelper.togglePowerConnectionReceiver(
+                    context.getApplicationContext(),
+                    false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return super.onDisableRequested(context, intent);
+    }
+
 }
