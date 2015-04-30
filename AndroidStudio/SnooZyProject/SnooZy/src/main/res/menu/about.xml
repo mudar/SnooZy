@@ -21,20 +21,21 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_eula"
         android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/action_eula" />
+        android:title="@string/action_eula"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_share"
         android:orderInCategory="110"
-        android:showAsAction="always"
-        android:title="@string/action_share" />
+        android:title="@string/action_share"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_rate"
         android:orderInCategory="120"
-        android:showAsAction="always"
-        android:title="@string/action_rate" />
+        android:title="@string/action_rate"
+        app:showAsAction="always" />
 </menu>
