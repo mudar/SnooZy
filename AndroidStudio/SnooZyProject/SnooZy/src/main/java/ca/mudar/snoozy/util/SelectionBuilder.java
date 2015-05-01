@@ -124,13 +124,16 @@ public class SelectionBuilder {
         return mSelectionArgs.toArray(new String[mSelectionArgs.size()]);
     }
 
-    private void mapColumns(String[] columns) {
+
+    private String[] mapColumns(String[] columns) {
+        String[] mapped = columns.clone();
         for (int i = 0; i < columns.length; i++) {
             final String target = mProjectionMap.get(columns[i]);
             if (target != null) {
-                columns[i] = target;
+                mapped[i] = target;
             }
         }
+        return mapped;
     }
 
     @Override
