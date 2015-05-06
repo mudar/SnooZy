@@ -155,7 +155,7 @@ public class SelectionBuilder {
     public Cursor query(SQLiteDatabase db, String[] columns, String groupBy,
                         String having, String orderBy, String limit) {
         assertTable();
-        if (columns != null) mapColumns(columns);
+        if (columns != null) columns = mapColumns(columns);
         LOGV(TAG, "query(columns=" + Arrays.toString(columns) + ") " + this);
         return db.query(mTable, columns, getSelection(), getSelectionArgs(), groupBy, having,
                 orderBy, limit);
