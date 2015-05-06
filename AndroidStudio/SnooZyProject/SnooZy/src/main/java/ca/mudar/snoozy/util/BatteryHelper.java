@@ -33,15 +33,20 @@ import ca.mudar.snoozy.Const;
 
 
 public class BatteryHelper {
+    private static final float BATTERY_LEVEL_ERROR = 0.50f;
 
     public static float getBatteryLevel(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        if (batteryIntent == null) {
+            return BATTERY_LEVEL_ERROR;
+        }
+
         int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
         // Error checking that probably isn't needed, just in case.
         if (level == -1 || scale == -1) {
-            return 0.50f;
+            return BATTERY_LEVEL_ERROR;
         }
 
         return ((float) level / (float) scale);

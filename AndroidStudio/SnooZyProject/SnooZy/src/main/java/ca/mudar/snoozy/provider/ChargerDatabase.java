@@ -38,11 +38,9 @@ import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
 public class ChargerDatabase extends SQLiteOpenHelper {
     private static final String TAG = makeLogTag(ChargerDatabase.class);
-    private final Context mContext;
 
     public ChargerDatabase(Context context) {
         super(context, Const.DATABASE_NAME, null, Const.DATABASE_VERSION);
-        mContext = context;
     }
 
     @Override
@@ -84,7 +82,7 @@ public class ChargerDatabase extends SQLiteOpenHelper {
     }
 
     private interface Indexes {
-        final String HISTORY_DAY = "h_day_index";
+        String HISTORY_DAY = "h_day_index";
     }
 
 }

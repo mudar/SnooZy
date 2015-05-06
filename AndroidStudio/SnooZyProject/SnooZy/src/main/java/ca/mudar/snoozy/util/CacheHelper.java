@@ -98,13 +98,14 @@ public class CacheHelper {
         return (lastCleared + DateUtils.DAY_IN_MILLIS < now);
     }
 
-    public static long getCacheAgeInMillis(String age) {
-        if (age.equals(Const.PrefsValues.CACHE_SMALL)) {
-            return Const.CacheAgeValues.SMALL;
-        } else if (age.equals(Const.PrefsValues.CACHE_MEDIUM)) {
-            return Const.CacheAgeValues.MEDIUM;
-        } else if (age.equals(Const.PrefsValues.CACHE_LARGE)) {
-            return Const.CacheAgeValues.LARGE;
+    private static long getCacheAgeInMillis(String age) {
+        switch (age) {
+            case Const.PrefsValues.CACHE_SMALL:
+                return Const.CacheAgeValues.SMALL;
+            case Const.PrefsValues.CACHE_MEDIUM:
+                return Const.CacheAgeValues.MEDIUM;
+            case Const.PrefsValues.CACHE_LARGE:
+                return Const.CacheAgeValues.LARGE;
         }
 
         return 0;

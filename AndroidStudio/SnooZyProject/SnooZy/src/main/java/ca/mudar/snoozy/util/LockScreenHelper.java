@@ -31,8 +31,6 @@ import android.telephony.TelephonyManager;
 
 import ca.mudar.snoozy.Const;
 
-import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
-
 public class LockScreenHelper {
 
     public static void lockScreen(Context context, String screenLockStatus, String powerConnectionStatus,

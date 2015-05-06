@@ -138,6 +138,9 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
+    /**
+     * Enable device admin on first launch
+     */
     private void setupDeviceAdminIfNecessary() {
         final boolean isFirstLaunch = !mSharedPrefs.contains(Const.PrefsNames.IS_ENABLED);
         final boolean isDeviceAdmin = ComponentHelper.isDeviceAdmin(this);
@@ -149,6 +152,10 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
+    /**
+     * Load default prefs and merge legacy values.
+     * Toggle receiver following master-switch value.
+     */
     private void setupPreferences() {
         PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.default_preferences, false);
 
@@ -185,18 +192,26 @@ public class MainActivity extends BaseActivity implements
         ComponentHelper.togglePowerConnectionReceiver(getApplicationContext(), isEnabledPrefs);
     }
 
+    /**
+     * Notify user if app is disabled or not device admin
+     */
     private void showMessageIfNecessary() {
         final boolean isEnabled = mSharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
 
         if (!isEnabled) {
-            mToast = mToast.makeText(this, R.string.toast_service_disabled, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(this, R.string.toast_service_disabled, Toast.LENGTH_SHORT);
             mToast.show();
-        } else if (!mHasDeviceAdminIntent && !ComponentHelper.isDeviceAdmin(this)){
-            mToast = mToast.makeText(this, R.string.toast_running_no_admin, Toast.LENGTH_LONG);
+        } else if (!mHasDeviceAdminIntent && !ComponentHelper.isDeviceAdmin(this)) {
+            mToast = Toast.makeText(this, R.string.toast_running_no_admin, Toast.LENGTH_LONG);
             mToast.show();
         }
     }
 
+    /**
+     * Reset the notifications counter
+     *
+     * @param intent Notification-tap
+     */
     private void updateNotificationCount(Intent intent) {
         if (intent != null) {
             final SharedPreferences.Editor prefsEditor = mSharedPrefs.edit();

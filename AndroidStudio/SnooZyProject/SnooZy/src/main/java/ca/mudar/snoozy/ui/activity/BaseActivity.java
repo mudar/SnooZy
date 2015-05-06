@@ -27,14 +27,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     private static final String SEND_INTENT_TYPE = "text/plain";
 
     private Toolbar mActionBarToolbar = null;
@@ -76,7 +76,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             final Intent sendIntent = new Intent();
             sendIntent.putExtras(extras);
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.setType(this.SEND_INTENT_TYPE);
+            sendIntent.setType(SEND_INTENT_TYPE);
             startActivity(sendIntent);
         } else if (item.getItemId() == R.id.action_rate) {
             /*
