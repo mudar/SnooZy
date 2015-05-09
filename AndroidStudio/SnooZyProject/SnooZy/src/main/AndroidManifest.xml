@@ -76,10 +76,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/activity_eula"
-            android:parentActivityName="ca.mudar.snoozy.ui.activity.AboutActivity">
+            android:parentActivityName="ca.mudar.snoozy.ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.mudar.snoozy.ui.activity.AboutActivity" />
+                android:value="ca.mudar.snoozy.ui.activity.MainActivity" />
         </activity>
 
         <receiver
