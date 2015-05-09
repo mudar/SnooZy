@@ -23,19 +23,21 @@
 
 package ca.mudar.snoozy.ui.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.text.method.MovementMethod;
+import android.support.v4.view.ViewCompat;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 import ca.mudar.snoozy.R;
 
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseActivity implements
+        View.OnClickListener {
     private static final String TAG = makeLogTag(AboutActivity.class);
 
     @Override
@@ -44,29 +46,46 @@ public class AboutActivity extends BaseActivity {
 
         setContentView(R.layout.activity_about);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ViewCompat.setElevation(findViewById(R.id.about_header),
+                getResources().getDimensionPixelSize(R.dimen.headerbar_elevation));
 
         final Resources res = getResources();
 
         /**
          * Display version number in the About header.
          */
-        ((TextView) findViewById(R.id.about_project_version))
+        ((TextView) findViewById(R.id.about_subtitle))
                 .setText(String.format(res.getString(R.string.about_project_version),
                         res.getString(R.string.app_version)));
 
         /**
          * Handle web links.
          */
-        MovementMethod method = LinkMovementMethod.getInstance();
-        ((TextView) findViewById(R.id.about_text_credits)).setMovementMethod(method);
-        ((TextView) findViewById(R.id.about_footer_website)).setMovementMethod(method);
-        ((TextView) findViewById(R.id.about_text_usage_extra)).setText(
-                Html.fromHtml(res.getString(R.string.about_text_usage_extra)));
+        findViewById(R.id.about_source_code).setOnClickListener(this);
+        findViewById(R.id.about_credits).setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.about, menu);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        final int id = view.getId();
+
+        if (id == R.id.about_credits) {
+            openWebPage(R.string.url_about_credits);
+        } else if (id == R.id.about_source_code) {
+            openWebPage(R.string.url_about_source_code);
+        }
+    }
+
+    private void openWebPage(int res) {
+        final String url = getResources().getString(res);
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
     }
 }
