@@ -29,9 +29,10 @@ import android.provider.BaseColumns;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
 public class ChargerContract {
+    private static final String TAG = makeLogTag(ChargerContract.class);
+
     public static final String CONTENT_AUTHORITY = "ca.mudar.snoozy.provider";
     private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-    private static final String TAG = makeLogTag(ChargerContract.class);
     private static final String PATH_HISTORY = "history";
     private static final String PATH_DAILY_HISTORY = "daily_history";
     private static final String PATH_DAY = "day";
