@@ -65,8 +65,7 @@
             android:name=".ui.activity.AboutActivity"
             android:exported="false"
             android:label="@string/activity_about"
-            android:parentActivityName="ca.mudar.snoozy.ui.activity.MainActivity"
-            android:uiOptions="splitActionBarWhenNarrow">
+            android:parentActivityName="ca.mudar.snoozy.ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.mudar.snoozy.ui.activity.MainActivity" />
@@ -81,7 +80,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.mudar.snoozy.ui.activity.AboutActivity" />
-
         </activity>
 
         <receiver
