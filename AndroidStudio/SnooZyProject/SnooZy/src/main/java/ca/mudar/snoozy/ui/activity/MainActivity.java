@@ -26,6 +26,7 @@ package ca.mudar.snoozy.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -62,7 +63,6 @@ public class MainActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        setTitle(R.string.activity_main);
 
         mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -160,26 +160,40 @@ public class MainActivity extends BaseActivity implements
         PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.default_preferences, false);
 
         // Merge prefs legacy values
-        if (mSharedPrefs.contains(Const.PrefsNames.ON_SCREEN_LOCK) ||
-                mSharedPrefs.contains(Const.PrefsNames.ON_POWER_LOSS)) {
+        if (mSharedPrefs.contains(Const.LegacyPrefsNames.ON_SCREEN_LOCK)
+                || mSharedPrefs.contains(Const.LegacyPrefsNames.ON_POWER_LOSS)
+                || mSharedPrefs.contains(Const.LegacyPrefsNames.HAS_SOUND)) {
             final SharedPreferences.Editor editor = mSharedPrefs.edit();
 
             boolean hasChanges = false;
-            if (mSharedPrefs.contains(Const.PrefsNames.ON_SCREEN_LOCK)) {
+            if (mSharedPrefs.contains(Const.LegacyPrefsNames.ON_SCREEN_LOCK)) {
                 hasChanges = true;
-                boolean onScreenLock = mSharedPrefs.getBoolean(Const.PrefsNames.ON_SCREEN_LOCK, true);
-                editor.remove(Const.PrefsNames.ON_SCREEN_LOCK);
+                final boolean onScreenLock = mSharedPrefs.getBoolean(Const.LegacyPrefsNames.ON_SCREEN_LOCK, true);
+                editor.remove(Const.LegacyPrefsNames.ON_SCREEN_LOCK);
 
                 editor.putString(Const.PrefsNames.SCREEN_LOCK_STATUS,
                         onScreenLock ? Const.PrefsValues.SCREEN_LOCKED : Const.PrefsValues.IGNORE);
             }
-            if (mSharedPrefs.contains(Const.PrefsNames.ON_POWER_LOSS)) {
+            if (mSharedPrefs.contains(Const.LegacyPrefsNames.ON_POWER_LOSS)) {
                 hasChanges = true;
-                boolean onPowerLoss = mSharedPrefs.getBoolean(Const.PrefsNames.ON_POWER_LOSS, false);
-                editor.remove(Const.PrefsNames.ON_POWER_LOSS);
+                final boolean onPowerLoss = mSharedPrefs.getBoolean(Const.LegacyPrefsNames.ON_POWER_LOSS, false);
+                editor.remove(Const.LegacyPrefsNames.ON_POWER_LOSS);
 
                 editor.putString(Const.PrefsNames.POWER_CONNECTION_STATUS,
                         onPowerLoss ? Const.PrefsValues.CONNECTION_OFF : Const.PrefsValues.IGNORE);
+            }
+            if (mSharedPrefs.contains(Const.LegacyPrefsNames.HAS_SOUND)) {
+                hasChanges = true;
+                final boolean hasSound = mSharedPrefs.getBoolean(Const.LegacyPrefsNames.HAS_SOUND, false);
+                editor.remove(Const.LegacyPrefsNames.HAS_SOUND);
+
+                String ringtone = Const.PrefsValues.RINGTONE_SILENT;
+                if (hasSound) {
+                    ringtone = RingtoneManager
+                            .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                            .toString();
+                }
+                editor.putString(Const.PrefsNames.RINGTONE, ringtone);
             }
 
             if (hasChanges) {
