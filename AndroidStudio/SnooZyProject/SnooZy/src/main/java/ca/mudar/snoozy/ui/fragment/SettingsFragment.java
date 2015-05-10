@@ -26,14 +26,17 @@ package ca.mudar.snoozy.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.RingtonePreference;
 import android.provider.Settings;
-import android.util.Log;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
@@ -47,7 +50,7 @@ public class SettingsFragment extends PreferenceFragment implements
     private SharedPreferences mSharedPrefs;
     private Preference mHasNotifications;
     private Preference mHasVibration;
-    private Preference mHasSound;
+    private RingtonePreference mRingtone;
     private Preference mScreenLockStatus;
     private Preference mPowerConnectionStatus;
     private Preference mPowerConnectionType;
@@ -64,6 +67,11 @@ public class SettingsFragment extends PreferenceFragment implements
         addPreferencesFromResource(R.xml.preferences);
         mSharedPrefs = pm.getSharedPreferences();
 
+        /**
+         * Set up a listener whenever a key changes
+         */
+        mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
+
         setupPreferences();
 
         final PreferenceScreen deviceAdminPrefScreen = (PreferenceScreen) findPreference(Const.PrefsNames.DEVICE_ADMIN);
@@ -79,33 +87,17 @@ public class SettingsFragment extends PreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        Log.v(TAG, "onResume");
-
-
-        /**
-         * Set up a listener whenever a key changes
-         */
-        mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
 
         /**
          * Toggle prefs based on masterSwitch status
          */
         final boolean isEnabled = mSharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
         updateMasterSwitchDependencies(isEnabled);
-
-        /**
-         * Update summaries
-         */
-        mScreenLockStatus.setSummary(getLockStatusSummary());
-        mPowerConnectionStatus.setSummary(getConnectionStatusSummary());
-        mPowerConnectionType.setSummary(getConnectionTypeSummary());
-        mDelayToLock.setSummary(getLockDelaySummary());
-        findPreference(Const.PrefsNames.CACHE_AGE).setSummary(getCacheAgeSummary());
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
 
         /**
          * Remove the listener onPause
@@ -117,29 +109,23 @@ public class SettingsFragment extends PreferenceFragment implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Log.v(TAG, "onSharedPreferenceChanged "
-                + String.format("key = %s", key));
-
         /**
          * onChanged, new preferences values are sent to the AppHelper.
          */
-        if (key.equals(Const.PrefsNames.IS_ENABLED)) {
+        if (Const.PrefsNames.IS_ENABLED.equals(key)) {
             updateMasterSwitchDependencies(sharedPreferences.getBoolean(key, false));
-        } else if (key.equals(Const.PrefsNames.DELAY_TO_LOCK)) {
-            findPreference(Const.PrefsNames.DELAY_TO_LOCK)
-                    .setSummary(getLockDelaySummary());
-        } else if (key.equals(Const.PrefsNames.CACHE_AGE)) {
-            findPreference(Const.PrefsNames.CACHE_AGE)
-                    .setSummary(getCacheAgeSummary());
-        } else if (key.equals(Const.PrefsNames.SCREEN_LOCK_STATUS)) {
-            findPreference(Const.PrefsNames.SCREEN_LOCK_STATUS)
-                    .setSummary(getLockStatusSummary());
-        } else if (key.equals(Const.PrefsNames.POWER_CONNECTION_STATUS)) {
-            findPreference(Const.PrefsNames.POWER_CONNECTION_STATUS)
-                    .setSummary(getConnectionStatusSummary());
-        } else if (key.equals(Const.PrefsNames.POWER_CONNECTION_TYPE)) {
-            findPreference(Const.PrefsNames.POWER_CONNECTION_TYPE)
-                    .setSummary(getConnectionTypeSummary());
+        } else if (Const.PrefsNames.RINGTONE.equals(key)) {
+            mRingtone.setSummary(getRingtoneSummary());
+        } else if (Const.PrefsNames.DELAY_TO_LOCK.equals(key)) {
+            mDelayToLock.setSummary(getLockDelaySummary());
+        } else if (Const.PrefsNames.CACHE_AGE.equals(key)) {
+            findPreference(Const.PrefsNames.CACHE_AGE).setSummary(getCacheAgeSummary());
+        } else if (Const.PrefsNames.SCREEN_LOCK_STATUS.equals(key)) {
+            mScreenLockStatus.setSummary(getLockStatusSummary());
+        } else if (Const.PrefsNames.POWER_CONNECTION_STATUS.equals(key)) {
+            mPowerConnectionStatus.setSummary(getConnectionStatusSummary());
+        } else if (Const.PrefsNames.POWER_CONNECTION_TYPE.equals(key)) {
+            mPowerConnectionType.setSummary(getConnectionTypeSummary());
         }
     }
 
@@ -151,22 +137,29 @@ public class SettingsFragment extends PreferenceFragment implements
 
         mHasNotifications = findPreference(Const.PrefsNames.HAS_NOTIFICATIONS);
         mHasVibration = findPreference(Const.PrefsNames.HAS_VIBRATION);
-        mHasSound = findPreference(Const.PrefsNames.HAS_SOUND);
+        mRingtone = (RingtonePreference) findPreference(Const.PrefsNames.RINGTONE);
         mScreenLockStatus = findPreference(Const.PrefsNames.SCREEN_LOCK_STATUS);
         mPowerConnectionStatus = findPreference(Const.PrefsNames.POWER_CONNECTION_STATUS);
         mPowerConnectionType = findPreference(Const.PrefsNames.POWER_CONNECTION_TYPE);
         mDelayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
+
+        /**
+         * Update summaries
+         */
+        mRingtone.setSummary(getRingtoneSummary());
+        mScreenLockStatus.setSummary(getLockStatusSummary());
+        mPowerConnectionStatus.setSummary(getConnectionStatusSummary());
+        mPowerConnectionType.setSummary(getConnectionTypeSummary());
+        mDelayToLock.setSummary(getLockDelaySummary());
+        findPreference(Const.PrefsNames.CACHE_AGE).setSummary(getCacheAgeSummary());
     }
 
     private void updateMasterSwitchDependencies(boolean isChecked) {
-        Log.v(TAG, "updateMasterDependencies "
-                + String.format("isChecked = %s", isChecked));
         mHasNotifications.setEnabled(isChecked);
         mHasVibration.setEnabled(isChecked);
-        mHasSound.setEnabled(isChecked);
+        mRingtone.setEnabled(isChecked);
         if (isChecked) {
             final boolean isDeviceAdmin = ComponentHelper.isDeviceAdmin(getActivity());
-            Log.v(TAG, "isDeviceAdmin = " + isDeviceAdmin );
             updateDeviceAdminDependencies(isDeviceAdmin);
         } else {
             updateDeviceAdminDependencies(false);
@@ -174,9 +167,6 @@ public class SettingsFragment extends PreferenceFragment implements
     }
 
     private void updateDeviceAdminDependencies(boolean isDeviceAdmin) {
-        Log.v(TAG, "updateDeviceAdminDependencies "
-                + String.format("isDeviceAdmin = %s", isDeviceAdmin));
-
         mScreenLockStatus.setEnabled(isDeviceAdmin);
         mPowerConnectionStatus.setEnabled(isDeviceAdmin);
         mPowerConnectionType.setEnabled(isDeviceAdmin);
@@ -195,6 +185,17 @@ public class SettingsFragment extends PreferenceFragment implements
             intentSecuritySettings.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intentSecuritySettings);
         }
+    }
+
+    private String getRingtoneSummary() {
+        final String path = mSharedPrefs.getString(Const.PrefsNames.RINGTONE, Const.PrefsValues.RINGTONE_SILENT);
+        if (path != null && !path.isEmpty()) {
+            final Ringtone ringtone = RingtoneManager.getRingtone(
+                    getActivity(), Uri.parse(path));
+            return ringtone.getTitle(getActivity().getApplicationContext());
+        }
+
+        return getResources().getString(R.string.prefs_screen_silent);
     }
 
     private int getLockDelaySummary() {

@@ -36,8 +36,8 @@
         android:defaultValue="false"
         android:key="@string/prefs_key_has_vibration" />
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/prefs_key_has_sound" />
+        android:defaultValue=""
+        android:key="@string/prefs_key_ringtone" />
     <!--Screen lock-->
     <ListPreference
         android:defaultValue="locked"

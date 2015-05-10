@@ -24,6 +24,7 @@
 package ca.mudar.snoozy;
 
 
+import android.os.Build;
 import android.text.format.DateUtils;
 
 public class Const {
@@ -40,13 +41,9 @@ public class Const {
         String IS_ENABLED = "prefs_is_enabled";
         String HAS_NOTIFICATIONS = "prefs_has_notifications";
         String HAS_VIBRATION = "prefs_has_vibration";
-        String HAS_SOUND = "prefs_has_sound";
+        String RINGTONE = "prefs_ringtone";
         String NOTIFY_COUNT = "prefs_notify_count";
         String NOTIFY_GROUP = "prefs_notify_group";
-        @Deprecated
-        String ON_SCREEN_LOCK = "prefs_on_screen_lock";
-        @Deprecated
-        String ON_POWER_LOSS = "prefs_on_power_loss";
         String SCREEN_LOCK_STATUS = "prefs_screen_lock_status";
         String POWER_CONNECTION_STATUS = "prefs_connection_status";
         String POWER_CONNECTION_TYPE = "prefs_connection_type";
@@ -54,6 +51,13 @@ public class Const {
         String DEVICE_ADMIN = "prefs_device_admin";
         String CACHE_AGE = "prefs_cache_age";
         String LAST_CACHE_CLEAR = "prefs_last_cache_clear";
+    }
+
+    @Deprecated
+    public interface LegacyPrefsNames {
+        String HAS_SOUND = "prefs_has_sound";
+        String ON_POWER_LOSS = "prefs_on_power_loss";
+        String ON_SCREEN_LOCK = "prefs_on_screen_lock";
     }
 
     public interface PrefsValues {
@@ -66,6 +70,7 @@ public class Const {
         String LAST_CONNECTION_TYPE = "last_connection";
         String SCREEN_LOCKED = "locked";
         String SCREEN_UNLOCKED = "unlocked";
+        String RINGTONE_SILENT = "";
         String DELAY_FAST = "0";
         String DELAY_MODERATE = "3";
         String DELAY_SLOW = "5";
@@ -111,5 +116,10 @@ public class Const {
     public interface LocalAssets {
         String LICENSE = "gpl-3.0-standalone.html";
     }
+
+    /**
+     * Compatibility
+     */
+    public static boolean SUPPORTS_LOLLIPOP = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
 
 }
