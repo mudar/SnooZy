@@ -53,13 +53,6 @@ public class Const {
         String LAST_CACHE_CLEAR = "prefs_last_cache_clear";
     }
 
-    @Deprecated
-    public interface LegacyPrefsNames {
-        String HAS_SOUND = "prefs_has_sound";
-        String ON_POWER_LOSS = "prefs_on_power_loss";
-        String ON_SCREEN_LOCK = "prefs_on_screen_lock";
-    }
-
     public interface PrefsValues {
         String IGNORE = "ignore";
         String CONNECTION_ON = "on";
