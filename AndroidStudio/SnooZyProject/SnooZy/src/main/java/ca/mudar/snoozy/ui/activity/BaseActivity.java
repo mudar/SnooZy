@@ -94,8 +94,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mActionBarToolbar == null) {
             mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
             if (mActionBarToolbar != null) {
-//                ViewCompat.setElevation(mActionBarToolbar,
-//                        getResources().getDimensionPixelSize(R.dimen.headerbar_elevation));
                 setSupportActionBar(mActionBarToolbar);
             }
         }
