@@ -26,6 +26,11 @@
     android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -83,7 +88,7 @@
         </activity>
 
         <receiver
-            android:name=".receiver.ForceLockDeviceAdminReceiver"
+            android:name="ca.mudar.snoozy.receiver.ForceLockDeviceAdminReceiver"
             android:description="@string/admin_device_app_desc"
             android:enabled="true"
             android:exported="false"
@@ -98,7 +103,7 @@
         </receiver>
 
         <receiver
-            android:name=".receiver.PowerConnectionReceiver"
+            android:name="ca.mudar.snoozy.receiver.PowerConnectionReceiver"
             android:enabled="false"
             android:exported="false">
             <intent-filter>
@@ -110,7 +115,9 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".service.DelayedLockService" />
+        <service
+            android:name="ca.mudar.snoozy.service.DelayedLockService"
+            android:exported="false" />
 
         <provider
             android:name=".provider.ChargerProvider"
