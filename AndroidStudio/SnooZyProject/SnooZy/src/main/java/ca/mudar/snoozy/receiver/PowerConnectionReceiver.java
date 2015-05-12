@@ -80,11 +80,13 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         final int notifyGroup = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_GROUP, 1);
 
         // Parse ringtone path
-        Uri ringtone;
-        try {
-            ringtone = Uri.parse(ringtonePath);
-        } catch (NullPointerException e) {
-            ringtone = null;
+        Uri ringtone = null;
+        if (ringtonePath != null && !Const.PrefsValues.RINGTONE_SILENT.equals(ringtonePath)) {
+            try {
+                ringtone = Uri.parse(ringtonePath);
+            } catch (NullPointerException e) {
+                ringtone = null;
+            }
         }
 
         final String action = intent.getAction();
