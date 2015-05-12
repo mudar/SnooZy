@@ -21,63 +21,160 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/about_scrollview"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        style="@style/AboutView"
+        android:id="@+id/about_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/theme_primary"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <include layout="@layout/toolbar_actionbar" />
 
         <TextView
-            style="@style/AboutHeaderTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/about_title"
+            style="@style/ActionBar.TitleText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_title" />
-
-        <LinearLayout
-            style="@style/AboutCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/about_text_credits"
-                style="@style/AboutCardText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_text_credits" />
-
-            <TextView
-                style="@style/AboutCardText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_text_usage" />
-
-            <TextView
-                android:id="@+id/about_text_usage_extra"
-                style="@style/AboutCardText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_text_usage_extra" />
-        </LinearLayout>
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:lineSpacingMultiplier="1.1"
+            android:text="@string/about_title"
+            android:textColor="@color/text_primary_light" />
 
         <TextView
-            android:id="@+id/about_footer_website"
-            style="@style/AboutFooterText"
-            android:layout_width="wrap_content"
+            android:id="@+id/about_subtitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_footer_website" />
-
-        <TextView
-            android:id="@+id/about_project_version"
-            style="@style/AboutFooterText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/about_project_version" />
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/text_secondary_light"
+            android:textSize="16sp" />
 
     </LinearLayout>
-</ScrollView>
+
+    <ScrollView
+        android:id="@+id/about_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CFD8DC"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingTop="24dp">
+
+            <TextView
+                style="@style/AboutSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/about_subtitle" />
+
+            <LinearLayout
+                android:id="@+id/about_intro"
+                style="@style/AboutRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/AboutIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/desc_credits"
+                    android:src="@drawable/ic_about_snoozy" />
+
+                <TextView
+                    style="@style/AboutPrimaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_intro" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/about_usage"
+                style="@style/AboutRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/AboutIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/desc_credits"
+                    android:src="@drawable/ic_wireless_charger" />
+
+                <TextView
+                    style="@style/AboutPrimaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_usage" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/bg_divider" />
+
+            <LinearLayout
+                android:id="@+id/about_credits"
+                style="@style/AboutRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/AboutIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/desc_credits"
+                    android:src="@drawable/ic_social_people" />
+
+                <TextView
+                    style="@style/AboutPrimaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_credits" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/about_source_code"
+                style="@style/AboutRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/AboutIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/desc_github"
+                    android:src="@drawable/ic_github" />
+
+                <TextView
+                    style="@style/AboutPrimaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_source_code" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
