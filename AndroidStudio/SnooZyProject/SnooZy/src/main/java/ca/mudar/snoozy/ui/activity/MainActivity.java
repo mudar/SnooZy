@@ -26,9 +26,9 @@ package ca.mudar.snoozy.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.view.ViewCompat;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -37,6 +37,7 @@ import ca.mudar.snoozy.R;
 import ca.mudar.snoozy.ui.fragment.HistoryFragment;
 import ca.mudar.snoozy.util.CacheHelper;
 import ca.mudar.snoozy.util.ComponentHelper;
+import ca.mudar.snoozy.util.LegacyPrefsHelper;
 
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
@@ -63,6 +64,9 @@ public class MainActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        ViewCompat.setElevation(findViewById(R.id.header_wrapper),
+                getResources().getDimensionPixelSize(R.dimen.headerbar_elevation));
 
         mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -159,48 +163,7 @@ public class MainActivity extends BaseActivity implements
     private void setupPreferences() {
         PreferenceManager.setDefaultValues(this, Const.APP_PREFS_NAME, Context.MODE_PRIVATE, R.xml.default_preferences, false);
 
-        // Merge prefs legacy values
-        if (mSharedPrefs.contains(Const.LegacyPrefsNames.ON_SCREEN_LOCK)
-                || mSharedPrefs.contains(Const.LegacyPrefsNames.ON_POWER_LOSS)
-                || mSharedPrefs.contains(Const.LegacyPrefsNames.HAS_SOUND)) {
-            final SharedPreferences.Editor editor = mSharedPrefs.edit();
-
-            boolean hasChanges = false;
-            if (mSharedPrefs.contains(Const.LegacyPrefsNames.ON_SCREEN_LOCK)) {
-                hasChanges = true;
-                final boolean onScreenLock = mSharedPrefs.getBoolean(Const.LegacyPrefsNames.ON_SCREEN_LOCK, true);
-                editor.remove(Const.LegacyPrefsNames.ON_SCREEN_LOCK);
-
-                editor.putString(Const.PrefsNames.SCREEN_LOCK_STATUS,
-                        onScreenLock ? Const.PrefsValues.SCREEN_LOCKED : Const.PrefsValues.IGNORE);
-            }
-            if (mSharedPrefs.contains(Const.LegacyPrefsNames.ON_POWER_LOSS)) {
-                hasChanges = true;
-                final boolean onPowerLoss = mSharedPrefs.getBoolean(Const.LegacyPrefsNames.ON_POWER_LOSS, false);
-                editor.remove(Const.LegacyPrefsNames.ON_POWER_LOSS);
-
-                editor.putString(Const.PrefsNames.POWER_CONNECTION_STATUS,
-                        onPowerLoss ? Const.PrefsValues.CONNECTION_OFF : Const.PrefsValues.IGNORE);
-            }
-            if (mSharedPrefs.contains(Const.LegacyPrefsNames.HAS_SOUND)) {
-                hasChanges = true;
-                final boolean hasSound = mSharedPrefs.getBoolean(Const.LegacyPrefsNames.HAS_SOUND, false);
-                editor.remove(Const.LegacyPrefsNames.HAS_SOUND);
-
-                String ringtone = Const.PrefsValues.RINGTONE_SILENT;
-                if (hasSound) {
-                    ringtone = RingtoneManager
-                            .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-                            .toString();
-                }
-                editor.putString(Const.PrefsNames.RINGTONE, ringtone);
-            }
-
-            if (hasChanges) {
-                // Remove legacy and save new prefs
-                editor.apply();
-            }
-        }
+        LegacyPrefsHelper.mergeLegacyPrefs(mSharedPrefs);
 
         final boolean isEnabledPrefs = mSharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
         ComponentHelper.togglePowerConnectionReceiver(getApplicationContext(), isEnabledPrefs);
