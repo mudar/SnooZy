@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity implements
         setContentView(R.layout.activity_main);
 
         ViewCompat.setElevation(findViewById(R.id.header_wrapper),
-                getResources().getDimensionPixelSize(R.dimen.headerbar_elevation));
+                getResources().getDimensionPixelSize(R.dimen.elevation_high));
 
         mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
 
