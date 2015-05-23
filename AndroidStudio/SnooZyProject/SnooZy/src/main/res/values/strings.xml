@@ -100,9 +100,9 @@
     <string name="prefs_cache_age_large">1 month</string>
     <string name="prefs_cache_age_all">Keep all</string>
 
-    <string name="prefs_device_admin_title">Uninstall helper</string>
-    <string name="prefs_device_admin_summary_enabled">Deactivate device admin to remove app</string>
-    <string name="prefs_device_admin_summary_disabled">SnooZy is currently not a device administrator: Screen cannot be locked</string>
+    <string name="prefs_device_admin_title">Device administrator</string>
+    <string name="prefs_device_admin_summary_enabled">NOTE: uncheck this to be able to uninstall app</string>
+    <string name="prefs_device_admin_summary_disabled">Needed to allow SnooZy to lock the screen</string>
 
     <!--Notifications-->
     <string name="notify_content_title">Power connection</string>
@@ -132,6 +132,7 @@
     <string name="history_item_power_connected">Yes</string>
     <string name="history_item_power_disconnected">No</string>
     <string name="history_item_day_today">Today</string>
+    <string name="history_item_day_yesterday">Yesterday</string>
     <string name="history_item_battery_level">%s%%</string>
 
     <!--About -->
