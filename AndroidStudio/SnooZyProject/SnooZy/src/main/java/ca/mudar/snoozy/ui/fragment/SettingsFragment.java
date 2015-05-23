@@ -24,19 +24,17 @@
 package ca.mudar.snoozy.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
-import android.provider.Settings;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
@@ -55,6 +53,8 @@ public class SettingsFragment extends PreferenceFragment implements
     private Preference mPowerConnectionStatus;
     private Preference mPowerConnectionType;
     private Preference mDelayToLock;
+    private CheckBoxPreference mDeviceAdmin;
+    private boolean isListenerStateUpdate;  // Determine if deviceAdmin was updated in UI or Listener
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,12 +74,24 @@ public class SettingsFragment extends PreferenceFragment implements
 
         setupPreferences();
 
-        final PreferenceScreen deviceAdminPrefScreen = (PreferenceScreen) findPreference(Const.PrefsNames.DEVICE_ADMIN);
-        deviceAdminPrefScreen.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                launchDeviceAdminSettings();
-
-                return true;
+        mDeviceAdmin.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            /**
+             * DeviceAdmin checkbox is not toggled on UI click, but on updates from DeviceAdminReceiver.
+             * This allows the checkbox state to change only if admin was truly enabled/disabled.
+             *
+             * @param preference
+             * @param newValue
+             * @return false for UI, true for DeviceAdminReceiver
+             */
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (isListenerStateUpdate) {
+                    isListenerStateUpdate = false;
+                    return true;
+                } else {
+                    toggleDeviceAdminSettings(!mSharedPrefs.getBoolean(Const.PrefsNames.DEVICE_ADMIN, false));
+                    return false;
+                }
             }
         });
     }
@@ -126,6 +138,9 @@ public class SettingsFragment extends PreferenceFragment implements
             mPowerConnectionStatus.setSummary(getConnectionStatusSummary());
         } else if (Const.PrefsNames.POWER_CONNECTION_TYPE.equals(key)) {
             mPowerConnectionType.setSummary(getConnectionTypeSummary());
+        } else if (Const.PrefsNames.DEVICE_ADMIN.equals(key)) {
+            isListenerStateUpdate = true;
+            mDeviceAdmin.setChecked(sharedPreferences.getBoolean(key, false));
         }
     }
 
@@ -142,6 +157,7 @@ public class SettingsFragment extends PreferenceFragment implements
         mPowerConnectionStatus = findPreference(Const.PrefsNames.POWER_CONNECTION_STATUS);
         mPowerConnectionType = findPreference(Const.PrefsNames.POWER_CONNECTION_TYPE);
         mDelayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
+        mDeviceAdmin = (CheckBoxPreference) findPreference(Const.PrefsNames.DEVICE_ADMIN);
 
         /**
          * Update summaries
@@ -156,7 +172,9 @@ public class SettingsFragment extends PreferenceFragment implements
 
     private void updateMasterSwitchDependencies(boolean isChecked) {
         mHasNotifications.setEnabled(isChecked);
-        mHasVibration.setEnabled(isChecked);
+        if (mHasVibration != null) {
+            mHasVibration.setEnabled(isChecked);
+        }
         mRingtone.setEnabled(isChecked);
         if (isChecked) {
             final boolean isDeviceAdmin = ComponentHelper.isDeviceAdmin(getActivity());
@@ -173,17 +191,11 @@ public class SettingsFragment extends PreferenceFragment implements
         mDelayToLock.setEnabled(isDeviceAdmin);
     }
 
-    private void launchDeviceAdminSettings() {
-        try {
-            Intent intentDeviceAdmin = new Intent(Settings.ACTION_SETTINGS);
-            intentDeviceAdmin.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intentDeviceAdmin.setClassName(Const.IntentActions.ANDROID_SETTINGS, Const.IntentActions.ANDROID_DEVICE_ADMIN);
-            startActivity(intentDeviceAdmin);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Intent intentSecuritySettings = new Intent(Settings.ACTION_SECURITY_SETTINGS);
-            intentSecuritySettings.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intentSecuritySettings);
+    private void toggleDeviceAdminSettings(boolean isEnabled) {
+        if (isEnabled) {
+            startActivity(ComponentHelper.getDeviceAdminAddIntent(getActivity()));
+        } else {
+            ComponentHelper.disableDeviceAdmin(getActivity().getApplicationContext());
         }
     }
 

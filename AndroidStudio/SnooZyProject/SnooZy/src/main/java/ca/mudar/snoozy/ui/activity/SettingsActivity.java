@@ -28,7 +28,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.widget.CompoundButton;
 
 import ca.mudar.snoozy.Const;
@@ -39,7 +38,8 @@ import ca.mudar.snoozy.util.ComponentHelper;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
 public class SettingsActivity extends BaseActivity implements
-        CompoundButton.OnCheckedChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
+        CompoundButton.OnCheckedChangeListener,
+        SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = makeLogTag(SettingsActivity.class);
 
     private SwitchCompat mSwitchPref;
@@ -53,8 +53,16 @@ public class SettingsActivity extends BaseActivity implements
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Layout elevation
+        ViewCompat.setElevation(getActionBarToolbar(),
+                getResources().getDimensionPixelSize(R.dimen.elevation_high));
         ViewCompat.setElevation(findViewById(R.id.master_switch_wrapper),
-                getResources().getDimensionPixelSize(R.dimen.headerbar_elevation));
+                getResources().getDimensionPixelSize(R.dimen.elevation_high));
+
+        // Prefs listener
+        mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
+
+        setupSwitchPreference();
 
         if (savedInstanceState == null) {
             final SettingsFragment fragment = new SettingsFragment();
@@ -66,26 +74,17 @@ public class SettingsActivity extends BaseActivity implements
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onDestroy() {
+        if (mSharedPrefs != null) {
+            mSharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
+        }
 
-        mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
-
-        setupSwitchPreference();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        mSharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (Const.PrefsNames.IS_ENABLED.equals(key)) {
-            Log.v(TAG, "onSharedPreferenceChanged @ IS_ENABLED");
             final boolean isEnabled = sharedPreferences.getBoolean(Const.PrefsNames.IS_ENABLED, false);
             mSwitchPref.setChecked(isEnabled);
             ComponentHelper.togglePowerConnectionReceiver(getApplicationContext(),
@@ -93,11 +92,8 @@ public class SettingsActivity extends BaseActivity implements
         }
     }
 
-
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Log.v(TAG, "onCheckedChanged "
-                + String.format("isChecked = %s", isChecked));
         toggleSwitchText(isChecked);
 
         mSharedPrefs.edit()
