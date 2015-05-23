@@ -31,7 +31,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -71,7 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity {
               */
             final Bundle extras = new Bundle();
             extras.putString(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_intent_title));
-            extras.putString(Intent.EXTRA_TEXT, Const.URL_PLAYSTORE);
+            extras.putString(Intent.EXTRA_TEXT, getResources().getString(R.string.url_playstore));
 
             final Intent sendIntent = new Intent();
             sendIntent.putExtras(extras);
@@ -83,7 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity {
              Launch Playstore to rate app
               */
             final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
-            viewIntent.setData(Uri.parse(Const.URL_PLAYSTORE));
+            viewIntent.setData(Uri.parse(getResources().getString(R.string.url_playstore)));
             startActivity(viewIntent);
         }
 
