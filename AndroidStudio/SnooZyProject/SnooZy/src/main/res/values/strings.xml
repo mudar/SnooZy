@@ -101,8 +101,8 @@
     <string name="prefs_cache_age_all">Keep all</string>
 
     <string name="prefs_device_admin_title">Device administrator</string>
-    <string name="prefs_device_admin_summary_enabled">NOTE: uncheck this to be able to uninstall app</string>
-    <string name="prefs_device_admin_summary_disabled">Needed to allow SnooZy to lock the screen</string>
+    <string name="prefs_device_admin_summary_enabled">NOTE: uncheck this to allow app uninstall</string>
+    <string name="prefs_device_admin_summary_disabled">Needed to authorize screen lock by SnooZy</string>
 
     <!--Notifications-->
     <string name="notify_content_title">Power connection</string>
