@@ -80,7 +80,7 @@ public class SettingsFragment extends PreferenceFragment implements
              *
              * @param preference
              * @param newValue
-             * @return false for UI, true for DeviceAdminReceiver
+             * @return false to stop UI changes
              */
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
