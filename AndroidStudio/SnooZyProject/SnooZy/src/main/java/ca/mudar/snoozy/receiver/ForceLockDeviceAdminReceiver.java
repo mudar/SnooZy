@@ -36,7 +36,7 @@ import ca.mudar.snoozy.util.ComponentHelper;
 public class ForceLockDeviceAdminReceiver extends DeviceAdminReceiver {
 
     @Override
-    public CharSequence onDisableRequested(Context context, Intent intent) {
+    public void onDisabled(Context context, Intent intent) {
         try {
             // Update preferences
             context.getApplicationContext()
@@ -53,7 +53,7 @@ public class ForceLockDeviceAdminReceiver extends DeviceAdminReceiver {
             e.printStackTrace();
         }
 
-        return super.onDisableRequested(context, intent);
+        super.onDisabled(context, intent);
     }
 
 }
