@@ -21,7 +21,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package ca.mudar.snoozy.model;
 
 import android.util.SparseArray;
@@ -33,7 +32,7 @@ public class SectionsArray extends SparseArray<HistorySection> {
 
     public int getRawPosition(int position) {
         final int size = size();
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             HistorySection section = valueAt(i);
             if (section.contains(position)) {
                 return section.computeRawPosition(position);
@@ -45,7 +44,7 @@ public class SectionsArray extends SparseArray<HistorySection> {
 
     public boolean isHeader(int position) {
         final int size = size();
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             HistorySection section = valueAt(i);
             if (section.contains(position)) {
                 return section.isHeader(position);
@@ -57,7 +56,7 @@ public class SectionsArray extends SparseArray<HistorySection> {
 
     public int getHeaderPosition(int position) {
         final int size = size();
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             HistorySection section = valueAt(i);
             if (section.contains(position)) {
                 return section.getHeaderPosition();
