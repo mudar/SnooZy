@@ -6,7 +6,7 @@
 
 SnooZy Charger is a Power Connection manager. The app turns off the screen on power connection or disconnection, to save battery consumption by the phone's display. 
 
-SnooZy can also be used as an auto-lock on unplug or simply as for power connection history. 
+SnooZy can also be used as an auto-lock on unplug or simply for power connection history. 
 
 This app can be useful to save battery when using a **solar charger**, where power connectivity relies on weather conditions! It was initially developed as a fix for battery drain issues on **Samsung Galaxy Nexus**.
 
@@ -48,6 +48,7 @@ SnooZy Charger was developed as a (partial) software solution for this issue: it
 
 The Android app includes (thanks!) libraries and derivative work of the following projects:
 
+* [SuperSLiM][link_lib_superslim] &copy; Tonic Artos.
 * [AOSP][link_lib_aosp] &copy; The Android Open Source Project.
 * [Android Support Library v4][link_lib_supportv4] &copy; The Android Open Source Project.
 * [Android Asset Studio][link_lib_ui_utils] &copy; Google Inc, used to create icons assets.
@@ -88,6 +89,7 @@ These three projects are all released under the [Apache License v2.0][link_apach
 [link_gpl]: http://www.gnu.org/licenses/gpl.html
 [img_devices]: http://snoozy.mudar.ca/images/snoozy-devices.png
 [img_playstore_badge]: http://snoozy.mudar.ca/images/en_app_rgb_wo_60.png
+[link_lib_superslim]: http://github.com/TonicArtos/SuperSLiM
 [link_lib_aosp]: http://source.android.com/
 [link_lib_supportv4]: http://developer.android.com/tools/support-library/
 [link_lib_ui_utils]: http://code.google.com/p/android-ui-utils/
