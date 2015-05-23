@@ -32,24 +32,25 @@
 
     <FrameLayout
         android:id="@+id/master_switch_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:addStatesFromChildren="true"
+        android:background="#CFD8DC"
         android:clipChildren="false"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:background="#CFD8DC"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:addStatesFromChildren="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:paddingRight="16dp">
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/master_switch"
-            android:background="@color/transparent"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/listPreferredItemHeight"
+            android:background="@color/transparent"
             android:enabled="true"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
+            android:textColor="@color/text_primary_dark"
             android:textSize="18sp" />
     </FrameLayout>
     <!--android:background="#CFD8DC"-->

@@ -24,18 +24,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg_color"
     android:cacheColorHint="@android:color/transparent"
     android:gravity="center"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@id/android:list"
-        style="@style/HistoryList"
+    <android.support.v7.widget.RecyclerView
+        android:clipToPadding="false"
+        android:visibility="gone"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:cacheColorHint="@android:color/transparent"
-        android:fastScrollEnabled="true" />
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical" />
 
     <ProgressBar
         android:id="@id/android:empty"
@@ -54,10 +54,11 @@
 
         <TextView
             android:id="@+id/history_empty_list_title"
-            style="@style/HistoryListEmptyTitle"
+            style="@style/HistoryListEmpty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/history_empty_list_title" />
+            android:text="@string/history_empty_list_title"
+            android:textColor="@color/card_title_color" />
 
         <TextView
             style="@style/HistoryListEmpty"
