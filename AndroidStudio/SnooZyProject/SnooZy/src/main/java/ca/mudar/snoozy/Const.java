@@ -29,12 +29,16 @@ import android.text.format.DateUtils;
 
 public class Const {
 
+    // UI Configuration
+    public static final long VIBRATION_DURATION = 300;
+    public static final long TOTAL_THRESHOLD = 2;
+
+    // App Configuration
     public static final String APP_PREFS_NAME = "snoozy_prefs";
     public static final String DATABASE_NAME = "snoozy.db";
     public static final int DATABASE_VERSION = 1;
-    public static final long VIBRATION_DURATION = 300;
     public static final int NOTIFY_ID = 0x1;
-    public static final String URL_PLAYSTORE = "http://play.google.com/store/apps/details?id=ca.mudar.snoozy";
+    public static final String FORMAT_ORDINAL_DAY = "yyyyDDDD"; // ordinalDate is prefixed with year for disambiguation
 
     // Preferences
     public interface PrefsNames {

@@ -29,6 +29,7 @@
     <!--URLs-->
     <string name="url_about_credits" translatable="false">http://www.mudar.ca/</string>
     <string name="url_about_source_code" translatable="false">https://github.com/mudar/SnooZy</string>
+    <string name="url_playstore" translatable="false">http://play.google.com/store/apps/details?id=ca.mudar.snoozy</string>
 
     <!--Prefs keys-->
     <string name="prefs_key_is_enabled" translatable="false">prefs_is_enabled</string>
