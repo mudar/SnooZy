@@ -36,6 +36,22 @@ import ca.mudar.snoozy.util.ComponentHelper;
 public class ForceLockDeviceAdminReceiver extends DeviceAdminReceiver {
 
     @Override
+    public void onEnabled(Context context, Intent intent) {
+        try {
+            // Update preferences
+            context.getApplicationContext()
+                    .getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean(Const.PrefsNames.DEVICE_ADMIN, true)
+                    .apply();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        super.onEnabled(context, intent);
+    }
+
+    @Override
     public void onDisabled(Context context, Intent intent) {
         try {
             // Update preferences
@@ -43,6 +59,7 @@ public class ForceLockDeviceAdminReceiver extends DeviceAdminReceiver {
                     .getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE)
                     .edit()
                     .putBoolean(Const.PrefsNames.IS_ENABLED, false)
+                    .putBoolean(Const.PrefsNames.DEVICE_ADMIN, false)
                     .apply();
 
             // Disable receiver
