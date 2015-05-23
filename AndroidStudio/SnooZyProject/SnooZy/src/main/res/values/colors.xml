@@ -22,23 +22,42 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <color name="temp_first">#ffffffff</color>
-    <color name="temp_last">#30ff0000</color>
-    <color name="temp_single">#ffffffff</color>
-    <color name="temp_middle">#ffffffff</color>
 
-    <color name="app_bg_color">#e3e3e3</color>
-    <color name="bg_eula">#e3e3e3</color>
-    <color name="bg_webview">#00000000</color>
+    <!--Toolbar-->
+    <color name="transparent">#00000000</color>
+    <color name="theme_primary">#00ACC1</color>
+    <color name="theme_primary_dark">#00838F</color>
+    <color name="text_secondary_light">#a0ffffff</color>
+    <color name="theme_accent_1">#00838F</color>
+    <color name="text_primary_light">#ffffff</color>
+    <color name="text_primary_dark">#000000</color>
+    <color name="theme_overlay_text">@color/text_primary_light</color>
+    <color name="bg_divider">#ECEFF1</color>
+
+    <!--blue-grey: #CFD8DC-->
+
+    <!--Old Styles-->
+    <!--<color name="temp_first">#ffffffff</color>-->
+    <!--<color name="temp_last">#30ff0000</color>-->
+    <!--<color name="temp_single">#ffffffff</color>-->
+    <!--<color name="temp_middle">#ffffffff</color>-->
+
+    <!--<color name="app_bg_color">#e3e3e3</color>-->
+    <color name="app_bg_color">@color/theme_primary</color>
+    <!--<color name="bg_eula">#e3e3e3</color>-->
+    <color name="bg_flat">#ffffff</color>
+    <color name="bg_webview">#ffffff</color>
 
     <color name="card_background">#ffffff</color>
-    <color name="card_header_color">#80323232</color>
-    <color name="card_title_color">#ff0099cc</color>
-    <color name="card_row_color">#80323232</color>
+    <color name="card_header_color">#ffffff</color>
+    <color name="card_title_color">@color/theme_accent_1</color>
+    <color name="card_row_color">#212121</color>
     <color name="empty_list_color">#80323232</color>
 
-    <color name="card_row_highlight_color">#ff0099cc</color>
+    <!--<color name="card_row_highlight_color">#FAFAFA</color>-->
+    <color name="card_row_highlight_color">@color/theme_accent_1</color>
 
+    <color name="about_subtitle_color">@color/theme_accent_1</color>
     <color name="about_footer_color">#80323232</color>
-    <color name="about_card_color">#80323232</color>
+    <color name="about_card_color">#212121</color>
 </resources>
