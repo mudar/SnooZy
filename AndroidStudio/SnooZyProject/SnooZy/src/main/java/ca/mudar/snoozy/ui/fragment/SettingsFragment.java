@@ -54,7 +54,6 @@ public class SettingsFragment extends PreferenceFragment implements
     private Preference mPowerConnectionType;
     private Preference mDelayToLock;
     private CheckBoxPreference mDeviceAdmin;
-    private boolean isListenerStateUpdate;  // Determine if deviceAdmin was updated in UI or Listener
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,13 +84,9 @@ public class SettingsFragment extends PreferenceFragment implements
              */
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (isListenerStateUpdate) {
-                    isListenerStateUpdate = false;
-                    return true;
-                } else {
-                    toggleDeviceAdminSettings(!mSharedPrefs.getBoolean(Const.PrefsNames.DEVICE_ADMIN, false));
-                    return false;
-                }
+                toggleDeviceAdminSettings((Boolean) newValue);
+
+                return false;
             }
         });
     }
@@ -139,7 +134,6 @@ public class SettingsFragment extends PreferenceFragment implements
         } else if (Const.PrefsNames.POWER_CONNECTION_TYPE.equals(key)) {
             mPowerConnectionType.setSummary(getConnectionTypeSummary());
         } else if (Const.PrefsNames.DEVICE_ADMIN.equals(key)) {
-            isListenerStateUpdate = true;
             mDeviceAdmin.setChecked(sharedPreferences.getBoolean(key, false));
         }
     }
