@@ -29,7 +29,6 @@ import android.database.Cursor;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +50,6 @@ import ca.mudar.snoozy.model.HistorySection;
 import ca.mudar.snoozy.model.Queries;
 import ca.mudar.snoozy.model.SectionsArray;
 import ca.mudar.snoozy.util.LogUtils;
-
-// https://gist.github.com/gabrielemariotti/4c189fb1124df4556058
 
 public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = LogUtils.makeLogTag(HistoryAdapter.class);
@@ -127,14 +124,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             HistoryViewHolder historyHolder = (HistoryViewHolder) holder;
             historyHolder.bindRow();
-
-//            final int julianDay = mCursor.getInt(Queries.HistoryDetailsQuery.JULIAN_DAY);
-//            final int header = mCursor.getInt(Queries.HistoryDetailsQuery.TOTAL);
-
         }
 
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//        params.headerDisplay = LayoutManager.LayoutParams.HEADER_STICKY;
 
         params.setSlm(LinearSLM.ID);
         params.setFirstPosition(mSections.getHeaderPosition(position));
@@ -166,9 +158,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void setHeaders(SectionsArray headers) {
-        Log.v(TAG, "setHeaders "
-                + String.format("headers = %s", headers.size()));
-
         this.mSections = headers;
     }
 
@@ -274,6 +263,5 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             vTimestamp.setText(sTimestamp);
             vBatteryLevel.setText(sBatteryLevel);
         }
-
     }
 }
