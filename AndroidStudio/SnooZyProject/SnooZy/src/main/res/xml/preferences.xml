@@ -35,10 +35,10 @@
 
     <RingtonePreference
         android:icon="@drawable/ic_audio_notification"
-        android:showDefault="true"
-        android:showSilent="true"
         android:key="@string/prefs_key_ringtone"
         android:ringtoneType="notification"
+        android:showDefault="true"
+        android:showSilent="true"
         android:title="@string/prefs_ringtone_title" />
 
     <PreferenceCategory android:title="@string/prefs_category_advanced">
@@ -77,10 +77,11 @@
             android:key="@string/prefs_key_cache_age"
             android:title="@string/prefs_cache_age_title" />
 
-        <PreferenceScreen
-            android:icon="@drawable/ic_delete"
+        <CheckBoxPreference
+            android:icon="@drawable/ic_security"
             android:key="@string/prefs_key_device_admin"
-            android:summary="@string/prefs_device_admin_summary_enabled"
+            android:summaryOff="@string/prefs_device_admin_summary_disabled"
+            android:summaryOn="@string/prefs_device_admin_summary_enabled"
             android:title="@string/prefs_device_admin_title" />
     </PreferenceCategory>
 

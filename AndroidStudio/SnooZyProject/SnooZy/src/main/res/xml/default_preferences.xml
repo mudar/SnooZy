@@ -55,6 +55,9 @@
     <ListPreference
         android:defaultValue="-1"
         android:key="@string/prefs_key_cache_age" />
-
+    <!--Device admin-->
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/prefs_key_device_admin" />
 
 </PreferenceScreen>
