@@ -58,6 +58,6 @@
     <!--Device admin-->
     <CheckBoxPreference
         android:defaultValue="false"
-        android:key="@string/prefs_key_device_admin" />
+        android:key="@string/prefs_key_is_admin" />
 
 </PreferenceScreen>

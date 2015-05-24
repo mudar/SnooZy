@@ -79,7 +79,7 @@
 
         <CheckBoxPreference
             android:icon="@drawable/ic_security"
-            android:key="@string/prefs_key_device_admin"
+            android:key="@string/prefs_key_is_admin"
             android:summaryOff="@string/prefs_device_admin_summary_disabled"
             android:summaryOn="@string/prefs_device_admin_summary_enabled"
             android:title="@string/prefs_device_admin_title" />

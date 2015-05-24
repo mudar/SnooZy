@@ -52,7 +52,7 @@ public class Const {
         String POWER_CONNECTION_STATUS = "prefs_connection_status";
         String POWER_CONNECTION_TYPE = "prefs_connection_type";
         String DELAY_TO_LOCK = "prefs_delay_to_lock";
-        String DEVICE_ADMIN = "prefs_device_admin";
+        String IS_ADMIN = "prefs_is_admin";
         String CACHE_AGE = "prefs_cache_age";
         String LAST_CACHE_CLEAR = "prefs_last_cache_clear";
     }

@@ -42,7 +42,7 @@ public class ForceLockDeviceAdminReceiver extends DeviceAdminReceiver {
             context.getApplicationContext()
                     .getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE)
                     .edit()
-                    .putBoolean(Const.PrefsNames.DEVICE_ADMIN, true)
+                    .putBoolean(Const.PrefsNames.IS_ADMIN, true)
                     .apply();
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class ForceLockDeviceAdminReceiver extends DeviceAdminReceiver {
                     .getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE)
                     .edit()
                     .putBoolean(Const.PrefsNames.IS_ENABLED, false)
-                    .putBoolean(Const.PrefsNames.DEVICE_ADMIN, false)
+                    .putBoolean(Const.PrefsNames.IS_ADMIN, false)
                     .apply();
 
             // Disable receiver

@@ -133,7 +133,7 @@ public class SettingsFragment extends PreferenceFragment implements
             mPowerConnectionStatus.setSummary(getConnectionStatusSummary());
         } else if (Const.PrefsNames.POWER_CONNECTION_TYPE.equals(key)) {
             mPowerConnectionType.setSummary(getConnectionTypeSummary());
-        } else if (Const.PrefsNames.DEVICE_ADMIN.equals(key)) {
+        } else if (Const.PrefsNames.IS_ADMIN.equals(key)) {
             mDeviceAdmin.setChecked(sharedPreferences.getBoolean(key, false));
         }
     }
@@ -151,7 +151,7 @@ public class SettingsFragment extends PreferenceFragment implements
         mPowerConnectionStatus = findPreference(Const.PrefsNames.POWER_CONNECTION_STATUS);
         mPowerConnectionType = findPreference(Const.PrefsNames.POWER_CONNECTION_TYPE);
         mDelayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
-        mDeviceAdmin = (CheckBoxPreference) findPreference(Const.PrefsNames.DEVICE_ADMIN);
+        mDeviceAdmin = (CheckBoxPreference) findPreference(Const.PrefsNames.IS_ADMIN);
 
         /**
          * Update summaries

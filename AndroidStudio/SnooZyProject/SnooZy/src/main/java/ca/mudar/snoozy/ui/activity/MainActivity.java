@@ -165,6 +165,16 @@ public class MainActivity extends BaseActivity implements
 
         LegacyPrefsHelper.mergeLegacyPrefs(mSharedPrefs);
 
+        // Update isAdmin status
+        final boolean isAdmin = ComponentHelper.isDeviceAdmin(this);
+        if (isAdmin != mSharedPrefs.getBoolean(Const.PrefsNames.IS_ADMIN, false)) {
+            mSharedPrefs
+                    .edit()
+                    .putBoolean(Const.PrefsNames.IS_ADMIN, isAdmin)
+                    .apply();
+        }
+
+        // Update ConnectionReceiver status
         final boolean isEnabledPrefs = mSharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, false);
         ComponentHelper.togglePowerConnectionReceiver(getApplicationContext(), isEnabledPrefs);
     }
