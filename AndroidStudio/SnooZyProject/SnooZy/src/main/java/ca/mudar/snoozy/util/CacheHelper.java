@@ -72,6 +72,8 @@ public class CacheHelper {
             }
         }
 
+        context.getContentResolver().notifyChange(ChargerContract.DailyHistory.CONTENT_URI, null);
+
         // Set lastClear timestamp to midnight.
         // This allows one cleanup per day instead of every 24 hours.
         final SharedPreferences.Editor editor = sharedPrefs.edit();
