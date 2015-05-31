@@ -78,13 +78,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_marginLeft="@dimen/keyline_2"
+                android:layout_marginRight="16dp"
+                android:lineSpacingMultiplier="1.1"
                 android:text="@string/about_subtitle"
                 android:textColor="@color/text_about_subtitle"
-                android:textStyle="italic"
                 android:textSize="18sp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="@dimen/keyline_2"
-                android:lineSpacingMultiplier="1.1" />
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:id="@+id/about_intro"
@@ -94,10 +94,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:contentDescription="@string/desc_credits"
-                    android:src="@drawable/ic_about_snoozy" />
+                    android:src="@drawable/ic_about_snoozy"
+                    android:tint="@color/text_about" />
 
                 <TextView
                     style="@style/AboutPrimaryText"
