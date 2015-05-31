@@ -65,13 +65,12 @@ public class SettingsFragment extends PreferenceFragment implements
 
         addPreferencesFromResource(R.xml.preferences);
         mSharedPrefs = pm.getSharedPreferences();
+        setupPreferences();
 
         /**
          * Set up a listener whenever a key changes
          */
         mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
-
-        setupPreferences();
 
         mDeviceAdmin.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             /**
@@ -152,6 +151,8 @@ public class SettingsFragment extends PreferenceFragment implements
         mPowerConnectionType = findPreference(Const.PrefsNames.POWER_CONNECTION_TYPE);
         mDelayToLock = findPreference(Const.PrefsNames.DELAY_TO_LOCK);
         mDeviceAdmin = (CheckBoxPreference) findPreference(Const.PrefsNames.IS_ADMIN);
+        // Synchronize pref value, done before settings the ChangeListener
+        mDeviceAdmin.setChecked(ComponentHelper.isDeviceAdmin(getActivity()));
 
         /**
          * Update summaries
@@ -186,10 +187,15 @@ public class SettingsFragment extends PreferenceFragment implements
     }
 
     private void toggleDeviceAdminSettings(boolean isEnabled) {
-        if (isEnabled) {
-            startActivity(ComponentHelper.getDeviceAdminAddIntent(getActivity()));
+        if ((isEnabled == ComponentHelper.isDeviceAdmin(getActivity()))) {
+            // UI has the wrong checkbox value, wo launch system settings to give user control.
+            ComponentHelper.launchDeviceAdminSettings(getActivity());
         } else {
-            ComponentHelper.disableDeviceAdmin(getActivity().getApplicationContext());
+            if (isEnabled) {
+                startActivity(ComponentHelper.getDeviceAdminAddIntent(getActivity()));
+            } else {
+                ComponentHelper.disableDeviceAdmin(getActivity().getApplicationContext());
+            }
         }
     }
 
