@@ -27,7 +27,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/keyline_3"
     android:layout_marginRight="@dimen/keyline_1"
-    android:background="@color/bg_flat"
+    android:background="@color/bg_primary"
     android:clickable="false"
     android:focusable="false"
     android:orientation="vertical">

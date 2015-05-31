@@ -47,7 +47,7 @@
             android:layout_marginRight="16dp"
             android:lineSpacingMultiplier="1.1"
             android:text="@string/about_title"
-            android:textColor="@color/text_primary_light" />
+            android:textColor="@color/text_primary" />
 
         <TextView
             android:id="@+id/about_subtitle"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/keyline_2"
             android:layout_marginRight="16dp"
-            android:textColor="@color/text_secondary_light"
+            android:textColor="@color/text_secondary"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -64,7 +64,7 @@
         android:id="@+id/about_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_flat"
+        android:background="@color/bg_primary"
         android:fillViewport="true">
 
         <LinearLayout
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:text="@string/about_subtitle"
-                android:textColor="@color/about_subtitle_color"
+                android:textColor="@color/text_about_subtitle"
                 android:textStyle="italic"
                 android:textSize="18sp"
                 android:layout_marginRight="16dp"

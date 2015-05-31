@@ -26,10 +26,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_flat"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
 
     <LinearLayout
         android:id="@+id/header_wrapper"
@@ -41,6 +39,7 @@
         <include layout="@layout/toolbar_actionbar" />
 
         <LinearLayout
+            android:id="@+id/header_legend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
