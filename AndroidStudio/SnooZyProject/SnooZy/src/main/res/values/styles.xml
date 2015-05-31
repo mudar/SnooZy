@@ -86,10 +86,12 @@
     </style>
 
     <style name="HistoryListEmpty" parent="@android:style/TextAppearance.Medium">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textColor">@color/text_toolbar_primary</item>
-        <item name="android:alpha">0.6</item>
-        <item name="android:paddingBottom">@dimen/listview_empty_bottom_padding</item>
+        <item name="android:alpha">0.75</item>
+        <item name="android:lines">3</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
 
     <style name="CardHeaderLegend" parent="@android:style/TextAppearance.Small">

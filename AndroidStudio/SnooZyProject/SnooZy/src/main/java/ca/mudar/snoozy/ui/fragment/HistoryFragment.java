@@ -50,6 +50,7 @@ import ca.mudar.snoozy.model.SectionsArray;
 import ca.mudar.snoozy.provider.ChargerContract;
 import ca.mudar.snoozy.ui.adapter.HistoryAdapter;
 import ca.mudar.snoozy.util.BatteryHelper;
+import ca.mudar.snoozy.util.ComponentHelper;
 
 import static ca.mudar.snoozy.provider.ChargerContract.History;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
@@ -161,19 +162,41 @@ public class HistoryFragment extends Fragment implements
 
     }
 
-    private void setIntroTitle() {
+    public void updateEmptyScreenIfNecessary() {
+        if (mAdapter == null || mAdapter.getItemCount() == 0) {
+            updateEmptyScreen();
+        }
+    }
+
+    private void updateEmptyScreen() {
         final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
         final String cacheAge = sharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
+        final boolean isEnabled = sharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, true);
 
-        final TextView vIntro = (TextView) mRootView.findViewById(R.id.history_empty_list_title);
+        final TextView vIntro = (TextView) mRootView.findViewById(R.id.history_empty_list);
 
-        if (Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
-//            vIntro.setVisibility(View.GONE);
+        if (!isEnabled) {
+            vIntro.setClickable(true);
+
+            vIntro.setText(R.string.history_empty_list_disabled);
+            vIntro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.setClickable(false);
+                    sharedPrefs.edit()
+                            .putBoolean(Const.PrefsNames.IS_ENABLED, true)
+                            .apply();
+
+                    ComponentHelper.togglePowerConnectionReceiver(getActivity(), true);
+                }
+            });
+        } else if (Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
+            vIntro.setText(R.string.history_empty_list_cache_none);
         } else {
             final boolean isPowerConnected = BatteryHelper.isPowerConnected(getActivity().getApplicationContext());
             final Resources res = getResources();
             final String powerAction = res.getString(isPowerConnected ? R.string.history_empty_list_title_disconnect : R.string.history_empty_list_title_connect);
-            vIntro.setText(String.format(res.getString(R.string.history_empty_list_title), powerAction));
+            vIntro.setText(res.getString(R.string.history_empty_list_title, powerAction));
         }
     }
 
@@ -181,7 +204,7 @@ public class HistoryFragment extends Fragment implements
         mListener.toggleVisibility(isEmpty);
 
         if (isEmpty) {
-            setIntroTitle();
+            updateEmptyScreen();
 
             mRootView.findViewById(R.id.recycler_view).setVisibility(View.GONE);
             mRootView.findViewById(android.R.id.empty).setVisibility(View.GONE);

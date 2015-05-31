@@ -49,30 +49,13 @@
         android:layout_gravity="center"
         android:progressTint="@color/text_toolbar_secondary" />
 
-    <LinearLayout
+    <TextView
         android:id="@+id/history_empty_list"
+        style="@style/HistoryListEmpty"
         android:layout_width="@dimen/listview_empty_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="-48dp"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            style="@style/HistoryListEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/logo_snoozy"
-            android:text="@string/history_footer_about" />
-
-        <TextView
-            android:id="@+id/history_empty_list_title"
-            style="@style/HistoryListEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/history_empty_list_title" />
-
-    </LinearLayout>
-
+        android:drawableTop="@drawable/logo_snoozy"
+        android:visibility="gone" />
 
 </LinearLayout>

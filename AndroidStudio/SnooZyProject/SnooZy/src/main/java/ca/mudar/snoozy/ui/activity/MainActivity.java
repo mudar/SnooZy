@@ -46,6 +46,8 @@ public class MainActivity extends BaseActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener,
         HistoryFragment.HistorySizeCallback {
     private static final String TAG = makeLogTag(MainActivity.class);
+    private static final String HISTORY_FRAGMENT_TAG = "fragment_history";
+
     private boolean mHasDeviceAdminIntent = false;
     private SharedPreferences mSharedPrefs;
     private Toast mToast;
@@ -66,6 +68,7 @@ public class MainActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -84,7 +87,7 @@ public class MainActivity extends BaseActivity implements
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.main_content, new HistoryFragment())
+                    .add(R.id.main_content, new HistoryFragment(), HISTORY_FRAGMENT_TAG)
                     .commit();
         }
     }
@@ -136,8 +139,15 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (Const.PrefsNames.CACHE_AGE.equals(key)) {
-            CacheHelper.clearHistory(getApplicationContext());
+        if (Const.PrefsNames.CACHE_AGE.equals(key) || Const.PrefsNames.IS_ENABLED.equals(key)) {
+            if (Const.PrefsNames.CACHE_AGE.equals(key)) {
+                CacheHelper.clearHistory(getApplicationContext());
+            }
+
+            final HistoryFragment fragment = (HistoryFragment) getSupportFragmentManager().findFragmentByTag(HISTORY_FRAGMENT_TAG);
+            if (fragment != null) {
+                fragment.updateEmptyScreenIfNecessary();
+            }
         }
     }
 
@@ -228,9 +238,10 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void toggleVisibility(boolean isEmpty) {
         if (isEmpty) {
-            setTitle(null);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
             findViewById(R.id.header_legend).setVisibility(View.GONE);
         } else {
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
             setTitle(R.string.activity_main);
             findViewById(R.id.header_legend).setVisibility(View.VISIBLE);
         }
