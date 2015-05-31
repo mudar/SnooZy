@@ -26,7 +26,7 @@
     android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <uses-feature
         android:name="android.permission.READ_EXTERNAL_STORAGE"
