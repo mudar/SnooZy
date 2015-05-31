@@ -105,33 +105,27 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final View itemView = holder.itemView;
-
-        final LayoutManager.LayoutParams params = LayoutManager.LayoutParams.from(itemView.getLayoutParams());
-
-
         if (getItemViewType(position) == VIEW_TYPE_HEADER) {
             HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
             headerHolder.bindRow(position);
 
-            ViewCompat.setElevation(itemView, headerElevation);
+            ViewCompat.setElevation(holder.itemView, headerElevation);
 
             setAnimation(holder.itemView, position);
         } else {
-            if (mCursor == null || !mCursor.moveToPosition(mSections.getRawPosition(position))) {
-                return;
+            if (mCursor != null && mCursor.moveToPosition(mSections.getRawPosition(position))) {
+                HistoryViewHolder historyHolder = (HistoryViewHolder) holder;
+                historyHolder.bindRow();
             }
-
-            HistoryViewHolder historyHolder = (HistoryViewHolder) holder;
-            historyHolder.bindRow();
         }
 
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        final LayoutManager.LayoutParams params = LayoutManager.LayoutParams.from(holder.itemView.getLayoutParams());
 
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
         params.setSlm(LinearSLM.ID);
         params.setFirstPosition(mSections.getHeaderPosition(position));
 
-        itemView.setLayoutParams(params);
+        holder.itemView.setLayoutParams(params);
     }
 
     /**
@@ -238,7 +232,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     R.string.history_item_power_connected : R.string.history_item_power_disconnected);
             final String sBatteryLevel = String.format(resources.getString(R.string.history_item_battery_level), batteryLevel);
             final int resPowerStatusColor = resources.getColor(isPowerOn ?
-                    R.color.card_row_highlight_color : R.color.card_row_color);
+                    R.color.text_list_item_highlight : R.color.text_list_item);
 
             String sTimestamp;
 
