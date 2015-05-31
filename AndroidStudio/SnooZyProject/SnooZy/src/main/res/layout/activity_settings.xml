@@ -50,7 +50,7 @@
             android:enabled="true"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textColor="@color/text_primary_dark"
+            android:textColor="@color/text_header"
             android:textSize="18sp" />
     </FrameLayout>
     <!--android:background="#CFD8DC"-->

@@ -47,7 +47,7 @@
             android:layout_marginRight="16dp"
             android:lineSpacingMultiplier="1.1"
             android:text="@string/about_title"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_toolbar_primary" />
 
         <TextView
             android:id="@+id/about_subtitle"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/keyline_2"
             android:layout_marginRight="16dp"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_toolbar_secondary"
             android:textSize="16sp" />
 
     </LinearLayout>

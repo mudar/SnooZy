@@ -74,26 +74,26 @@
     </style>
 
     <style name="ToolbarOverlayTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorPrimary">@color/text_primary</item>
-        <item name="colorControlNormal">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_toolbar_primary</item>
+        <item name="colorControlNormal">@color/text_toolbar_primary</item>
     </style>
     <style name="ToolbarPopupOverlayTheme" parent="ThemeOverlay.AppCompat.Light" />
 
 
     <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColor">@color/text_toolbar_primary</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="HistoryListEmpty" parent="@android:style/TextAppearance.Medium">
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColor">@color/text_toolbar_primary</item>
         <item name="android:paddingBottom">@dimen/listview_empty_bottom_padding</item>
     </style>
 
     <style name="CardHeaderLegend" parent="@android:style/TextAppearance.Small">
         <!--<item name="android:textColor">@color/card_header_color</item>-->
-        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textColor">@color/text_toolbar_secondary</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
         <item name="android:lines">1</item>
@@ -109,7 +109,7 @@
     <style name="AboutPrimaryText" >
         <item name="android:layout_marginLeft">32dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textColor">@color/text_about</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
     </style>

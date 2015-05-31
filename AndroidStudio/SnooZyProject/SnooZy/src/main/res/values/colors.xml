@@ -27,9 +27,12 @@
     <color name="theme_primary">#00acc1</color>
     <color name="theme_primary_dark">#00838F</color>
     <color name="theme_accent">#00838F</color>
-    <color name="text_primary">#ffffff</color>
-    <color name="text_primary_dark">#000000</color>
-    <color name="text_secondary">#a0ffffff</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_header">#000000</color>
+
+    <!--Toolbar-->
+    <color name="text_toolbar_primary">#ffffff</color>
+    <color name="text_toolbar_secondary">#a0ffffff</color>
 
     <!--Backgrounds-->
     <color name="bg_app">@color/theme_primary</color>
@@ -37,12 +40,13 @@
     <color name="bg_secondary">#cfd8dc</color>
 
     <!--History list rows-->
-    <color name="text_list_header">@color/text_primary_dark</color>
+    <color name="text_list_header">@color/text_header</color>
     <color name="text_list_header_highlight">@color/theme_accent</color>
-    <color name="text_list_item">#212121</color>
+    <color name="text_list_item">@color/text_primary</color>
     <color name="text_list_item_highlight">@color/theme_accent</color>
 
     <!--About-->
+    <color name="text_about">@color/text_primary</color>
     <color name="text_about_subtitle">@color/theme_accent</color>
     <color name="bg_divider">#eceff1</color>
 </resources>
