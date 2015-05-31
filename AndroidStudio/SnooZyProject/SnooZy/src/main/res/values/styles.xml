@@ -88,6 +88,7 @@
     <style name="HistoryListEmpty" parent="@android:style/TextAppearance.Medium">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textColor">@color/text_toolbar_primary</item>
+        <item name="android:alpha">0.6</item>
         <item name="android:paddingBottom">@dimen/listview_empty_bottom_padding</item>
     </style>
 

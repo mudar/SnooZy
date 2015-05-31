@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewCompat;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 
 import ca.mudar.snoozy.Const;
@@ -42,7 +43,8 @@ import ca.mudar.snoozy.util.LegacyPrefsHelper;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
 public class MainActivity extends BaseActivity implements
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        HistoryFragment.HistorySizeCallback {
     private static final String TAG = makeLogTag(MainActivity.class);
     private boolean mHasDeviceAdminIntent = false;
     private SharedPreferences mSharedPrefs;
@@ -64,9 +66,6 @@ public class MainActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
-        ViewCompat.setElevation(findViewById(R.id.header_wrapper),
-                getResources().getDimensionPixelSize(R.dimen.elevation_high));
 
         mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -224,5 +223,19 @@ public class MainActivity extends BaseActivity implements
                 prefsEditor.apply();
             }
         }
+    }
+
+    @Override
+    public void toggleVisibility(boolean isEmpty) {
+        if (isEmpty) {
+            setTitle(null);
+            findViewById(R.id.header_legend).setVisibility(View.GONE);
+        } else {
+            setTitle(R.string.activity_main);
+            findViewById(R.id.header_legend).setVisibility(View.VISIBLE);
+        }
+
+        ViewCompat.setElevation(findViewById(R.id.header_wrapper),
+                isEmpty ? 0 : getResources().getDimensionPixelSize(R.dimen.elevation_high));
     }
 }

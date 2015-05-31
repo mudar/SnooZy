@@ -39,6 +39,7 @@
         <include layout="@layout/toolbar_actionbar" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/header_legend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

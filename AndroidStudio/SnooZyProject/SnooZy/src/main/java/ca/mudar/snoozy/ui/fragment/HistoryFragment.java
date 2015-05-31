@@ -24,6 +24,7 @@
 package ca.mudar.snoozy.ui.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -59,18 +60,27 @@ public class HistoryFragment extends Fragment implements
     //    private Cursor mCursor = null;
     private HistoryAdapter mAdapter;
     private View mRootView;
-//    private View mHeaderView;
-//    private View mFooterView;
-//    private RecyclerView mRecyclerView;
+    private HistorySizeCallback mListener;
+
+    /**
+     * Attach a listener.
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (HistorySizeCallback) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement EmptyHistoryListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         mRootView = inflater.inflate(R.layout.fragment_list_history, container, false);
-
-//        mHeaderView = inflater.inflate(R.layout.fragment_list_history_header, null);
-//        mFooterView = inflater.inflate(R.layout.fragment_list_history_footer, null);
 
         return mRootView;
     }
@@ -80,30 +90,6 @@ public class HistoryFragment extends Fragment implements
         super.onActivityCreated(savedInstanceState);
 
         final RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
-
-//        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-
-//        recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.abc_list_divider_mtrl_alpha)));
-
-//        recyclerView.setHasFixedSize(false);
-
-//        if (mHeaderView != null) {
-//            try {
-//                getRecyclerView().addHeaderView(mHeaderView, null, false);
-//            } catch (IllegalStateException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        if (mFooterView != null) {
-//            try {
-//                getRecyclerView().addFooterView(mFooterView, null, false);
-//            } catch (IllegalStateException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
         LayoutManager layoutManager = new LayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
@@ -113,8 +99,6 @@ public class HistoryFragment extends Fragment implements
                 R.layout.list_item_content,
                 null);
         recyclerView.setAdapter(mAdapter);
-
-//        mRecyclerView.setAdapter(mAdapter);
 
         getLoaderManager().initLoader(Queries.HistorySummaryQuery._TOKEN, null, this);
     }
@@ -184,7 +168,7 @@ public class HistoryFragment extends Fragment implements
         final TextView vIntro = (TextView) mRootView.findViewById(R.id.history_empty_list_title);
 
         if (Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
-            vIntro.setVisibility(View.GONE);
+//            vIntro.setVisibility(View.GONE);
         } else {
             final boolean isPowerConnected = BatteryHelper.isPowerConnected(getActivity().getApplicationContext());
             final Resources res = getResources();
@@ -194,23 +178,26 @@ public class HistoryFragment extends Fragment implements
     }
 
     private void toggleVisibility(boolean isEmpty) {
+        mListener.toggleVisibility(isEmpty);
 
         if (isEmpty) {
-            getActivity().setTitle(R.string.app_name);
             setIntroTitle();
 
-            getActivity().findViewById(R.id.header_legend).setVisibility(View.GONE);
             mRootView.findViewById(R.id.recycler_view).setVisibility(View.GONE);
             mRootView.findViewById(android.R.id.empty).setVisibility(View.GONE);
             mRootView.findViewById(R.id.history_empty_list).setVisibility(View.VISIBLE);
         } else {
-            getActivity().setTitle(R.string.activity_main);
-
-            getActivity().findViewById(R.id.header_legend).setVisibility(View.VISIBLE);
             mRootView.findViewById(R.id.recycler_view).setVisibility(View.VISIBLE);
             mRootView.findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
             mRootView.findViewById(R.id.history_empty_list).setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * Container Activity must implement this interface to be notified about History size
+     */
+    public interface HistorySizeCallback {
+        public void toggleVisibility(boolean isEmpty);
     }
 
 }
