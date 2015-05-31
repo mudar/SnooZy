@@ -43,10 +43,7 @@
     <string name="share_intent_title">Discover SnooZy Charger on Google Play</string>
 
     <!--Settings/Preferences-->
-    <string name="prefs_breadcrumb">Settings</string>
     <string name="prefs_category_advanced">Turn off display</string>
-    <string name="prefs_category_device_admin">Device Administration</string>
-    <string name="prefs_category_cache">Cache</string>
     <string name="prefs_category_other">Other</string>
 
     <string name="prefs_is_enabled">Enabled</string>

@@ -31,18 +31,7 @@
 
     <dimen name="listview_empty_width">300dp</dimen>
 
-    <dimen name="card_shadow_bottom_margin">13dp</dimen>
-    <dimen name="card_horizontal_margin">16dp</dimen>
     <dimen name="card_vertical_padding">12dp</dimen>
-    <dimen name="card_horizontal_padding">24dp</dimen>
-    <dimen name="card_top_padding">16dp</dimen>
-    <dimen name="card_bottom_padding">24dp</dimen>
-    <dimen name="card_header_inner_padding">6dp</dimen>
-    <dimen name="card_title_bottom_padding">8dp</dimen>
-    <dimen name="listview_empty_bottom_padding">8dp</dimen>
-    <dimen name="root_horizontal_margin">0dp</dimen>
-    <dimen name="root_vertical_margin">16dp</dimen>
-    <dimen name="card_text_bottom_padding">16dp</dimen>
 
 
     <dimen name="elevation_high">4dp</dimen>

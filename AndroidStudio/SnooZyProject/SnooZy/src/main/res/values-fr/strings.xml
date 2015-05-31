@@ -42,10 +42,7 @@
     <string name="share_intent_title">Découvrez SnooZy le chargeur sur Google Play</string>
 
     <!--Settings/Preferences-->
-    <string name="prefs_breadcrumb">Paramètres</string>
     <string name="prefs_category_advanced">Verrouillage de l’écran</string>
-    <string name="prefs_category_device_admin">Gestion de l’appareil</string>
-    <string name="prefs_category_cache">Cache</string>
     <string name="prefs_category_other">Autre</string>
 
     <string name="prefs_is_enabled">Activé</string>
