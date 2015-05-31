@@ -63,6 +63,6 @@ public class SectionsArray extends SparseArray<HistorySection> {
             }
         }
 
-        return -1;
+        return 0; // If not found, default to first
     }
 }
