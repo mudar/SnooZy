@@ -118,7 +118,6 @@
     <string name="history_empty_list_title">%s your power charger to&#160;see SnooZy in&#160;action!</string>
     <string name="history_empty_list_cache_none">No connection history</string>
     <string name="history_empty_list_disabled">Enable SnooZy</string>
-    <string name="history_empty_list_settings">Check Settings to make the app useful for you…</string>
     <string name="history_empty_list_title_connect">Connect</string>
     <string name="history_empty_list_title_disconnect">Disconnect</string>
 
@@ -144,7 +143,8 @@
     <string name="about_usage">SnooZy can be very useful with wireless, solar or dynamo chargers, where power connection is hectic! It can also be used for auto-lock or for connection history. Check Settings to make the app fit your needs…</string>
 
     <!-- Accessibility -->
-    <string name="desc_github">GitHub repository</string>
+    <string name="desc_wireless_charger">Wireless charging</string>
     <string name="desc_credits">Credits</string>
+    <string name="desc_github">GitHub repository</string>
 
 </resources>
