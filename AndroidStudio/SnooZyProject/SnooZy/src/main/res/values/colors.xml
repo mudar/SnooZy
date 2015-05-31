@@ -32,7 +32,7 @@
 
     <!--Toolbar-->
     <color name="text_toolbar_primary">#ffffff</color>
-    <color name="text_toolbar_secondary">#a0ffffff</color>
+    <color name="text_toolbar_secondary">#c0ffffff</color>
 
     <!--Backgrounds-->
     <color name="bg_app">@color/theme_primary</color>
