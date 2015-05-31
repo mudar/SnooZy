@@ -37,6 +37,8 @@
     <color name="bg_secondary">#cfd8dc</color>
 
     <!--History list rows-->
+    <color name="text_list_header">@color/text_primary_dark</color>
+    <color name="text_list_header_highlight">@color/theme_accent</color>
     <color name="text_list_item">#212121</color>
     <color name="text_list_item_highlight">@color/theme_accent</color>
 
