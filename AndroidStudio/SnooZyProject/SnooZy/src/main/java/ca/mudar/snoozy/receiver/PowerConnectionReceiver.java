@@ -44,6 +44,7 @@ import java.util.Date;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
+import ca.mudar.snoozy.provider.ChargerContract;
 import ca.mudar.snoozy.service.DelayedLockService;
 import ca.mudar.snoozy.ui.activity.MainActivity;
 import ca.mudar.snoozy.util.BatteryHelper;
@@ -57,7 +58,6 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         implements AudioManager.OnAudioFocusChangeListener {
     private static final String TAG = makeLogTag(PowerConnectionReceiver.class);
     private static final int AUDIO_FOCUS_DURATION = 1000;
-    private static final String FORMAT_ORDINAL_DAY = "yyyyDDDD"; // Ensure that ordinalDate is greater than previous julianDay values
     private Ringtone mRingtone;
 
     @Override
@@ -224,7 +224,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver
 
         final float batteryLevel = BatteryHelper.getBatteryLevel(context);
         final long millis = System.currentTimeMillis();
-        final int ordinalDay = Integer.valueOf(new SimpleDateFormat(FORMAT_ORDINAL_DAY).format(new Date(millis)));
+        final int ordinalDay = Integer.valueOf(new SimpleDateFormat(Const.FORMAT_ORDINAL_DAY).format(new Date(millis)));
 
         ContentValues newItem = new ContentValues();
         newItem.put(History.IS_POWER_ON, (isPowerConnected ? 1 : 0));
@@ -236,6 +236,9 @@ public class PowerConnectionReceiver extends BroadcastReceiver
                 History.CONTENT_URI,
                 newItem
         );
+
+        context.getContentResolver().notifyChange(ChargerContract.DailyHistory.CONTENT_URI, null);
+        context.getContentResolver().notifyChange(ChargerContract.History.CONTENT_URI_PER_DAY, null);
     }
 
     @Override
