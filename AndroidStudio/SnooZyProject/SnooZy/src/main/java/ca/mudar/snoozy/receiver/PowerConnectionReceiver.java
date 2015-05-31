@@ -252,35 +252,4 @@ public class PowerConnectionReceiver extends BroadcastReceiver
                 break;
         }
     }
-
-//    @Deprecated
-//    private void saveRandomHistoryItems(Context context, boolean isPowerConnected, int notifyGroup) {
-//        final float batteryLevel = BatteryHelper.getBatteryLevel(context);
-//        long millis = System.currentTimeMillis();
-//        final int ordinalDay = Integer.valueOf(new SimpleDateFormat(Const.FORMAT_ORDINAL_DAY).format(new Date(millis)));
-//
-//        final int nbLines = new Random().nextInt(5) + 1;
-//        final ArrayList<ContentProviderOperation> batch = Lists.newArrayList();
-//        for (int i = 0; i < nbLines; i++) {
-//            millis = millis - DateUtils.SECOND_IN_MILLIS * 2;
-//
-//            final ContentProviderOperation.Builder builder =
-//                    ContentProviderOperation.newInsert(History.CONTENT_URI);
-//            builder.withValue(History.IS_POWER_ON, (isPowerConnected ? 1 : 0));
-//            builder.withValue(History.BATTERY_LEVEL, Math.round(batteryLevel * 100));
-//            builder.withValue(History.NOTIFY_GROUP, notifyGroup);
-//            builder.withValue(History.TIME_STAMP, millis);
-//            builder.withValue(History.ORDINAL_DAY, ordinalDay);
-//
-//            batch.add(builder.build());
-//        }
-//
-//        try {
-//            context.getContentResolver().applyBatch(ChargerContract.CONTENT_AUTHORITY, batch);
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        } catch (OperationApplicationException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
