@@ -100,20 +100,17 @@ public class ComponentHelper {
         return intent;
     }
 
-    @Deprecated
-    private static synchronized void launchDeviceAdminSettings(Context context) {
-        if (ComponentHelper.isDeviceAdmin(context.getApplicationContext())) {
-            try {
-                Intent intentDeviceAdmin = new Intent(Settings.ACTION_SETTINGS);
-                intentDeviceAdmin.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intentDeviceAdmin.setClassName(Const.IntentActions.ANDROID_SETTINGS, Const.IntentActions.ANDROID_DEVICE_ADMIN);
-                context.startActivity(intentDeviceAdmin);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Intent intentSecuritySettings = new Intent(Settings.ACTION_SECURITY_SETTINGS);
-                intentSecuritySettings.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                context.startActivity(intentSecuritySettings);
-            }
+    public static void launchDeviceAdminSettings(Context context) {
+        try {
+            Intent intentDeviceAdmin = new Intent(Settings.ACTION_SETTINGS);
+            intentDeviceAdmin.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intentDeviceAdmin.setClassName(Const.IntentActions.ANDROID_SETTINGS, Const.IntentActions.ANDROID_DEVICE_ADMIN);
+            context.startActivity(intentDeviceAdmin);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Intent intentSecuritySettings = new Intent(Settings.ACTION_SECURITY_SETTINGS);
+            intentSecuritySettings.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            context.startActivity(intentSecuritySettings);
         }
     }
 
