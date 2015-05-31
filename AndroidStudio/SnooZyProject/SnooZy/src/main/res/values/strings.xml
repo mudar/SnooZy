@@ -64,7 +64,7 @@
     <string name="prefs_screen_both">Both</string>
     <string name="prefs_screen_lock_unlocked">Unlocked screen only</string>
     <string name="prefs_screen_lock_locked">Locked screen only</string>
-    <string name="prefs_screen_lock_both">Locked and unlocked screen</string>
+    <string name="prefs_screen_lock_both">Locked &amp; unlocked screen</string>
 
     <string name="prefs_connection_status_title">Connection status</string>
     <string name="prefs_connection_status_dialog_title">Select connection status</string>
@@ -73,7 +73,7 @@
     <string name="prefs_connection_both">Both</string>
     <string name="prefs_power_connection_on">Power connection only</string>
     <string name="prefs_power_connection_off">Power loss only</string>
-    <string name="prefs_power_connection_both">Power connection and disconnection</string>
+    <string name="prefs_power_connection_both">Power connection &amp; disconnection</string>
 
     <string name="prefs_connection_type_title">Charger type</string>
     <string name="prefs_connection_type_dialog_title">Select charger type</string>
@@ -115,7 +115,9 @@
     <string name="toast_running_no_admin">To allow screen lock, activate as a device administrator</string>
 
     <!--History ListFragment-->
-    <string name="history_empty_list_title">%s your power charger to see the app in action!</string>
+    <string name="history_empty_list_title">%s your power charger to&#160;see SnooZy in&#160;action!</string>
+    <string name="history_empty_list_cache_none">No connection history</string>
+    <string name="history_empty_list_disabled">Enable SnooZy</string>
     <string name="history_empty_list_settings">Check Settings to make the app useful for you…</string>
     <string name="history_empty_list_title_connect">Connect</string>
     <string name="history_empty_list_title_disconnect">Disconnect</string>
@@ -124,9 +126,6 @@
     <string name="history_header_timestamp">Time</string>
     <string name="history_header_power_connection">Charging</string>
     <string name="history_header_battery_level">Battery</string>
-
-    <!--History Footer -->
-    <string name="history_footer_about">SnooZy runs in the background. On power connection and disconnection, the app turns off the screen to save power.</string>
 
     <!--History ListFragmentItem -->
     <string name="history_item_power_connected">Yes</string>
