@@ -145,7 +145,6 @@ public class HistoryFragment extends Fragment implements
         final int id = loader.getId();
 
         if (id == Queries.HistorySummaryQuery._TOKEN) {
-//            SparseArray<HistorySection> headers = new SparseArray<>();
             SectionsArray headers = new SectionsArray();
             int section = 0;
             int offset = 0;
@@ -197,14 +196,17 @@ public class HistoryFragment extends Fragment implements
     private void toggleVisibility(boolean isEmpty) {
 
         if (isEmpty) {
+            getActivity().setTitle(R.string.app_name);
             setIntroTitle();
 
+            getActivity().findViewById(R.id.header_legend).setVisibility(View.GONE);
             mRootView.findViewById(R.id.recycler_view).setVisibility(View.GONE);
             mRootView.findViewById(android.R.id.empty).setVisibility(View.GONE);
             mRootView.findViewById(R.id.history_empty_list).setVisibility(View.VISIBLE);
         } else {
             getActivity().setTitle(R.string.activity_main);
 
+            getActivity().findViewById(R.id.header_legend).setVisibility(View.VISIBLE);
             mRootView.findViewById(R.id.recycler_view).setVisibility(View.VISIBLE);
             mRootView.findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
             mRootView.findViewById(R.id.history_empty_list).setVisibility(View.GONE);
