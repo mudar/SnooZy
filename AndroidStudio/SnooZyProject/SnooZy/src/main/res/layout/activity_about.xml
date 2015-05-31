@@ -96,7 +96,8 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="@string/desc_credits"
+                    android:importantForAccessibility="no"
+                    android:contentDescription="@string/desc_snoozy"
                     android:src="@drawable/ic_about_snoozy"
                     android:tint="@color/text_about" />
 
@@ -117,7 +118,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/desc_credits"
+                    android:contentDescription="@string/desc_wireless_charger"
                     android:src="@drawable/ic_wireless_charger" />
 
                 <TextView

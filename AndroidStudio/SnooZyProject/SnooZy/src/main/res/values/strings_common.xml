@@ -47,6 +47,6 @@
     <string name="prefs_key_last_cache_clear" translatable="false">prefs_last_cache_clear</string>
 
     <!-- Accessibility -->
-    <string name="desc_snoozy">@string/app_name</string>
+    <string name="desc_snoozy" translatable="false">@string/snoozy_app</string>
 
 </resources>

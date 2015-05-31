@@ -24,7 +24,7 @@
 -->
 <resources>
 
-    <string name="app_name">SnooZy Charger</string>
+    <string name="snoozy_app">SnooZy Charger</string>
     <string name="activity_main">Power connection history</string>
     <string name="activity_settings">Settings</string>
     <string name="activity_about">About</string>
