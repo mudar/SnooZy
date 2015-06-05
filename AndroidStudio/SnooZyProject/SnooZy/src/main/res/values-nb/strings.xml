@@ -51,7 +51,7 @@
     <string name="prefs_has_notifications_title">Varsler</string>
     <string name="prefs_has_vibration_title">Vibrer</string>
 
-    <!--<string name="prefs_ringtone_title">Spill av lyd</string>-->
+    <!--<string name="prefs_ringtone_title">Sound</string>-->
     <!--<string name="prefs_screen_silent">Silent</string>-->
 
     <!--<string name="prefs_screen_lock_status_title">Screen lock status</string>-->
