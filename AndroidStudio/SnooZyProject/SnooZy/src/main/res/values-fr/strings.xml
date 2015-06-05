@@ -131,7 +131,7 @@
 
     <!--About -->
     <string name="about_title">SnooZy le chargeur Zzz…</string>
-    <string name="about_subtitle">Eteindre l’écran au moment du chargement</string>
+    <string name="about_subtitle">Éteindre l’écran au moment du chargement</string>
     <string name="about_project_version">Version %s</string>
     <string name="about_credits">Application Android réalisée par Mudar&#160;Noufal. Un grand merci à G&amp;A.</string>
     <string name="about_source_code">Projet de logiciel libre, disponible sur GitHub. Le code source est publié sous la licence GPLv3 de la Free Software Foundation.</string>
