@@ -24,7 +24,7 @@
 -->
 <resources>
 
-    <string name="app_name">SnooZy Charger</string>
+    <string name="snoozy_app">SnooZy Charger</string>
     <string name="activity_main">Historikk over laderstatus</string>
     <string name="activity_settings">Innstillinger</string>
     <string name="activity_about">Om</string>
@@ -43,50 +43,45 @@
     <string name="share_intent_title">Oppdag SnooZy Charger på Google Play</string>
 
     <!--Settings/Preferences-->
-    <string name="prefs_breadcrumb">Innstillinger</string>
     <string name="prefs_category_advanced">Skru av skjermen</string>
-    <string name="prefs_category_device_admin">Enhetsadministrasjon</string>
-    <string name="prefs_category_cache">Mellomlager</string>
+    <string name="prefs_category_other">Mellomlager</string>
 
-    <string name="prefs_is_enabled">Bruk app</string>
+    <string name="prefs_is_enabled">På</string>
+    <string name="prefs_is_disabled">Av</string>
     <string name="prefs_has_notifications_title">Varsler</string>
-    <string name="prefs_has_sound_title">Spill av lyd</string>
     <string name="prefs_has_vibration_title">Vibrer</string>
 
-    <!--<string name="prefs_on_screen_lock_title">Kun når den allerede er låst</string>-->
-    <!--<string name="prefs_on_screen_lock_summary_on">Skjermen blir ikke avslått om skjermen ikke er låst.</string>-->
-    <!--<string name="prefs_on_screen_lock_summary_off">Ignorerer skjermens låsetilstand.</string>-->
-    <string name="prefs_screen_lock_status_title">Screen lock status</string>
-    <string name="prefs_screen_lock_status_dialog_title">Select screen status</string>
-    <string name="prefs_screen_locked">Locked screen</string>
-    <string name="prefs_screen_unlocked">Unlocked screen</string>
-    <string name="prefs_screen_both">Both</string>
-    <string name="prefs_screen_lock_unlocked">Unlocked screen only</string>
-    <string name="prefs_screen_lock_locked">Locked screen only, doesn’t turn display off when you’re using the device</string>
-    <string name="prefs_screen_lock_both">Ignores screen lock status</string>
+    <!--<string name="prefs_ringtone_title">Spill av lyd</string>-->
+    <!--<string name="prefs_screen_silent">Silent</string>-->
 
-    <!--<string name="prefs_on_power_loss_title">Kun når lader kobles fra</string>-->
-    <!--<string name="prefs_on_power_loss_summary_on">Skjermen blir ikke avslått når lader kobles til.</string>-->
-    <!--<string name="prefs_on_power_loss_summary_off">Ignorer om lader er koblet til eller ikke.</string>-->
-    <string name="prefs_connection_status_title">Connection status</string>
-    <string name="prefs_connection_status_dialog_title">Select connection status</string>
-    <string name="prefs_connection_on">Power connection</string>
-    <string name="prefs_connection_off">Power disconnection</string>
-    <string name="prefs_connection_both">Both</string>
-    <string name="prefs_power_connection_on">Power connection only</string>
-    <string name="prefs_power_connection_off">Power loss only</string>
-    <string name="prefs_power_connection_both">Turns display off on both power connection and disconnection</string>
+    <!--<string name="prefs_screen_lock_status_title">Screen lock status</string>-->
+    <!--<string name="prefs_screen_lock_status_dialog_title">Select screen status</string>-->
+    <!--<string name="prefs_screen_locked">Locked screen</string>-->
+    <!--<string name="prefs_screen_unlocked">Unlocked screen</string>-->
+    <!--<string name="prefs_screen_both">Both</string>-->
+    <!--<string name="prefs_screen_lock_unlocked">Unlocked screen only</string>-->
+    <!--<string name="prefs_screen_lock_locked">Locked screen only</string>-->
+    <!--<string name="prefs_screen_lock_both">Locked &amp; unlocked screen</string>-->
 
-    <string name="prefs_connection_type_title">Charger type</string>
-    <string name="prefs_connection_type_dialog_title">Select charger type</string>
-    <string name="prefs_connection_ac">AC adapter</string>
-    <string name="prefs_connection_usb">USB port</string>
-    <string name="prefs_connection_wireless">Wireless</string>
-    <string name="prefs_connection_all">All</string>
-    <string name="prefs_power_connection_ac">AC adapter only</string>
-    <string name="prefs_power_connection_usb">USB port connection only</string>
-    <string name="prefs_power_connection_wireless">Wireless charger only</string>
-    <string name="prefs_power_connection_all">Turns display off with any kind of charger</string>
+    <!--<string name="prefs_connection_status_title">Connection status</string>-->
+    <!--<string name="prefs_connection_status_dialog_title">Select connection status</string>-->
+    <!--<string name="prefs_connection_on">Power connection</string>-->
+    <!--<string name="prefs_connection_off">Power disconnection</string>-->
+    <!--<string name="prefs_connection_both">Both</string>-->
+    <!--<string name="prefs_power_connection_on">Power connection only</string>-->
+    <!--<string name="prefs_power_connection_off">Power loss only</string>-->
+    <!--<string name="prefs_power_connection_both">Power connection &amp; disconnection</string>-->
+
+    <!--<string name="prefs_connection_type_title">Charger type</string>-->
+    <!--<string name="prefs_connection_type_dialog_title">Select charger type</string>-->
+    <!--<string name="prefs_connection_ac">AC adapter</string>-->
+    <!--<string name="prefs_connection_usb">USB port</string>-->
+    <!--<string name="prefs_connection_wireless">Wireless</string>-->
+    <!--<string name="prefs_connection_all">All</string>-->
+    <!--<string name="prefs_power_connection_ac">AC adapter only</string>-->
+    <!--<string name="prefs_power_connection_usb">USB connection only</string>-->
+    <!--<string name="prefs_power_connection_wireless">Wireless charger only</string>-->
+    <!--<string name="prefs_power_connection_all">Any power source</string>-->
 
     <string name="prefs_delay_to_lock_title">Forsinket skjermlås</string>
     <string name="prefs_delay_dialog_title">Velg låseforsinkelse</string>
@@ -103,15 +98,14 @@
     <string name="prefs_cache_age_all">Behold alt</string>
 
     <string name="prefs_device_admin_title">Enhetsadministratorer</string>
-    <string name="prefs_device_admin_summary_enabled">Se eller deaktiver enhetsadministratorer. Nyttig om du vil avinstallere SnooZy.</string>
-    <string name="prefs_device_admin_summary_disabled">SnooZy er for øyeblikket ikke en enhetsadministrator: Skjermen kan ikke låses.</string>
+    <!--<string name="prefs_device_admin_summary_enabled">NOTE: uncheck this to allow app uninstall</string>-->
+    <!--<string name="prefs_device_admin_summary_disabled">Needed to authorize screen lock by SnooZy</string>-->
 
     <!--Notifications-->
     <string name="notify_content_title">Ladertilkobling</string>
     <string name="notify_content_text_single_on">Ekstern lader tilkoblet.</string>
     <string name="notify_content_text_single_off">Ekstern lader fjernet.</string>
     <string name="notify_content_text_multi">Lader ble tilkoblet/fjernet.</string>
-    <!--<string name="notify_big_content_title">Ladertilkoblingsdetaljer:</string>-->
 
     <!-- Toast Notifications -->
     <string name="toast_service_disabled">SnooZy er for øyeblikket ikke aktiv.</string>
@@ -119,7 +113,8 @@
 
     <!--History ListFragment-->
     <string name="history_empty_list_title">%s laderen din for å se appen i aksjon!</string>
-    <string name="history_empty_list_settings">Gå igjennom innstillingene for å gjøre appen nyttig for deg…</string>
+    <!--<string name="history_empty_list_cache_none">No connection history</string>-->
+    <!--<string name="history_empty_list_disabled">Enable SnooZy</string>-->
     <string name="history_empty_list_title_connect">Koble til</string>
     <string name="history_empty_list_title_disconnect">Koble fra</string>
 
@@ -128,21 +123,25 @@
     <string name="history_header_power_connection">Lader</string>
     <string name="history_header_battery_level">Batteri</string>
 
-    <!--History Footer -->
-    <string name="history_footer_about">SnooZy kjører som en bakgrunnsprosess. Når en lader kobles til eller fra vil appen slå av skjermen for å spare strøm.</string>
-
     <!--History ListFragmentItem -->
     <string name="history_item_power_connected">Ja</string>
     <string name="history_item_power_disconnected">Nei</string>
     <string name="history_item_day_today">Idag</string>
+    <!--<string name="history_item_day_yesterday">Yesterday</string>-->
     <string name="history_item_battery_level">%s%%</string>
 
     <!--About -->
     <string name="about_title">SnooZy Charger Zzz…</string>
+    <!--<string name="about_subtitle">Turn off screen display on power connection</string>-->
     <string name="about_project_version">Versjon %s</string>
-    <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
-    <string name="about_text_credits">Android app utviklet av <a href="http://www.mudar.ca/">Mudar Noufal</a>. Kildekoden er utgitt under GPLv3-lisensen fra Free Software Foundation. Takk til <a href="http://www.aeyoun.priv.no/">Daniel Aleksandersen</a> for den norske oversettelsen.</string>
-    <string name="about_text_usage">Denne appen prøver å redusere skjermens batteribruk. Den kan også brukes til å automatisk låse skjermen når en lader kobles til eller fra, eller som en historikk over ladesykluser.</string>
-    <string name="about_text_usage_extra"><![CDATA[SnooZy kan være veldig nyttig sammen med <b>sol- og trådløseladere</b> eller for <b>Galaxy Nexus</b>-telefoner med batteriproblemer relatert til fantomlading.]]></string>
+    <!--<string name="about_credits">Android app developed by Mudar&#160;Noufal. Many thanks to Daniel Aleksandersen for the translation.</string>-->
+    <!--<string name="about_source_code">Open source project, available on GitHub. Source code is released under the GPLv3 license from the Free Software Foundation.</string>-->
+    <!--<string name="about_intro">Power connection can turn on display when unwanted. SnooZy avoids intrusive screenlight during nighttime-charging and saves power consumption.</string>-->
+    <!--<string name="about_usage">SnooZy can be very useful with wireless, solar or dynamo chargers, where power connection is hectic! It can also be used for auto-lock or for connection history. Check Settings to make the app fit your needs…</string>-->
+
+    <!-- Accessibility -->
+    <!--<string name="desc_wireless_charger">Wireless charging</string>-->
+    <!--<string name="desc_credits">Credits</string>-->
+    <!--<string name="desc_github">GitHub repository</string>-->
 
 </resources>
