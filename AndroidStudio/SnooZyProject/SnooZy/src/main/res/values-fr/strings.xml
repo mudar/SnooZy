@@ -23,7 +23,8 @@
 -->
 <resources>
 
-    <string name="app_name">SnooZy le chargeur</string>
+    <string name="snoozy_app">SnooZy le chargeur</string>
+    <string name="activity_main">Historique des recharges</string>
     <string name="activity_settings">Paramètres</string>
     <string name="activity_about">À propos</string>
     <string name="activity_eula">Licence</string>
@@ -38,24 +39,48 @@
     <!--System-->
     <string name="admin_device_extra_desc_text">Cette application a besoin d’être activée comme administrateur afin de pouvoir verrouiller l’écran…</string>
     <string name="admin_device_app_desc">Autoriser SnooZy le chargeur à verrouiller l’écran. Zzz…</string>
-    <string name="share_intent_title">Découvrez SnooZy Charger sur Google Play</string>
+    <string name="share_intent_title">Découvrez SnooZy le chargeur sur Google Play</string>
 
     <!--Settings/Preferences-->
-    <string name="prefs_breadcrumb">Paramètres</string>
     <string name="prefs_category_advanced">Verrouillage de l’écran</string>
-    <string name="prefs_category_device_admin">Gestion de l’appareil</string>
-    <string name="prefs_category_cache">Cache</string>
+    <string name="prefs_category_other">Autre</string>
 
-    <string name="prefs_is_enabled">Activer l’application</string>
+    <string name="prefs_is_enabled">Activé</string>
+    <string name="prefs_is_disabled">Désactivé</string>
     <string name="prefs_has_notifications_title">Notifications</string>
-    <string name="prefs_has_sound_title">Sonnerie</string>
-    <string name="prefs_has_vibration_title">Vibreur</string>
-    <string name="prefs_on_screen_lock_title">Écran de veille uniquement</string>
-    <string name="prefs_on_screen_lock_summary_on">Éteindre l’écran uniquement si l’appareil est verrouillé</string>
-    <string name="prefs_on_screen_lock_summary_off">Ignorer l’état du verrouillage</string>
-    <string name="prefs_on_power_loss_title">Déconnexion uniquement</string>
-    <string name="prefs_on_power_loss_summary_on">Éteindre l’écran uniquement si le chargeur est déconnecté</string>
-    <string name="prefs_on_power_loss_summary_off">Ignorer l’état de la connexion</string>
+    <string name="prefs_has_vibration_title">Vibration</string>
+
+    <string name="prefs_ringtone_title">Sonnerie</string>
+    <string name="prefs_screen_silent">Mode silencieux</string>
+
+    <string name="prefs_screen_lock_status_title">État du verrouillage de l’écran</string>
+    <string name="prefs_screen_lock_status_dialog_title">Choix de l’état du verrouillage</string>
+    <string name="prefs_screen_locked">Écran verrouillé</string>
+    <string name="prefs_screen_unlocked">Écran déverrouillé</string>
+    <string name="prefs_screen_both">Les deux</string>
+    <string name="prefs_screen_lock_unlocked">Écran déverrouillé uniquement</string>
+    <string name="prefs_screen_lock_locked">Écran de veille uniquement</string>
+    <string name="prefs_screen_lock_both">Écran verrouillé et déverrouillé</string>
+
+    <string name="prefs_connection_status_title">État de la connexion</string>
+    <string name="prefs_connection_status_dialog_title">Choix de l’état de la connexion</string>
+    <string name="prefs_connection_on">Connexion</string>
+    <string name="prefs_connection_off">Déconnexion</string>
+    <string name="prefs_connection_both">Les deux</string>
+    <string name="prefs_power_connection_on">Connexion uniquement</string>
+    <string name="prefs_power_connection_off">Déconnexion uniquement</string>
+    <string name="prefs_power_connection_both">Connexion et déconnexion du chargeur</string>
+
+    <string name="prefs_connection_type_title">Type de chargeur</string>
+    <string name="prefs_connection_type_dialog_title">Choix du type de chargeur</string>
+    <string name="prefs_connection_ac">Adaptateur secteur</string>
+    <string name="prefs_connection_usb">Port USB</string>
+    <string name="prefs_connection_wireless">Chargeur sans fil</string>
+    <string name="prefs_connection_all">Tous</string>
+    <string name="prefs_power_connection_ac">Adaptateur secteur uniquement</string>
+    <string name="prefs_power_connection_usb">Connexion à un port USB uniquement</string>
+    <string name="prefs_power_connection_wireless">Chargeur sans fil uniquement</string>
+    <string name="prefs_power_connection_all">Tout type de chargeur</string>
 
     <string name="prefs_delay_to_lock_title">Délai avant le verrouillage</string>
     <string name="prefs_delay_dialog_title">Choix du délai avant le verrouillage</string>
@@ -63,8 +88,9 @@
     <string name="prefs_delay_moderate">3 secondes</string>
     <string name="prefs_delay_slow">5 secondes</string>
 
-    <string name="prefs_cache_age_title">Jours d’historique à sauvegarder</string>
+    <string name="prefs_cache_age_title">Taille de l’historique</string>
     <string name="prefs_cache_age_dialog_title">Choix de l’âge de l’historique</string>
+    <string name="prefs_cache_age_none">Aucun historique</string>
     <string name="prefs_cache_age_small">1 semaine</string>
     <string name="prefs_cache_age_medium">2 semaines</string>
     <string name="prefs_cache_age_large">1 mois</string>
@@ -72,7 +98,7 @@
 
     <string name="prefs_device_admin_title">Administrateurs de l’appareil</string>
     <string name="prefs_device_admin_summary_enabled">Afficher ou désactiver les administrateurs de l’appareil. Utile si vous souhaitez désinstaller SnooZy</string>
-    <string name="prefs_device_admin_summary_disabled">SnooZy n’est pas un administrateur de l’appareil actuellement : impossible de verrouiller l’écran</string>
+    <string name="prefs_device_admin_summary_disabled">SnooZy n’est pas un administrateur de l’appareil: impossible de verrouiller l’écran</string>
 
     <!--Notifications-->
     <string name="notify_content_title">Connexion chargeur</string>
@@ -85,32 +111,38 @@
     <string name="toast_running_no_admin">Afin de verrouiller l’écran, activer en tant que administrateur de l’appareil</string>
 
     <!--History ListFragment-->
-    <string name="history_empty_list_title">Veuillez %s votre source d’alimentation pour commencer à utiliser l’application !</string>
-    <string name="history_empty_list_settings">Vérifier les paramètres pour adapter l’application à vos besoins…</string>
+    <string name="history_empty_list_title">Veuillez %s votre source d’alimentation pour commencer à utiliser SnooZy&#160;!</string>
+    <string name="history_empty_list_cache_none">Aucun historique</string>
+    <string name="history_empty_list_disabled">Activer SnooZy</string>
     <string name="history_empty_list_title_connect">connecter</string>
     <string name="history_empty_list_title_disconnect">déconnecter</string>
 
     <!--History Header -->
-    <string name="history_header">Historique des charges</string>
     <string name="history_header_timestamp">Heure</string>
     <string name="history_header_power_connection">Connecté</string>
     <string name="history_header_battery_level">Batterie</string>
-
-    <!--History Footer -->
-    <string name="history_footer_about">SnooZy s’exécute en arrière-plan. Au moment de la connexion ou de la déconnexion du chargeur, l’application verrouille l’appareil afin de réduire la consommation d’énergie de l’écran.</string>
 
     <!--History ListFragmentItem -->
     <string name="history_item_power_connected">Oui</string>
     <string name="history_item_power_disconnected">Non</string>
     <string name="history_item_day_today">Aujourd’hui</string>
+    <string name="history_item_day_yesterday">Hier</string>
     <string name="history_item_battery_level">%s %%</string>
 
     <!--About -->
     <string name="about_title">SnooZy le chargeur Zzz…</string>
+    <string name="about_subtitle">Eteinte automatique de l’écran au moment du chargement</string>
     <string name="about_project_version">Version %s</string>
-    <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
-    <string name="about_text_credits">Application Android réalisée par <a href="http://www.mudar.ca/">Mudar Noufal</a>. Le code source est publié sous la licence GPLv3 de la Free Software Foundation. Un grand merci à G&amp;A.</string>
-    <string name="about_text_usage">Cette application réduit la consommation d’énergie de l’écran de l’appareil. Elle peut également être utilisée pour l’auto-verrouillage au moment de la déconnexion, ou simplement pour obtenir l’historique des charges.</string>
-    <string name="about_text_usage_extra"><![CDATA[SnooZy est très utile avec les <b>chargeurs solaires ou sans-fil</b> et d’une façon plus spécifique avec les téléphones <b>Galaxy Nexus</b> qui rencontrent des problèmes de batterie liés aux connexions fantômes du chargeur.]]></string>
+    <string name="about_credits">Application Android réalisée par Mudar&#160;Noufal. Un grand merci à G&amp;A.</string>
+    <string name="about_source_code">Projet de logiciel libre, disponible sur GitHub. Le code source est publié sous la licence GPLv3 de la Free Software Foundation.</string>
+    <string name="about_intro">Power connection can turn on display when unwanted. SnooZy avoids intrusive screenlight during nighttime-charging and saves power consumption.</string>
+    <string name="about_usage">SnooZy can be very useful with wireless, solar or dynamo chargers, where power connection is hectic! It can also be used for auto-lock or for connection history. Check Settings to make the app fit your needs…</string>
+    <!--<string name="about_intro">Cette application réduit la consommation d’énergie de l’écran de l’appareil. Elle peut également être utilisée pour l’auto-verrouillage au moment de la déconnexion, ou simplement pour obtenir l’historique des recharges.</string>-->
+    <!--<string name="about_usage">SnooZy est très utile avec les chargeurs solaires ou sans-fil et d’une façon plus spécifique avec les téléphones Galaxy Nexus qui rencontrent des problèmes de batterie liés aux connexions fantômes du chargeur.</string>-->
+
+    <!-- Accessibility -->
+    <string name="desc_wireless_charger">Recharge sans-fil</string>
+    <string name="desc_github">Dépôt GitHub</string>
+    <string name="desc_credits">Crédits</string>
 
 </resources>

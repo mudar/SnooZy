@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -34,24 +35,19 @@ import android.webkit.WebViewClient;
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 
-import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
-
 public class EulaActivity extends BaseActivity {
-    private static final String TAG = makeLogTag(EulaActivity.class);
+    private static final String ASSETS_URI = "file:///android_asset/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         setContentView(R.layout.activity_eula);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ViewCompat.setElevation(getActionBarToolbar(),
+                getResources().getDimensionPixelSize(R.dimen.headerbar_elevation));
 
-        WebView v = (WebView) findViewById(R.id.webview);
-        v.setBackgroundColor(getResources().getColor(R.color.bg_webview));
-        v.setWebViewClient(new MyWebViewClient());
-        v.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        v.loadUrl("file:///android_asset/" + Const.LocalAssets.LICENSE);
+        loadWebView((WebView) findViewById(R.id.webview));
     }
 
     @Override
@@ -59,13 +55,22 @@ public class EulaActivity extends BaseActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    class MyWebViewClient extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
-            return true;
-        }
-    }
+    private void loadWebView(WebView v) {
+        // Set basic style
+        v.setBackgroundColor(getResources().getColor(R.color.bg_primary));
+        v.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
+        // Open links in external browser
+        v.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        // Load HTML content from assets
+        v.loadUrl(ASSETS_URI + Const.LocalAssets.LICENSE);
+    }
 }

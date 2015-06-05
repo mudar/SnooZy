@@ -23,18 +23,27 @@
 
 package ca.mudar.snoozy.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
 
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
     private static final String SEND_INTENT_TYPE = "text/plain";
+
+    private Toolbar mActionBarToolbar = null;
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        getActionBarToolbar();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,22 +70,32 @@ public class BaseActivity extends Activity {
               */
             final Bundle extras = new Bundle();
             extras.putString(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_intent_title));
-            extras.putString(Intent.EXTRA_TEXT, Const.URL_PLAYSTORE);
+            extras.putString(Intent.EXTRA_TEXT, getResources().getString(R.string.url_playstore));
 
             final Intent sendIntent = new Intent();
             sendIntent.putExtras(extras);
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.setType(this.SEND_INTENT_TYPE);
+            sendIntent.setType(SEND_INTENT_TYPE);
             startActivity(sendIntent);
         } else if (item.getItemId() == R.id.action_rate) {
             /*
              Launch Playstore to rate app
               */
             final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
-            viewIntent.setData(Uri.parse(Const.URL_PLAYSTORE));
+            viewIntent.setData(Uri.parse(getResources().getString(R.string.url_playstore)));
             startActivity(viewIntent);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected Toolbar getActionBarToolbar() {
+        if (mActionBarToolbar == null) {
+            mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+            if (mActionBarToolbar != null) {
+                setSupportActionBar(mActionBarToolbar);
+            }
+        }
+        return mActionBarToolbar;
     }
 }

@@ -24,8 +24,8 @@
 -->
 <resources>
 
-    <string name="app_name">SnooZy Charger</string>
-    <string name="app_version">1.2</string>
+    <string name="snoozy_app">SnooZy Charger</string>
+    <string name="activity_main">Power connection history</string>
     <string name="activity_settings">Settings</string>
     <string name="activity_about">About</string>
     <string name="activity_eula">EULA</string>
@@ -34,8 +34,8 @@
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
     <string name="action_eula">License</string>
-    <string name="action_share">Share it</string>
-    <string name="action_rate">Rate it</string>
+    <string name="action_share">Share</string>
+    <string name="action_rate">Rate app</string>
 
     <!--System-->
     <string name="admin_device_extra_desc_text">The app needs to be authorized as a Device administrator to control screen lock…</string>
@@ -43,21 +43,45 @@
     <string name="share_intent_title">Discover SnooZy Charger on Google Play</string>
 
     <!--Settings/Preferences-->
-    <string name="prefs_breadcrumb">Settings</string>
     <string name="prefs_category_advanced">Turn off display</string>
-    <string name="prefs_category_device_admin">Device Administration</string>
-    <string name="prefs_category_cache">Cache</string>
+    <string name="prefs_category_other">Other</string>
 
-    <string name="prefs_is_enabled">Enable app</string>
+    <string name="prefs_is_enabled">Enabled</string>
+    <string name="prefs_is_disabled">Disabled</string>
     <string name="prefs_has_notifications_title">Notifications</string>
-    <string name="prefs_has_sound_title">Play sound</string>
     <string name="prefs_has_vibration_title">Vibrate</string>
-    <string name="prefs_on_screen_lock_title">Locked screen only</string>
-    <string name="prefs_on_screen_lock_summary_on">Turns display off only if the device is locked</string>
-    <string name="prefs_on_screen_lock_summary_off">Ignores screen lock status.</string>
-    <string name="prefs_on_power_loss_title">Power loss only</string>
-    <string name="prefs_on_power_loss_summary_on">Turns display off only when disconnecting the charger</string>
-    <string name="prefs_on_power_loss_summary_off">Ignores power connection status.</string>
+
+    <string name="prefs_ringtone_title">Sound</string>
+    <string name="prefs_screen_silent">Silent</string>
+
+    <string name="prefs_screen_lock_status_title">Screen lock status</string>
+    <string name="prefs_screen_lock_status_dialog_title">Select screen status</string>
+    <string name="prefs_screen_locked">Locked screen</string>
+    <string name="prefs_screen_unlocked">Unlocked screen</string>
+    <string name="prefs_screen_both">Both</string>
+    <string name="prefs_screen_lock_unlocked">Unlocked screen only</string>
+    <string name="prefs_screen_lock_locked">Locked screen only</string>
+    <string name="prefs_screen_lock_both">Locked &amp; unlocked screen</string>
+
+    <string name="prefs_connection_status_title">Connection status</string>
+    <string name="prefs_connection_status_dialog_title">Select connection status</string>
+    <string name="prefs_connection_on">Power connection</string>
+    <string name="prefs_connection_off">Power disconnection</string>
+    <string name="prefs_connection_both">Both</string>
+    <string name="prefs_power_connection_on">Power connection only</string>
+    <string name="prefs_power_connection_off">Power loss only</string>
+    <string name="prefs_power_connection_both">Power connection &amp; disconnection</string>
+
+    <string name="prefs_connection_type_title">Charger type</string>
+    <string name="prefs_connection_type_dialog_title">Select charger type</string>
+    <string name="prefs_connection_ac">AC adapter</string>
+    <string name="prefs_connection_usb">USB port</string>
+    <string name="prefs_connection_wireless">Wireless</string>
+    <string name="prefs_connection_all">All</string>
+    <string name="prefs_power_connection_ac">AC adapter only</string>
+    <string name="prefs_power_connection_usb">USB connection only</string>
+    <string name="prefs_power_connection_wireless">Wireless charger only</string>
+    <string name="prefs_power_connection_all">Any power source</string>
 
     <string name="prefs_delay_to_lock_title">Screen lock delay</string>
     <string name="prefs_delay_dialog_title">Set lock delay</string>
@@ -67,53 +91,57 @@
 
     <string name="prefs_cache_age_title">Days of history to keep</string>
     <string name="prefs_cache_age_dialog_title">Set history age</string>
+    <string name="prefs_cache_age_none">No history</string>
     <string name="prefs_cache_age_small">1 week</string>
     <string name="prefs_cache_age_medium">2 weeks</string>
     <string name="prefs_cache_age_large">1 month</string>
     <string name="prefs_cache_age_all">Keep all</string>
 
-    <string name="prefs_device_admin_title">Device administrators</string>
-    <string name="prefs_device_admin_summary_enabled">View or deactivate device administrators. Useful if you want to uninstall SnooZy</string>
-    <string name="prefs_device_admin_summary_disabled">SnooZy is currently not a device administrator: Screen cannot be locked</string>
+    <string name="prefs_device_admin_title">Device administrator</string>
+    <string name="prefs_device_admin_summary_enabled">NOTE: uncheck this to allow app uninstall</string>
+    <string name="prefs_device_admin_summary_disabled">Needed to authorize screen lock by SnooZy</string>
 
     <!--Notifications-->
     <string name="notify_content_title">Power connection</string>
     <string name="notify_content_text_single_on">External power was connected.</string>
     <string name="notify_content_text_single_off">External power was removed.</string>
     <string name="notify_content_text_multi">Power was connected/disconnected.</string>
-    <!--<string name="notify_big_content_title">Power connection details:</string>-->
 
     <!-- Toast Notifications -->
     <string name="toast_service_disabled">SnooZy is currently disabled</string>
     <string name="toast_running_no_admin">To allow screen lock, activate as a device administrator</string>
 
     <!--History ListFragment-->
-    <string name="history_empty_list_title">%s your power charger to see the app in action!</string>
-    <string name="history_empty_list_settings">Check Settings to make the app useful for you…</string>
+    <string name="history_empty_list_title">%s your power charger to&#160;see SnooZy in&#160;action!</string>
+    <string name="history_empty_list_cache_none">No connection history</string>
+    <string name="history_empty_list_disabled">Enable SnooZy</string>
     <string name="history_empty_list_title_connect">Connect</string>
     <string name="history_empty_list_title_disconnect">Disconnect</string>
 
     <!--History Header -->
-    <string name="history_header">Power connection history</string>
     <string name="history_header_timestamp">Time</string>
     <string name="history_header_power_connection">Charging</string>
     <string name="history_header_battery_level">Battery</string>
-
-    <!--History Footer -->
-    <string name="history_footer_about">SnooZy runs in the background. On power connection and disconnection, the app turns off the screen to save power.</string>
 
     <!--History ListFragmentItem -->
     <string name="history_item_power_connected">Yes</string>
     <string name="history_item_power_disconnected">No</string>
     <string name="history_item_day_today">Today</string>
+    <string name="history_item_day_yesterday">Yesterday</string>
     <string name="history_item_battery_level">%s%%</string>
 
     <!--About -->
     <string name="about_title">SnooZy Charger Zzz…</string>
+    <string name="about_subtitle">Turn off screen display on power connection</string>
     <string name="about_project_version">Version %s</string>
-    <string name="about_footer_website"><a href="http://snoozy.mudar.ca/">snoozy.mudar.ca</a></string>
-    <string name="about_text_credits">Android app developed by <a href="http://www.mudar.ca/">Mudar Noufal</a>. Source code is released under the GPLv3 license from the Free Software Foundation. Many thanks to G&amp;A.</string>
-    <string name="about_text_usage">This app aims to save power consumption by the device’s display. It can also be used for auto-lock on unplug or as a simple power connection history app.</string>
-    <string name="about_text_usage_extra"><![CDATA[SnooZy can be very useful with <b>solar and wireless chargers</b> or more specifically for <b>Galaxy Nexus</b> phones with battery drain issues related to ghost power connections.]]></string>
+    <string name="about_credits">Android app developed by Mudar&#160;Noufal. Many thanks to G&amp;A.</string>
+    <string name="about_source_code">Open source project, available on GitHub. Source code is released under the GPLv3 license from the Free Software Foundation.</string>
+    <string name="about_intro">Power connection can turn on display when unwanted. SnooZy avoids intrusive screenlight during nighttime-charging and saves power consumption.</string>
+    <string name="about_usage">SnooZy can be very useful with wireless, solar or dynamo chargers, where power connection is hectic! It can also be used for auto-lock or for connection history. Check Settings to make the app fit your needs…</string>
+
+    <!-- Accessibility -->
+    <string name="desc_wireless_charger">Wireless charging</string>
+    <string name="desc_credits">Credits</string>
+    <string name="desc_github">GitHub repository</string>
 
 </resources>

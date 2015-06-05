@@ -29,9 +29,10 @@ import android.provider.BaseColumns;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
 public class ChargerContract {
-    public static final String CONTENT_AUTHORITY = "ca.mudar.snoozy.provider";
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     private static final String TAG = makeLogTag(ChargerContract.class);
+
+    public static final String CONTENT_AUTHORITY = "ca.mudar.snoozy.provider";
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     private static final String PATH_HISTORY = "history";
     private static final String PATH_DAILY_HISTORY = "daily_history";
     private static final String PATH_DAY = "day";
@@ -65,6 +66,7 @@ public class ChargerContract {
         public static final String CONTENT_ITEM_TYPE =
                 "vnd.android.cursor.item/vnd.snoozy.history";
         public static final String DEFAULT_SORT = HistoryColumns.TIME_STAMP + " DESC ";
+
         public static final String IS_FIRST = "is_first";
         public static final String IS_LAST = "is_last";
 
@@ -95,7 +97,7 @@ public class ChargerContract {
                 "vnd.android.cursor.item/vnd.snoozy.dailyhistory";
         public static final String DEFAULT_SORT = DailyHistoryColumns.JULIAN_DAY + " DESC ";
 
-        public static Uri buildDailyHistyrUri(String dailyHistoryDay) {
+        public static Uri buildDailyHistoryUri(String dailyHistoryDay) {
             return CONTENT_URI.buildUpon().appendPath(dailyHistoryDay).build();
         }
 

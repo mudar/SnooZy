@@ -34,9 +34,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
@@ -46,10 +44,12 @@ import java.util.Date;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
+import ca.mudar.snoozy.provider.ChargerContract;
 import ca.mudar.snoozy.service.DelayedLockService;
 import ca.mudar.snoozy.ui.activity.MainActivity;
 import ca.mudar.snoozy.util.BatteryHelper;
 import ca.mudar.snoozy.util.LockScreenHelper;
+import ca.mudar.snoozy.util.RingtoneHelper;
 
 import static ca.mudar.snoozy.provider.ChargerContract.History;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
@@ -58,7 +58,6 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         implements AudioManager.OnAudioFocusChangeListener {
     private static final String TAG = makeLogTag(PowerConnectionReceiver.class);
     private static final int AUDIO_FOCUS_DURATION = 1000;
-    private static final String FORMAT_ORDINAL_DAY = "yyyyDDDD"; // Ensure that ordinalDate is greater than previous julianDay values
     private Ringtone mRingtone;
 
     @Override
@@ -69,14 +68,26 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         // Get user preferences
         final SharedPreferences sharedPrefs = context.getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
         final SharedPreferences.Editor sharedPrefsEditor = sharedPrefs.edit();
+        final String cacheAge = sharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
         final boolean hasNotifications = sharedPrefs.getBoolean(Const.PrefsNames.HAS_NOTIFICATIONS, false);
         final boolean hasVibration = (sharedPrefs.getBoolean(Const.PrefsNames.HAS_VIBRATION, false) && vibrator.hasVibrator());
-        final boolean hasSound = sharedPrefs.getBoolean(Const.PrefsNames.HAS_SOUND, false);
-        final boolean onScreenLock = sharedPrefs.getBoolean(Const.PrefsNames.ON_SCREEN_LOCK, true);
-        final boolean onPowerLoss = sharedPrefs.getBoolean(Const.PrefsNames.ON_POWER_LOSS, false);
+        final String ringtonePath = sharedPrefs.getString(Const.PrefsNames.RINGTONE, Const.PrefsValues.RINGTONE_SILENT);
+        final String screenLockStatus = sharedPrefs.getString(Const.PrefsNames.SCREEN_LOCK_STATUS, Const.PrefsValues.SCREEN_LOCKED);
+        final String powerConnectionStatus = sharedPrefs.getString(Const.PrefsNames.POWER_CONNECTION_STATUS, Const.PrefsValues.IGNORE);
+        final String powerConnectionType = sharedPrefs.getString(Const.PrefsNames.POWER_CONNECTION_TYPE, Const.PrefsValues.IGNORE);
         final int delayToLock = Integer.parseInt(sharedPrefs.getString(Const.PrefsNames.DELAY_TO_LOCK, Const.PrefsValues.DELAY_FAST)) * 1000;
         final int notifyCount = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_COUNT, 1);
         final int notifyGroup = sharedPrefs.getInt(Const.PrefsNames.NOTIFY_GROUP, 1);
+
+        // Parse ringtone path
+        Uri ringtone = null;
+        if (ringtonePath != null && !Const.PrefsValues.RINGTONE_SILENT.equals(ringtonePath)) {
+            try {
+                ringtone = Uri.parse(ringtonePath);
+            } catch (NullPointerException e) {
+                ringtone = null;
+            }
+        }
 
         final String action = intent.getAction();
         if (action == null) return;
@@ -93,24 +104,28 @@ public class PowerConnectionReceiver extends BroadcastReceiver
 
             // Lock the screen, following the user preferences
             if (delayToLock == 0) {
-                LockScreenHelper.lockScreen(context, onScreenLock, onPowerLoss, isConnectedPower);
+                LockScreenHelper.lockScreen(context,
+                        screenLockStatus,
+                        powerConnectionStatus,
+                        powerConnectionType,
+                        isConnectedPower);
             } else {
-                Intent intentService = new Intent(Intent.ACTION_SYNC, null, context, DelayedLockService.class);
-                Bundle extras = new Bundle();
-                extras.putBoolean(Const.IntentExtras.ON_SCREEN_LOCK, onScreenLock);
-                extras.putBoolean(Const.IntentExtras.ON_POWER_LOSS, onPowerLoss);
-                extras.putBoolean(Const.IntentExtras.IS_CONNECTED, isConnectedPower);
-                extras.putInt(Const.IntentExtras.DELAY_TO_LOCK, delayToLock);
-                intentService.putExtras(extras);
-                context.startService(intentService);
+                context.startService(DelayedLockService.newIntent(context,
+                        screenLockStatus,
+                        powerConnectionStatus,
+                        powerConnectionType,
+                        isConnectedPower,
+                        delayToLock));
             }
 
-            // Save in database
-            saveHistoryItem(context.getApplicationContext(), isConnectedPower, notifyGroup);
+            if (!Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
+                // Save in database
+                saveHistoryItem(context.getApplicationContext(), isConnectedPower, notifyGroup);
+            }
 
             if (hasNotifications) {
                 // Send notification, with sound and vibration
-                notify(context, isConnectedPower, hasVibration, hasSound, notifyCount);
+                notify(context, isConnectedPower, hasVibration, ringtone, notifyCount);
 
                 // Increment the notification counter
                 sharedPrefsEditor.putInt(Const.PrefsNames.NOTIFY_COUNT, notifyCount + 1);
@@ -119,12 +134,12 @@ public class PowerConnectionReceiver extends BroadcastReceiver
                 // Native Vibration or Sound, without Notifications
                 nativeVibrate(context, hasVibration);
 
-                nativeRingtone(context, hasSound);
+                playRingtone(context, ringtone);
             }
         }
     }
 
-    private void notify(Context context, boolean isConnectedPower, boolean hasVibration, boolean hasSound, int notifyCount) {
+    private void notify(Context context, boolean isConnectedPower, boolean hasVibration, Uri ringtoneUri, int notifyCount) {
         final Resources res = context.getResources();
 
         NotificationCompat.Builder mBuilder =
@@ -143,20 +158,17 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         }
 
 
-        if (hasVibration && hasSound) {
-            mBuilder.setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND);
+        if (hasVibration && ringtoneUri != null) {
+            mBuilder.setDefaults(Notification.DEFAULT_VIBRATE)
+                    .setSound(ringtoneUri, AudioManager.STREAM_NOTIFICATION);
         } else if (hasVibration) {
             mBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
-        } else if (hasSound) {
-            mBuilder.setDefaults(Notification.DEFAULT_SOUND);
+        } else if (ringtoneUri != null) {
+            mBuilder.setSound(ringtoneUri);
         }
 
         // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(context, MainActivity.class);
-        final Bundle extras = new Bundle();
-        extras.putBoolean(Const.IntentExtras.INCREMENT_NOTIFY_GROUP, true);
-        extras.putBoolean(Const.IntentExtras.RESET_NOTIFY_NUMBER, true);
-        resultIntent.putExtras(extras);
+        final Intent resultIntent = MainActivity.newIntent(context);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -183,8 +195,8 @@ public class PowerConnectionReceiver extends BroadcastReceiver
         }
     }
 
-    private void nativeRingtone(Context context, boolean hasSound) {
-        if (hasSound) {
+    private void playRingtone(Context context, Uri ringtoneUri) {
+        if (ringtoneUri != null) {
             final AudioManager.OnAudioFocusChangeListener listener = this;
             final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
@@ -194,9 +206,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver
 
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
-                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                mRingtone = RingtoneManager.getRingtone(context, notification);
-                mRingtone.setStreamType(AudioManager.STREAM_NOTIFICATION);
+                mRingtone = RingtoneHelper.getRingtoneCompat(context, ringtoneUri);
                 mRingtone.play();
 
                 final Handler handler = new Handler();
@@ -214,7 +224,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver
 
         final float batteryLevel = BatteryHelper.getBatteryLevel(context);
         final long millis = System.currentTimeMillis();
-        final int ordinalDay = Integer.valueOf(new SimpleDateFormat(FORMAT_ORDINAL_DAY).format(new Date(millis)));
+        final int ordinalDay = Integer.valueOf(new SimpleDateFormat(Const.FORMAT_ORDINAL_DAY).format(new Date(millis)));
 
         ContentValues newItem = new ContentValues();
         newItem.put(History.IS_POWER_ON, (isPowerConnected ? 1 : 0));
@@ -226,6 +236,9 @@ public class PowerConnectionReceiver extends BroadcastReceiver
                 History.CONTENT_URI,
                 newItem
         );
+
+        context.getContentResolver().notifyChange(ChargerContract.DailyHistory.CONTENT_URI, null);
+        context.getContentResolver().notifyChange(ChargerContract.History.CONTENT_URI_PER_DAY, null);
     }
 
     @Override

@@ -22,23 +22,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <color name="temp_first">#ffffffff</color>
-    <color name="temp_last">#30ff0000</color>
-    <color name="temp_single">#ffffffff</color>
-    <color name="temp_middle">#ffffffff</color>
 
-    <color name="app_bg_color">#e3e3e3</color>
-    <color name="bg_eula">#e3e3e3</color>
-    <color name="bg_webview">#00000000</color>
+    <!--App Theme-->
+    <color name="theme_primary">#00acc1</color>
+    <color name="theme_primary_dark">#00838F</color>
+    <color name="theme_accent">#00838F</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_header">#000000</color>
 
-    <color name="card_background">#ffffff</color>
-    <color name="card_header_color">#80323232</color>
-    <color name="card_title_color">#ff0099cc</color>
-    <color name="card_row_color">#80323232</color>
-    <color name="empty_list_color">#80323232</color>
+    <!--Toolbar-->
+    <color name="text_toolbar_primary">#ffffff</color>
+    <color name="text_toolbar_secondary">#c0ffffff</color>
 
-    <color name="card_row_highlight_color">#ff0099cc</color>
+    <!--Backgrounds-->
+    <color name="bg_app">@color/theme_primary</color>
+    <color name="bg_primary">#ffffff</color>
+    <color name="bg_secondary">#cfd8dc</color>
 
-    <color name="about_footer_color">#80323232</color>
-    <color name="about_card_color">#80323232</color>
+    <!--History list rows-->
+    <color name="text_list_header">@color/text_header</color>
+    <color name="text_list_header_highlight">@color/theme_accent</color>
+    <color name="text_list_item">@color/text_primary</color>
+    <color name="text_list_item_highlight">@color/theme_accent</color>
+
+    <!--About-->
+    <color name="text_about">@color/text_primary</color>
+    <color name="text_about_subtitle">@color/theme_accent</color>
+    <color name="bg_divider">#eceff1</color>
 </resources>

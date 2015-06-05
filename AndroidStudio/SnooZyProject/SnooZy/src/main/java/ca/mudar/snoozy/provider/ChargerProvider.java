@@ -46,12 +46,12 @@ import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
 public class ChargerProvider extends ContentProvider {
     private static final String TAG = makeLogTag(ChargerProvider.class);
-    private static final UriMatcher sUriMatcher = buildUriMatcher();
     private static final int HISTORY = 100;
     private static final int HISTORY_PER_DAY = 101;
     private static final int HISTORY_ID = 102;
     private static final int DAILY_HISTORY = 200;
     private static final int DAILY_HISTORY_DAY = 201;
+    private static final UriMatcher URI_MATCHER = buildUriMatcher();
     private ChargerDatabase mOpenHelper;
 
     private static UriMatcher buildUriMatcher() {
@@ -78,7 +78,7 @@ public class ChargerProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         final SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 
-        final int match = sUriMatcher.match(uri);
+        final int match = URI_MATCHER.match(uri);
         final SelectionBuilder builder = buildExpandedSelection(uri, match);
 
         Cursor c = builder.where(selection, selectionArgs).query(db, projection, sortOrder);
@@ -89,7 +89,7 @@ public class ChargerProvider extends ContentProvider {
 
     @Override
     public String getType(Uri uri) {
-        final int match = sUriMatcher.match(uri);
+        final int match = URI_MATCHER.match(uri);
         switch (match) {
             case HISTORY:
             case HISTORY_PER_DAY:
@@ -108,11 +108,12 @@ public class ChargerProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-        final int match = sUriMatcher.match(uri);
+        final int match = URI_MATCHER.match(uri);
 
         switch (match) {
             case HISTORY: {
                 db.insertOrThrow(Tables.HISTORY, null, values);
+                getContext().getContentResolver().notifyChange(ChargerContract.DailyHistory.CONTENT_URI, null);
                 getContext().getContentResolver().notifyChange(uri, null);
                 return History.buildHistoryUri(values.getAsString(BaseColumns._ID));
             }
@@ -160,7 +161,7 @@ public class ChargerProvider extends ContentProvider {
 
     private SelectionBuilder buildSimpleSelection(Uri uri) {
         final SelectionBuilder builder = new SelectionBuilder();
-        final int match = sUriMatcher.match(uri);
+        final int match = URI_MATCHER.match(uri);
         switch (match) {
             case HISTORY: {
                 return builder.table(Tables.HISTORY);
@@ -186,21 +187,8 @@ public class ChargerProvider extends ContentProvider {
                         .map(History.IS_LAST, History.TIME_STAMP + " = " + DailyHistory.MAX);
 
             }
-            case HISTORY: {
-                return builder.table(Tables.HISTORY);
-            }
-            case HISTORY_ID: {
-                final String historyId = History.getHistoryId(uri);
-                return builder.table(Tables.HISTORY).where(History._ID + "=?",
-                        historyId);
-            }
             case DAILY_HISTORY: {
                 return builder.table(Tables.DAILY_HISTORY);
-            }
-            case DAILY_HISTORY_DAY: {
-                final String historyJulianDay = DailyHistory.getDailyHistoryDay(uri);
-                return builder.table(Tables.DAILY_HISTORY)
-                        .where(DailyHistory.JULIAN_DAY + "=?", historyJulianDay);
             }
             default: {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

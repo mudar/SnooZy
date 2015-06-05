@@ -23,41 +23,65 @@
 
 package ca.mudar.snoozy.ui.fragment;
 
-import android.app.ListFragment;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
-import android.content.Loader;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import ca.mudar.snoozy.R;
-import ca.mudar.snoozy.ui.widget.HistoryCursorAdapter;
-import ca.mudar.snoozy.util.BatteryHelper;
+import com.tonicartos.superslim.LayoutManager;
 
-import static ca.mudar.snoozy.provider.ChargerContract.DailyHistory;
+import ca.mudar.snoozy.Const;
+import ca.mudar.snoozy.R;
+import ca.mudar.snoozy.model.HistorySection;
+import ca.mudar.snoozy.model.Queries;
+import ca.mudar.snoozy.model.SectionsArray;
+import ca.mudar.snoozy.provider.ChargerContract;
+import ca.mudar.snoozy.ui.adapter.HistoryAdapter;
+import ca.mudar.snoozy.util.BatteryHelper;
+import ca.mudar.snoozy.util.ComponentHelper;
+
 import static ca.mudar.snoozy.provider.ChargerContract.History;
 import static ca.mudar.snoozy.util.LogUtils.makeLogTag;
 
-public class HistoryFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class HistoryFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = makeLogTag(HistoryFragment.class);
-    protected Cursor mCursor = null;
-    protected HistoryCursorAdapter mAdapter;
+    //    private Cursor mCursor = null;
+    private HistoryAdapter mAdapter;
     private View mRootView;
-    private View mHeaderView;
-    private View mFooterView;
+    private HistorySizeCallback mListener;
+
+    /**
+     * Attach a listener.
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (HistorySizeCallback) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement EmptyHistoryListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        mRootView = inflater.inflate(R.layout.fragment_list_history, null);
-        mHeaderView = inflater.inflate(R.layout.fragment_list_history_header, null);
-        mFooterView = inflater.inflate(R.layout.fragment_list_history_footer, null);
+        mRootView = inflater.inflate(R.layout.fragment_list_history, container, false);
 
         return mRootView;
     }
@@ -66,107 +90,137 @@ public class HistoryFragment extends ListFragment implements LoaderManager.Loade
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (mHeaderView != null) {
-            try {
-                getListView().addHeaderView(mHeaderView, null, false);
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            }
-        }
-        if (mFooterView != null) {
-            try {
-                getListView().addFooterView(mFooterView, null, false);
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            }
-        }
+        final RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        LayoutManager layoutManager = new LayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
 
-        setListAdapter(null);
+        recyclerView.setAdapter(null);
 
-        mAdapter = new HistoryCursorAdapter(getActivity(),
-                R.layout.fragment_list_item_history,
-                mCursor,
-                new String[]{
-                        History.IS_POWER_ON,
-                        History.BATTERY_LEVEL,
-                        History.TIME_STAMP,
-                        DailyHistory.TOTAL
-                },
-                new int[]{
-                        R.id.history_is_power_on,
-                        R.id.history_battery_level,
-                        R.id.history_timestamp,
-                        R.id.history_total
-                },
-                0);
+        mAdapter = new HistoryAdapter(getActivity(),
+                R.layout.list_item_content,
+                null);
+        recyclerView.setAdapter(mAdapter);
 
-        setListAdapter(mAdapter);
-
-        getLoaderManager().initLoader(HistoryQuery._TOKEN, null, this);
+        getLoaderManager().initLoader(Queries.HistorySummaryQuery._TOKEN, null, this);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity().getBaseContext(),
-                History.CONTENT_URI_PER_DAY,
-                HistoryQuery.HISTORY_SUMMARY_PROJECTION,
-                null,
-                null,
-                History.DEFAULT_SORT);
+        if (id == Queries.HistorySummaryQuery._TOKEN) {
+            return new CursorLoader(getActivity().getBaseContext(),
+                    ChargerContract.DailyHistory.CONTENT_URI,
+                    Queries.HistorySummaryQuery.PROJECTION,
+                    null,
+                    null,
+                    ChargerContract.DailyHistory.DEFAULT_SORT);
+        } else if (id == Queries.HistoryDetailsQuery._TOKEN) {
+            return new CursorLoader(getActivity().getBaseContext(),
+                    ChargerContract.History.CONTENT_URI_PER_DAY,
+                    Queries.HistoryDetailsQuery.PROJECTION,
+                    null,
+                    null,
+                    History.DEFAULT_SORT);
+        }
+
+        return null;
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        final int id = loader.getId();
 
-        mAdapter.swapCursor(data);
+        if (id == Queries.HistorySummaryQuery._TOKEN) {
+            SectionsArray headers = new SectionsArray();
+            int section = 0;
+            int offset = 0;
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    final int julianDay = cursor.getInt(Queries.HistorySummaryQuery.JULIAN_DAY);
+                    final int total = cursor.getInt(Queries.HistorySummaryQuery.TOTAL);
 
-        if ((data == null) || (data.getCount() == 0)) {
+                    final HistorySection header = new HistorySection(section, julianDay, total, offset);
+                    headers.append(offset, header);
 
-            setIntroTitle();
+                    section++;
+                    offset += total + 1;
+                } while (cursor.moveToNext());
+            }
 
-            mRootView.findViewById(android.R.id.empty).setVisibility(View.GONE);
-            mRootView.findViewById(R.id.history_empty_list).setVisibility(View.VISIBLE);
-        } else {
-            mRootView.findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
-            mRootView.findViewById(R.id.history_empty_list).setVisibility(View.GONE);
+            mAdapter.setHeaders(headers);
+            getLoaderManager().initLoader(Queries.HistoryDetailsQuery._TOKEN, null, this);
+        } else if (id == Queries.HistoryDetailsQuery._TOKEN) {
+
+            toggleVisibility(cursor == null || cursor.getCount() == 0);
+
+            mAdapter.swapCursor(cursor);
         }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
+
     }
 
-    private void setIntroTitle() {
-        final boolean isPowerConnected = BatteryHelper.isPowerConnected(getActivity().getApplicationContext());
-        final TextView vIntro = (TextView) mRootView.findViewById(R.id.history_empty_list_title);
-        final Resources res = getResources();
-        final String powerAction = res.getString(isPowerConnected ? R.string.history_empty_list_title_disconnect : R.string.history_empty_list_title_connect);
-        vIntro.setText(String.format(res.getString(R.string.history_empty_list_title), powerAction));
+    public void updateEmptyScreenIfNecessary() {
+        if (mAdapter == null || mAdapter.getItemCount() == 0) {
+            updateEmptyScreen();
+        }
     }
 
+    private void updateEmptyScreen() {
+        final SharedPreferences sharedPrefs = getActivity().getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        final String cacheAge = sharedPrefs.getString(Const.PrefsNames.CACHE_AGE, Const.PrefsValues.CACHE_ALL);
+        final boolean isEnabled = sharedPrefs.getBoolean(Const.PrefsNames.IS_ENABLED, true);
 
-    public static interface HistoryQuery {
-        int _TOKEN = 0x10;
-        final String[] HISTORY_SUMMARY_PROJECTION = new String[]{
-                History._ID,
-                History.IS_POWER_ON,
-                History.BATTERY_LEVEL,
-                History.TIME_STAMP,
-                History.IS_FIRST,
-                History.IS_LAST,
-                DailyHistory.TOTAL,
-//                History.NOTIFY_GROUP,
-//                History.ORDINAL_DAY
-        };
-        final int _ID = 0;
-        final int IS_POWER_ON = 1;
-        final int BATTERY_LEVEL = 2;
-        final int TIME_STAMP = 3;
-        final int IS_FIRST = 4;
-        final int IS_LAST = 5;
-        final int TOTAL = 6;
-//        final int NOTIFY_GROUP = 6;
-//        final int ORDINAL_DAY = 7;
+        final TextView vIntro = (TextView) mRootView.findViewById(R.id.history_empty_list);
+
+        if (!isEnabled) {
+            vIntro.setClickable(true);
+
+            vIntro.setText(R.string.history_empty_list_disabled);
+            vIntro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.setClickable(false);
+                    sharedPrefs.edit()
+                            .putBoolean(Const.PrefsNames.IS_ENABLED, true)
+                            .apply();
+
+                    ComponentHelper.togglePowerConnectionReceiver(getActivity(), true);
+                }
+            });
+        } else if (Const.PrefsValues.CACHE_NONE.equals(cacheAge)) {
+            vIntro.setText(R.string.history_empty_list_cache_none);
+        } else {
+            final boolean isPowerConnected = BatteryHelper.isPowerConnected(getActivity().getApplicationContext());
+            final Resources res = getResources();
+            final String powerAction = res.getString(isPowerConnected ? R.string.history_empty_list_title_disconnect : R.string.history_empty_list_title_connect);
+            vIntro.setText(res.getString(R.string.history_empty_list_title, powerAction));
+        }
     }
+
+    private void toggleVisibility(boolean isEmpty) {
+        mListener.toggleVisibility(isEmpty);
+
+        if (isEmpty) {
+            updateEmptyScreen();
+
+            mRootView.findViewById(R.id.recycler_view).setVisibility(View.GONE);
+            mRootView.findViewById(android.R.id.empty).setVisibility(View.GONE);
+            mRootView.findViewById(R.id.history_empty_list).setVisibility(View.VISIBLE);
+        } else {
+            mRootView.findViewById(R.id.recycler_view).setVisibility(View.VISIBLE);
+            mRootView.findViewById(android.R.id.empty).setVisibility(View.VISIBLE);
+            mRootView.findViewById(R.id.history_empty_list).setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Container Activity must implement this interface to be notified about History size
+     */
+    public interface HistorySizeCallback {
+        public void toggleVisibility(boolean isEmpty);
+    }
+
 }

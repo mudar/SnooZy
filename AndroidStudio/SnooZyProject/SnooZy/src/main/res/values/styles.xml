@@ -27,7 +27,7 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -35,141 +35,95 @@
         -->
     </style>
 
+    <style name="DialogBaseTheme" parent="Theme.AppCompat.Light.Dialog" >
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:windowBackground">@color/app_bg_color</item>
-        <item name="android:logo">@drawable/ic_logo</item>
+    <style name="AppThemeNoBg" parent="AppBaseTheme">
+        <!--<item name="android:logo">@drawable/ic_logo</item>-->
         <!--<item name="android:actionBarStyle">@style/LogoActionBar</item>-->
+        <item name="colorPrimary">@color/theme_primary</item>
+        <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+        <item name="colorAccent">@color/theme_accent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColorLink">#37474F</item>
+        <item name="android:alertDialogTheme">@style/CustomDialogStyle</item>
+        <!--<item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item>-->
     </style>
 
-    <style name="LogoActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
-        <item name="android:displayOptions">useLogo</item>
+    <style name="CustomDialogStyle" parent="DialogBaseTheme">
+        <item name="colorPrimary">@color/theme_primary</item>
+        <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+        <item name="colorAccent">@color/theme_accent</item>
     </style>
 
-    <style name="HistoryList">
-        <item name="android:paddingLeft">@dimen/root_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/root_horizontal_margin</item>
-        <item name="android:listSelector">@android:color/transparent</item>
-        <item name="android:divider">@null</item>
-        <item name="android:clickable">false</item>
-        <item name="android:focusable">false</item>
-        <item name="android:dividerHeight">0dp</item>
+    <style name="AppTheme" parent="AppThemeNoBg">
+        <item name="android:windowBackground">@color/bg_app</item>
+    </style>
+
+    <!--Toolbar-->
+    <style name="HeaderToolbar">
+        <!--<item name="navigationIcon">@drawable/abc_ic_ab_back_mtrl_am_alpha</item>-->
+        <item name="popupTheme">@style/ToolbarPopupOverlayTheme</item>
+        <item name="theme">@style/ToolbarOverlayTheme</item>
+        <item name="titleTextAppearance">@style/ActionBar.TitleText</item>
+        <!--<item name="contentInsetStart">?actionBarInsetStart</item>-->
+    </style>
+
+    <style name="ToolbarOverlayTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/text_toolbar_primary</item>
+        <item name="colorControlNormal">@color/text_toolbar_primary</item>
+    </style>
+    <style name="ToolbarPopupOverlayTheme" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/text_toolbar_primary</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="HistoryListEmpty" parent="@android:style/TextAppearance.Medium">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/empty_list_color</item>
-        <item name="android:paddingBottom">@dimen/listview_empty_bottom_padding</item>
-    </style>
-
-    <style name="HistoryListEmptyTitle" parent="@style/HistoryListEmpty">
-        <item name="android:textColor">@color/card_title_color</item>
-    </style>
-
-    <style name="HistoryListItem">
-        <item name="android:clickable">false</item>
-        <item name="android:focusable">false</item>
-    </style>
-
-    <style name="HistoryHeader">
-        <item name="android:paddingLeft">@dimen/card_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/card_horizontal_margin</item>
-        <item name="android:paddingTop">@dimen/card_vertical_margin</item>
-        <item name="android:textColor">@color/card_header_color</item>
-    </style>
-
-    <style name="HistoryHeaderTitle" parent="@android:style/TextAppearance.Large">
-        <item name="android:textColor">@color/card_header_color</item>
-        <item name="android:paddingLeft">@dimen/card_header_inner_padding</item>
-        <item name="android:paddingBottom">@dimen/card_title_bottom_padding</item>
+        <item name="android:textColor">@color/text_toolbar_primary</item>
+        <item name="android:alpha">0.75</item>
+        <item name="android:lines">3</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
 
     <style name="CardHeaderLegend" parent="@android:style/TextAppearance.Small">
-        <item name="android:textColor">@color/card_header_color</item>
+        <!--<item name="android:textColor">@color/card_header_color</item>-->
+        <item name="android:textColor">@color/text_toolbar_secondary</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
         <item name="android:lines">1</item>
-        <item name="android:padding">@dimen/card_header_inner_padding</item>
-    </style>
-
-    <style name="CardHeaderTimestamp" parent="@style/CardHeaderLegend">
-        <item name="android:gravity">left|bottom</item>
-        <item name="android:layout_gravity">bottom</item>
-    </style>
-
-    <style name="CardHeaderPowerStatus" parent="@style/CardHeaderLegend">
-        <item name="android:gravity">center_horizontal|bottom</item>
-        <item name="android:layout_gravity">bottom</item>
-    </style>
-
-    <style name="CardHeaderBatteryLevel" parent="@style/CardHeaderLegend">
-        <item name="android:gravity">right|bottom</item>
-        <item name="android:layout_gravity">bottom</item>
-    </style>
-
-    <style name="HistoryFooter" parent="@android:style/TextAppearance.Medium">
-        <item name="android:paddingLeft">@dimen/card_horizontal_padding</item>
-        <item name="android:paddingRight">@dimen/card_horizontal_padding</item>
-        <item name="android:paddingBottom">@dimen/card_vertical_margin</item>
-        <item name="android:textColor">@color/card_header_color</item>
-    </style>
-
-    <style name="CardTitleText" parent="@android:style/TextAppearance.Large">
-        <item name="android:textColor">@color/card_title_color</item>
-        <item name="android:paddingBottom">@dimen/card_title_bottom_padding</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:lines">1</item>
-    </style>
-
-    <style name="CardTitleTotal" parent="@android:style/TextAppearance.Small">
-        <item name="android:textColor">@color/card_title_color</item>
-        <item name="android:gravity">right|center_vertical</item>
+        <!--<item name="android:padding">@dimen/card_header_inner_padding</item>-->
     </style>
 
     <style name="CardRowText">
-        <item name="android:textColor">@color/card_row_color</item>
+        <item name="android:textColor">@color/text_list_item</item>
     </style>
 
-    <style name="CardRowTimestamp" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/card_row_color</item>
+
+    <!--About-->
+    <style name="AboutPrimaryText" >
+        <item name="android:layout_marginLeft">32dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_about</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
 
-    <style name="CardRowPowerStatus" parent="@style/CardRowText">
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="CardRowBatteryLevel" parent="@style/CardRowText">
-        <item name="android:gravity">right</item>
-    </style>
-
-    <style name="AboutView">
-        <item name="android:paddingLeft">@dimen/root_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/root_horizontal_margin</item>
-        <item name="android:paddingBottom">@dimen/root_vertical_margin</item>
-    </style>
-
-    <style name="AboutHeaderTitle" parent="@android:style/TextAppearance.Large">
-        <item name="android:paddingTop">@dimen/card_vertical_margin</item>
-        <item name="android:paddingBottom">@dimen/card_vertical_margin</item>
-        <item name="android:paddingLeft">@dimen/card_horizontal_padding</item>
-        <item name="android:paddingRight">@dimen/card_horizontal_padding</item>
-        <item name="android:textColor">@color/card_title_color</item>
-    </style>
-
-    <style name="AboutFooterText" parent="@android:style/TextAppearance.Small">
-        <item name="android:textColor">@color/about_footer_color</item>
-        <!--<item name="android:gravity">center_horizontal</item>-->
-        <item name="android:layout_gravity">center_horizontal</item>
-    </style>
-
-    <style name="AboutCard">
-        <item name="android:background">@drawable/bg_cards_top_bottom</item>
-    </style>
-
-    <style name="AboutCardText" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/about_card_color</item>
-        <item name="android:paddingBottom">@dimen/card_text_bottom_padding</item>
+    <style name="AboutRow">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:gravity">top</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
     </style>
 
 </resources>

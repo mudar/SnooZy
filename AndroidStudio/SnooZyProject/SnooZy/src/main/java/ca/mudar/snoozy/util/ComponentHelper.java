@@ -29,6 +29,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.provider.Settings;
+
+import java.util.List;
 
 import ca.mudar.snoozy.Const;
 import ca.mudar.snoozy.R;
@@ -37,6 +40,23 @@ import ca.mudar.snoozy.receiver.PowerConnectionReceiver;
 
 
 public class ComponentHelper {
+    private final static String TAG = LogUtils.makeLogTag(ComponentHelper.class);
+
+    public synchronized static void disableDeviceAdmin(Context context) {
+        try {
+            final DevicePolicyManager mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            final String packageName = context.getPackageName();
+
+            final List<ComponentName> activeAdmins = mDPM.getActiveAdmins();
+            for (ComponentName admin : activeAdmins) {
+                if (packageName.equals(admin.getPackageName())) {
+                    mDPM.removeActiveAdmin(admin);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void togglePowerConnectionReceiver(Context context, boolean enabled) {
         final int newState = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
@@ -79,4 +99,19 @@ public class ComponentHelper {
 
         return intent;
     }
+
+    public static void launchDeviceAdminSettings(Context context) {
+        try {
+            Intent intentDeviceAdmin = new Intent(Settings.ACTION_SETTINGS);
+            intentDeviceAdmin.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intentDeviceAdmin.setClassName(Const.IntentActions.ANDROID_SETTINGS, Const.IntentActions.ANDROID_DEVICE_ADMIN);
+            context.startActivity(intentDeviceAdmin);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Intent intentSecuritySettings = new Intent(Settings.ACTION_SECURITY_SETTINGS);
+            intentSecuritySettings.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            context.startActivity(intentSecuritySettings);
+        }
+    }
+
 }

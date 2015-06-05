@@ -22,56 +22,40 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg_color"
     android:cacheColorHint="@android:color/transparent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:slm_isHeader="false"
+    app:slm_section_firstPosition="0">
 
-    <ListView
-        android:id="@id/android:list"
-        style="@style/HistoryList"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:cacheColorHint="@android:color/transparent"
-        android:fastScrollEnabled="true" />
+        android:background="@color/bg_primary"
+        android:clipToPadding="false"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@id/android:empty"
         style="@android:style/Widget.Holo.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"></ProgressBar>
+        android:layout_gravity="center"
+        android:progressTint="@color/text_toolbar_secondary" />
 
-    <LinearLayout
-        android:visibility="gone"
+    <TextView
         android:id="@+id/history_empty_list"
+        style="@style/HistoryListEmpty"
         android:layout_width="@dimen/listview_empty_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/history_empty_list_title"
-            style="@style/HistoryListEmptyTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/history_empty_list_title" />
-
-        <TextView
-            style="@style/HistoryListEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/history_footer_about" />
-
-        <TextView
-            style="@style/HistoryListEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/history_empty_list_settings" />
-
-    </LinearLayout>
-
+        android:drawableTop="@drawable/logo_snoozy"
+        android:visibility="gone" />
 
 </LinearLayout>

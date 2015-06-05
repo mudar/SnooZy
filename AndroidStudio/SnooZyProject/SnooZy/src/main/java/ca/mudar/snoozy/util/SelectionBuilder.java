@@ -124,13 +124,16 @@ public class SelectionBuilder {
         return mSelectionArgs.toArray(new String[mSelectionArgs.size()]);
     }
 
-    private void mapColumns(String[] columns) {
+
+    private String[] mapColumns(String[] columns) {
+        String[] mapped = columns.clone();
         for (int i = 0; i < columns.length; i++) {
             final String target = mProjectionMap.get(columns[i]);
             if (target != null) {
-                columns[i] = target;
+                mapped[i] = target;
             }
         }
+        return mapped;
     }
 
     @Override
@@ -152,7 +155,7 @@ public class SelectionBuilder {
     public Cursor query(SQLiteDatabase db, String[] columns, String groupBy,
                         String having, String orderBy, String limit) {
         assertTable();
-        if (columns != null) mapColumns(columns);
+        if (columns != null) columns = mapColumns(columns);
         LOGV(TAG, "query(columns=" + Arrays.toString(columns) + ") " + this);
         return db.query(mTable, columns, getSelection(), getSelectionArgs(), groupBy, having,
                 orderBy, limit);
