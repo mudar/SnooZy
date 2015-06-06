@@ -8,8 +8,8 @@ android {
         applicationId "ca.mudar.snoozy"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 6
-        versionName "1.5"
+        versionCode 7
+        versionName "1.5.1"
 
         resConfigs "en", "fr", "nb", "ru"
         resConfigs "nodpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"
