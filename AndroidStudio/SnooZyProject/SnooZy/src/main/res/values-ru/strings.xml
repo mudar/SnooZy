@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SnooZy Charger
+    Power Connection manager. Turn the screen off on power connection
+    or disconnection, to save battery consumption by the phone's display.
+
+    Copyright (C) 2013 Mudar Noufal <mn@mudar.ca>
+    Copyright (C) 2015 DumF0rGaming
+
+    This file is part of SnooZy Charger.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <string name="snoozy_app">SnooZy Charger</string>
+    <string name="activity_main">История подключений</string>
+    <string name="activity_settings">Настройки</string>
+    <string name="activity_about">О приложении</string>
+    <string name="activity_eula">Лицензионное соглашение</string>
+
+    <!--Menu-->
+    <string name="action_settings">Настройки</string>
+    <string name="action_about">О приложении</string>
+    <string name="action_eula">Условия пользования</string>
+    <string name="action_share">Рассказать друзьям</string>
+    <string name="action_rate">Оценить приложение</string>
+
+    <!--System-->
+    <string name="admin_device_extra_desc_text">Приложение должно быть авторизовано как Администратор устройства для контроля блокировки экрана...</string>
+    <string name="admin_device_app_desc">Позволяет SnooZy Charger отключать экран. Хррр...</string>
+    <string name="share_intent_title">Открыть SnooZy Charger в Google Play</string>
+
+    <!--Settings/Preferences-->
+    <string name="prefs_category_advanced">Отключение экрана</string>
+    <string name="prefs_category_other">Прочее</string>
+
+    <string name="prefs_is_enabled">Включено</string>
+    <string name="prefs_is_disabled">Отключено</string>
+    <string name="prefs_has_notifications_title">Уведомления</string>
+    <string name="prefs_has_vibration_title">Вибрация</string>
+
+    <string name="prefs_ringtone_title">Звук</string>
+    <string name="prefs_screen_silent">Без звука</string>
+
+    <string name="prefs_screen_lock_status_title">Тип отключения</string>
+    <string name="prefs_screen_lock_status_dialog_title">Выберите тип</string>
+    <string name="prefs_screen_locked">После блокировки экрана</string>
+    <string name="prefs_screen_unlocked">При разблокированном экране</string>
+    <string name="prefs_screen_both">В обоих случаях</string>
+    <string name="prefs_screen_lock_unlocked">При разблокированном экране</string>
+    <string name="prefs_screen_lock_locked">После блокировки экрана</string>
+    <string name="prefs_screen_lock_both">В обоих случаях</string>
+
+    <string name="prefs_connection_status_title">Статус подключения</string>
+    <string name="prefs_connection_status_dialog_title">Выберите статус</string>
+    <string name="prefs_connection_on">Подключение з/у</string>
+    <string name="prefs_connection_off">Отключение з/у</string>
+    <string name="prefs_connection_both">Оба случая</string>
+    <string name="prefs_power_connection_on">Только при подключении</string>
+    <string name="prefs_power_connection_off">Только при отсоединении</string>
+    <string name="prefs_power_connection_both">Оба случая</string>
+
+    <string name="prefs_connection_type_title">Тип з/у</string>
+    <string name="prefs_connection_type_dialog_title">Выберите предпочтительный тип</string>
+    <string name="prefs_connection_ac">Сетевой адаптер</string>
+    <string name="prefs_connection_usb">Порт USB</string>
+    <string name="prefs_connection_wireless">Беспроводные</string>
+    <string name="prefs_connection_all">Любые</string>
+    <string name="prefs_power_connection_ac">Только для сетевых з/у</string>
+    <string name="prefs_power_connection_usb">Только для USB подключений</string>
+    <string name="prefs_power_connection_wireless">Только для беспроводных з/у</string>
+    <string name="prefs_power_connection_all">Для любых источников питания</string>
+
+    <string name="prefs_delay_to_lock_title">Задержка блокировки</string>
+    <string name="prefs_delay_dialog_title">Установите задержку</string>
+    <string name="prefs_delay_fast">Отсутствует</string>
+    <string name="prefs_delay_moderate">3 секунды</string>
+    <string name="prefs_delay_slow">5 секунд</string>
+
+    <string name="prefs_cache_age_title">Время хранения журнала</string>
+    <string name="prefs_cache_age_dialog_title">Выберите срок</string>
+    <string name="prefs_cache_age_none">Не сохранять</string>
+    <string name="prefs_cache_age_small">Неделя</string>
+    <string name="prefs_cache_age_medium">2 недели</string>
+    <string name="prefs_cache_age_large">Месяц</string>
+    <string name="prefs_cache_age_all">Не удалять</string>
+
+    <string name="prefs_device_admin_title">Администратор устройства</string>
+    <string name="prefs_device_admin_summary_enabled">ПРИМЕЧАНИЕ: уберите эту галку, если захотите удалить приложение</string>
+    <string name="prefs_device_admin_summary_disabled">Необходимо для возможности блокировки экрана</string>
+
+    <!--Notifications-->
+    <string name="notify_content_title">Подключение з/у</string>
+    <string name="notify_content_text_single_on">Подключен внешний источник питания</string>
+    <string name="notify_content_text_single_off">Внешний источник питания отсоединен</string>
+    <string name="notify_content_text_multi">Источник питания был подкл./откл.</string>
+
+    <!-- Toast Notifications -->
+    <string name="toast_service_disabled">В данный момент SnooZy отключен</string>
+    <string name="toast_running_no_admin">Предоставьте права Администратора для возможности блокировки экрана</string>
+
+    <!--History ListFragment-->
+    <string name="history_empty_list_title">Чтобы увидеть SnooZy в&#160;действии %s зарядное устройство!&#160;</string>
+    <string name="history_empty_list_cache_none">Журнал подзарядок пуст</string>
+    <string name="history_empty_list_disabled">Активируйте SnooZy</string>
+    <string name="history_empty_list_title_connect">подключите</string>
+    <string name="history_empty_list_title_disconnect">отсоедините</string>
+
+    <!--History Header -->
+    <string name="history_header_timestamp">Время</string>
+    <string name="history_header_power_connection">Зарядка</string>
+    <string name="history_header_battery_level">Заряд</string>
+
+    <!--History ListFragmentItem -->
+    <string name="history_item_power_connected">Да</string>
+    <string name="history_item_power_disconnected">Нет</string>
+    <string name="history_item_day_today">Сегодня</string>
+    <string name="history_item_day_yesterday">Вчера</string>
+    <string name="history_item_battery_level">%s%%</string>
+
+    <!--About -->
+    <string name="about_title">SnooZy Charger Zzz…</string>
+    <string name="about_subtitle">Отключение экрана при заряде батареи</string>
+    <string name="about_project_version">Версия %s</string>
+    <string name="about_credits">Приложение для Android, разработал Mudar&#160;Noufal. Выражаем благодарность DumF0rGaming за перевод.</string>
+    <string name="about_source_code">Проект с открытым исходным кодом, доступен на GitHub. Код распространяется под лицензией GPLv3 Фонда Свободного ПО.</string>
+    <string name="about_intro">При заряде батареи могут происходить нежелательные включения экрана. SnooZy предотвращает навязчивое включение подсветки по ночам и сберегает энергию.</string>
+    <string name="about_usage">SnooZy полезен при использовании беспроводных з/у, солнечных батарей и динамомашин, имеющих нестабильную мощность! Также можно включить автоблокировку и историю позарядок. Загляните в Настройки и убедитесь, что приложение подстроено под ваши нужды…</string>
+
+    <!-- Accessibility -->
+    <string name="desc_wireless_charger">Беспроводное з/у</string>
+    <string name="desc_credits">Авторство</string>
+    <string name="desc_github">Репозиторий на GitHub</string>
+
+</resources>
