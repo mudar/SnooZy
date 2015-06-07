@@ -38,8 +38,8 @@
     <string name="action_rate">Оценить приложение</string>
 
     <!--System-->
-    <string name="admin_device_extra_desc_text">Приложение должно быть авторизовано как Администратор устройства для возможности отключения экрана...</string>
-    <string name="admin_device_app_desc">Позволяет SnooZy Charger отключать экран. Хррр...</string>
+    <string name="admin_device_extra_desc_text">Приложение должно быть авторизовано как Администратор устройства для возможности отключения экрана…</string>
+    <string name="admin_device_app_desc">Позволяет SnooZy Charger отключать экран. Хррр…</string>
     <string name="share_intent_title">Открыть SnooZy Charger в Google Play</string>
 
     <!--Settings/Preferences-->
