@@ -9,9 +9,9 @@ android {
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 8
-        versionName "1.5.2"
+        versionName "1.5.3"
 
-        resConfigs "en", "fr", "nb", "ru"
+        resConfigs "en", "fr", "nb", "ru", "tr"
         resConfigs "nodpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"
     }
     buildTypes {
