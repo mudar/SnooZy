@@ -39,8 +39,8 @@
 
     <!--System-->
     <string name="admin_device_extra_desc_text">Uygulamanın ekran kilidini kontrol edebilmesi için Cihaz yöneticilerinden yetki verilmesi gerekir…</string>
-    <string name="admin_device_app_desc">SnooZy Charger\'a ekranı kilitlemek için izin ver. Zzz…</string>
-    <string name="share_intent_title">SnooZy Charger\'ı Google Play'de keşfedin</string>
+    <string name="admin_device_app_desc">SnooZy Charger’a ekranı kilitlemek için izin ver. Zzz…</string>
+    <string name="share_intent_title">SnooZy Charger’ı Google Play’de keşfedin</string>
 
     <!--Settings/Preferences-->
     <string name="prefs_category_advanced">Ekranı kapat</string>
@@ -112,9 +112,9 @@
     <string name="toast_running_no_admin">Ekran kilidine izin vermek için, cihaz yönetiminden aktifleştirin</string>
 
     <!--History ListFragment-->
-    <string name="history_empty_list_title">SnooZy\'yi &#160;çalışırken &#160;görmek için şarj cihazınızı %s!</string>
+    <string name="history_empty_list_title">SnooZy’yi &#160;çalışırken &#160;görmek için şarj cihazınızı %s!</string>
     <string name="history_empty_list_cache_none">Bağlantı geçmişi yok</string>
-    <string name="history_empty_list_disabled">SnooZy\'yi Aktifleştir</string>
+    <string name="history_empty_list_disabled">SnooZy’yi Aktifleştir</string>
     <string name="history_empty_list_title_connect">Bağlayın</string>
     <string name="history_empty_list_title_disconnect">Bağlantısını kesin</string>
 
@@ -134,8 +134,8 @@
     <string name="about_title">SnooZy Şarj Zzz…</string>
     <string name="about_subtitle">Güç bağlantısı varken ekranı kapatma</string>
     <string name="about_project_version">Versiyon %s</string>
-    <string name="about_credits">Android uygulaması Mudar&#160;Noufal tarafından geliştirilmiştir. Çeviri için Onur Nurlu\'ya teşekkürler.</string>
-    <string name="about_source_code">Açık kaynak kodlu yazılım, GitHub\'dan ulaşılabilir. Kaynak kodu Özgür Yazılım Vakfı tarafından GPLv3 lisansıyla yayımlanmıştır.</string>
+    <string name="about_credits">Android uygulaması Mudar&#160;Noufal tarafından geliştirilmiştir. Çeviri için Onur Nurlu’ya teşekkürler.</string>
+    <string name="about_source_code">Açık kaynak kodlu yazılım, GitHub’dan ulaşılabilir. Kaynak kodu Özgür Yazılım Vakfı tarafından GPLv3 lisansıyla yayımlanmıştır.</string>
     <string name="about_intro">Güç bağlantısı istemediğiniz halde cihazınızın ekranını açabilir. SnooZy cihazınız gece şarj olurken sizin isteğiniz dışında ekranın açılmasını engeller ve güç tasarrufu sağlar.</string>
     <string name="about_usage">SnooZy kablosuz, güneş enerjili ya da güç bağlantısının yoğun olduğu dinamolu şarj aletleriyle de uyumludur. SnooZy bu özelliklerinin yanında ekranı otomatik kilitlemek veya şarj geçmişi için de kullanılabilir. Ayarlara bakın ve uygulamayı ihtiyaçlarınıza uygun hale getirin.</string>
 
