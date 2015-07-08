@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SnooZy Charger
+    Power Connection manager. Turn the screen off on power connection
+    or disconnection, to save battery consumption by the phone's display.
+
+    Copyright (C) 2013 Mudar Noufal <mn@mudar.ca>
+    Copyright (C) 2014 Daniel Aleksandersen <code@daniel.priv.no>
+
+    This file is part of SnooZy Charger.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <string name="snoozy_app">SnooZy Charger</string>
+    <string name="activity_main">ประวัติการชาร์ท</string>
+    <string name="activity_settings">ตั้งค่า</string>
+    <string name="activity_about">เกี่ยวกับโปรแกรม</string>
+    <string name="activity_eula">ข้อตกลง</string>
+
+    <!--Menu-->
+    <string name="action_settings">ตั้งค่า</string>
+    <string name="action_about">เกี่ยวกับโปรแกรม</string>
+    <string name="action_eula">ใบอนุญาต</string>
+    <string name="action_share">แบ่งปัน</string>
+    <string name="action_rate">ให้คะแนนแอพ</string>
+
+    <!--System-->
+    <string name="admin_device_extra_desc_text">แอปจำเป็นต้องได้รับการอนุญาตโดยโปรแกรมควบคุมอุปกรณ์เพื่อควบคุมการล็อคหน้าจอ</string>
+    <string name="admin_device_app_desc">อนุญาตให้ SnooZy Charger สามารถล็อคหน้าจอได้ Zzz…</string>
+    <string name="share_intent_title">เปิด SnooZy Charger บน Google Play</string>
+
+    <!--Settings/Preferences-->
+    <string name="prefs_category_advanced">ปิดหน้าจอ</string>
+    <string name="prefs_category_other">อื่นๆ</string>
+
+    <string name="prefs_is_enabled">เปิดการใช้งาน</string>
+    <string name="prefs_is_disabled">ปิดการใช้งาน</string>
+    <string name="prefs_has_notifications_title">การแจ้งเตือน</string>
+    <string name="prefs_has_vibration_title">การสั่น</string>
+
+    <string name="prefs_ringtone_title">เสียง</string>
+    <string name="prefs_screen_silent">เงียบ</string>
+
+    <string name="prefs_screen_lock_status_title">สถานะการล็อคหน้าจอ</string>
+    <string name="prefs_screen_lock_status_dialog_title">เลือกสถานะของหน้าจอ</string>
+    <string name="prefs_screen_locked">หน้าจอล็อค</string>
+    <string name="prefs_screen_unlocked">หน้าจอปรกติ</string>
+    <string name="prefs_screen_both">ทั้งคู่</string>
+    <string name="prefs_screen_lock_unlocked">เฉพาะหน้าจอที่ไม่ล็อคเท่านั้น</string>
+    <string name="prefs_screen_lock_locked">เฉพาะหน้าจอที่ล็อคเท่านั้น</string>
+    <string name="prefs_screen_lock_both">หน้าจอที่ล็อคและไม่ล็อค</string>
+
+    <string name="prefs_connection_status_title">สถานะการชาร์จ</string>
+    <string name="prefs_connection_status_dialog_title">เลือกสถานะการชาร์จ</string>
+    <string name="prefs_connection_on">เริ่มชาร์จ</string>
+    <string name="prefs_connection_off">เลิกชาร์จ</string>
+    <string name="prefs_connection_both">ทั้งคู่</string>
+    <string name="prefs_power_connection_on">เมื่อเริ่มชาร์จเท่านั้น</string>
+    <string name="prefs_power_connection_off">เมื่อเลิกชาร์จเท่านั้น</string>
+    <string name="prefs_power_connection_both">การเริ่มและเลิกชาร์จ</string>
+
+    <string name="prefs_connection_type_title">ประเภทการชาร์จ</string>
+    <string name="prefs_connection_type_dialog_title">เลือกประเภทการชาร์จ</string>
+    <string name="prefs_connection_ac">ไฟบ้าน</string>
+    <string name="prefs_connection_usb">USB</string>
+    <string name="prefs_connection_wireless">ไร้สาย</string>
+    <string name="prefs_connection_all">ทั้งหมด</string>
+    <string name="prefs_power_connection_ac">ไฟบ้านเท่านั้น</string>
+    <string name="prefs_power_connection_usb">USB เท่านั้น</string>
+    <string name="prefs_power_connection_wireless">ไร้สายเท่านั้น</string>
+    <string name="prefs_power_connection_all">แหล่งพลังงานอะไรก็ได้</string>
+
+    <string name="prefs_delay_to_lock_title">ดีเลย์การล็อคหน้าจอ</string>
+    <string name="prefs_delay_dialog_title">ตั้งค่าดีเลย์การล็อคหน้าจอ</string>
+    <string name="prefs_delay_fast">ทันที</string>
+    <string name="prefs_delay_moderate">3 วินาที</string>
+    <string name="prefs_delay_slow">5 วินาที</string>
+
+    <string name="prefs_cache_age_title">จำนวนวันที่เก็บประวัติ</string>
+    <string name="prefs_cache_age_dialog_title">ตั้งอายุของการเก็บประวัติ</string>
+    <string name="prefs_cache_age_none">ไม่เก็บประวัติ</string>
+    <string name="prefs_cache_age_small">1 สัปดาห์</string>
+    <string name="prefs_cache_age_medium">2 สัปดาห์</string>
+    <string name="prefs_cache_age_large">1 เดือน</string>
+    <string name="prefs_cache_age_all">เก็บตลอดไป</string>
+
+    <string name="prefs_device_admin_title">โปรแกรมควบคุมอุปกรณ์</string>
+    <string name="prefs_device_admin_summary_enabled">หมายเหตุ: เลือกออกเพื่อถอนการติดตั้งแอพ</string>
+    <string name="prefs_device_admin_summary_disabled">จำเป็นต้องรับสิทธิ์การเข้าถึงการล็อคหน้าจอ</string>
+
+    <!--Notifications-->
+    <string name="notify_content_title">การชาร์จ</string>
+    <string name="notify_content_text_single_on">ได้รับการชาร์จไฟ</string>
+    <string name="notify_content_text_single_off">ยกเลิกการชาร์จไฟ</string>
+    <string name="notify_content_text_multi">การชาร์จถูกเชื่อมต่อ/ยกเลิกการเชื่อมต่อ</string>
+
+    <!-- Toast Notifications -->
+    <string name="toast_service_disabled">SnooZy ถูกปิดใช้งานอยู่</string>
+    <string name="toast_running_no_admin">เพื่อใช้งานในหน้าจอล็อค เปิดการใช้งานแอพในโปรแกรมควบคุมอุปกรณ์</string>
+
+    <!--History ListFragment-->
+    <string name="history_empty_list_title">%s ชาร์จ&#160;เพื่อดู SnooZy กำลัง&#160;ทำงาน!</string>
+    <string name="history_empty_list_cache_none">ไม่มีประวัติการชาร์จ</string>
+    <string name="history_empty_list_disabled">ใช้งาน SnooZy</string>
+    <string name="history_empty_list_title_connect">เชื่อมต่อ</string>
+    <string name="history_empty_list_title_disconnect">ตัดการเชื่อมต่อ</string>
+
+    <!--History Header -->
+    <string name="history_header_timestamp">เวลา</string>
+    <string name="history_header_power_connection">การชาร์จ</string>
+    <string name="history_header_battery_level">แบตเตอรี</string>
+
+    <!--History ListFragmentItem -->
+    <string name="history_item_power_connected">ใช่</string>
+    <string name="history_item_power_disconnected">ไม่</string>
+    <string name="history_item_day_today">วันนี้</string>
+    <string name="history_item_day_yesterday">เมื่อวาน</string>
+    <string name="history_item_battery_level">%s%%</string>
+
+    <!--About -->
+    <string name="about_title">SnooZy Charger Zzz…</string>
+    <string name="about_subtitle">ปิดหน้าจอเมื่อเริ่มชาร์จ</string>
+    <string name="about_project_version">เวอร์ชั่น %s</string>
+    <string name="about_credits">แอปพลิเคชั่นพัฒนาโดย Mudar&#160;Noufal. แปลภาษาไทยโดย Spicydog Proxy.</string>
+    <string name="about_source_code">Source Code สามารถเข้าถึงได้ผ่านทาง GitHub ภายใต้ใบอนุญาต GPLv3 จาก Free Software Foundation.</string>
+    <string name="about_intro">การชาร์จไฟสามารถเปิดหน้าจอเวลาไม่ต้องการ SnooZy ช่วยป้องกันการเปิดหน้าจอในเวลากลางคืน เพื่อประหยัดพลังงาน</string>
+    <string name="about_usage">SnooZy มีประโยชน์มากสำหรับการชาร์จแบบไร้สาย เพื่อพลังงานที่ได้รับไม่ต่อเนื่อง และสามารถใช้งานเพื่อระบบล็อคหน้าจอ และบันทึกประวัติการชาร์จไฟ</string>
+
+    <!-- Accessibility -->
+    <string name="desc_wireless_charger">ชาร์จไร้สาย</string>
+    <string name="desc_credits">เครดิต</string>
+    <string name="desc_github">GitHub repository</string>
+
+</resources>
