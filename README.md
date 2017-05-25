@@ -1,8 +1,8 @@
-##SnooZy Charger - Android Power Connection manager
+## SnooZy Charger - Android Power Connection manager
 
 [![SnooZy Charger][img_github]][link_snoozy_playstore]
 
-###Battery Saver and Power Connection History
+### Battery Saver and Power Connection History
 
 SnooZy Charger is a Power Connection manager. The app turns off the screen on power connection or disconnection, to save battery consumption by the phone's display. 
 
@@ -10,7 +10,7 @@ SnooZy can also be used as an auto-lock on unplug or simply for power connection
 
 This app can be useful to save battery when using a **solar charger**, where power connectivity relies on weather conditions! It was initially developed as a fix for battery drain issues on **Samsung Galaxy Nexus**.
 
-##Features
+## Features
 * Lightweight background service detecting power connection/disconnection.
 * Power connection history saved in local database.
 * Receive notifications with/out sound or vibration.
@@ -18,7 +18,7 @@ This app can be useful to save battery when using a **solar charger**, where pow
 
 This app does NOT manage any other phone functionalities, such as WiFi, Bluetooth, GPS, etc. There are other apps for that…
 
-##Galaxy Nexus Ghost Charging
+## Galaxy Nexus Ghost Charging
 Some Samsung Galaxy Nexus devices randomly detect a power connection without any charger being actually connected to the phone. This would drain the battery because of the screen turning on to display the "Charging" message, multiple times per hour till screen timeout. 
 
 Forums reporting this bug:
@@ -32,7 +32,7 @@ Forums reporting this bug:
 
 SnooZy Charger was developed as a (partial) software solution for this issue: it saves battery consumption by turning off the display on these phantom connections, if the user is not currently using the phone. However, it does not fix the random detections. Some hardware solutions are suggested by users reporting this issue.
 
-##Links
+## Links
 
 * [Website][link_snoozy_website]
 * [Privacy policy][link_snoozy_privacy]
@@ -55,7 +55,7 @@ The Android app includes (thanks!) libraries and derivative work of the followin
 
 These three projects are all released under the [Apache License v2.0][link_apache].
 
-##Code license
+## Code license
 
     SnooZy Charger
     Power Connection manager. Turn the screen off on power connection
